@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6B91E96B-6A50-4C0C-BD6A-5DB698368CA4}</ProjectGuid>
+    <RootNamespace>GlassLabSDKLib</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>GlassLabSDK</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v90</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v90</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/include;$(SolutionDir)/../../../deps/include/libevent;$(IncludePath)</IncludePath>
+    <SourcePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(SourcePath)</SourcePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/../../../deps/include;$(SolutionDir)/../../../deps/include/libevent;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/../../../deps/lib;$(LibraryPath)</LibraryPath>
+    <SourcePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include;$(SolutionDir)/../../../deps/include/libevent;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>"C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/bin/lib.exe" /OUT:$(SolutionDir)/../../../lib/win32/GlassLabSDK.lib $(SolutionDir)$(Configuration)\GlassLabSDKLib.lib $(SolutionDir)/../../../deps/lib/jansson.lib $(SolutionDir)/../../../deps/lib/libevent.lib $(SolutionDir)/../../../deps/lib/libevent_core.lib $(SolutionDir)/../../../deps/lib/libevent_extras.lib $(SolutionDir)/../../../deps/lib/SQLite_Static_Library.lib</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include;$(SolutionDir)/../../../deps/include/libevent;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>"C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/bin/lib.exe" /OUT:"$(SolutionDir)\..\..\..\lib\win32\GlassLabSDK.lib" "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)\..\..\..\deps\lib\jansson.lib" "$(SolutionDir)\..\..\..\deps\lib\libevent.lib" "$(SolutionDir)\..\..\..\deps\lib\libevent_core.lib" "$(SolutionDir)\..\..\..\deps\lib\libevent_extras.lib" "$(SolutionDir)\..\..\..\deps\lib\SQLite_Static_Library.lib"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\glasslab_sdk.cpp" />
+    <ClCompile Include="..\..\..\..\source\glasslab_sdk_lib_export.cpp" />
+    <ClCompile Include="..\..\..\..\source\glsdk_core.cpp" />
+    <ClCompile Include="..\..\..\..\source\glsdk_data_sync.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\headers\glasslab_sdk.h" />
+    <ClInclude Include="..\..\..\..\headers\glsdk_config.h" />
+    <ClInclude Include="..\..\..\..\headers\glsdk_const.h" />
+    <ClInclude Include="..\..\..\..\headers\glsdk_core.h" />
+    <ClInclude Include="..\..\..\..\headers\glsdk_data_sync.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

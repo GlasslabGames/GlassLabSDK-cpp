@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E381BCAA-4C24-49ED-8AD7-2C0C51D5EEB2</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Glasslab SDK Basic</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</key>
+		<string>https://github.com/bendapkiewicz/GlassLabSDK-cpp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>examples/osx/Glasslab SDK Basic/Glasslab SDK Basic.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bendapkiewicz/GlassLabSDK-cpp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GLSDK-cpp</string>
+		</dict>
+	</array>
+</dict>
+</plist>

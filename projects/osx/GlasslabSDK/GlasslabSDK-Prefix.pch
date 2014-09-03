@@ -1,0 +1,17 @@
+//
+// Prefix header for all source files of the 'GlasslabSDK' target in the 'GlasslabSDK' project
+//
+
+#include <iostream>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+    float FooPluginFunction () {
+        return 1.2345;
+    }
+    
+#ifdef __cplusplus
+}
+#endif

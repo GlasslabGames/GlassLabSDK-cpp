@@ -1,0 +1,5 @@
+A very thin C++ wrapper around the public domain SQLite database library.
+
+Fork from codeproject(http://www.codeproject.com/KB/database/CppSQLite.aspx)
+
+Work in progress
