@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3FA8D990-0A06-4C72-A000-3B33D5E5AD1F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Glasslab SDK Hello World</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>EEC5EA76-59AE-4461-B905-E74948EE64BF</key>
+		<string>https://github.com/jstty/PlatformSDK.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>examples/osx/Glasslab SDK Hello World/Glasslab SDK Hello World.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3A4C3C67-9575-455A-AB9D-C55D7FAB6CD6</key>
+		<string>../..</string>
+		<key>EEC5EA76-59AE-4461-B905-E74948EE64BF</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jstty/PlatformSDK.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>EEC5EA76-59AE-4461-B905-E74948EE64BF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3A4C3C67-9575-455A-AB9D-C55D7FAB6CD6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Glasslab SDK Hello World</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EEC5EA76-59AE-4461-B905-E74948EE64BF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PlatformSDK</string>
+		</dict>
+	</array>
+</dict>
+</plist>

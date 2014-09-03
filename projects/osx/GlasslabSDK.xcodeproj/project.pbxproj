@@ -1,0 +1,844 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		97583E31189B31FE001E1A5D /* GlasslabSDK_i386.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 974013D5189B253000A02BDA /* GlasslabSDK_i386.dylib */; };
+		977FDD071899A84C0058F3C9 /* GlasslabSDK_x86_64.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 977FDCE518974C760058F3C9 /* GlasslabSDK_x86_64.dylib */; };
+		978B0040189C978200012868 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978B003F189C978200012868 /* Foundation.framework */; };
+		978B004E189C978300012868 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978B004D189C978300012868 /* XCTest.framework */; };
+		978B004F189C978300012868 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978B003F189C978200012868 /* Foundation.framework */; };
+		978B0051189C978300012868 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978B0050189C978300012868 /* UIKit.framework */; };
+		978B0054189C978300012868 /* libGlasslabSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 978B003D189C978200012868 /* libGlasslabSDK.a */; };
+		978B006A189C998700012868 /* libGlasslabSDK.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 978B003D189C978200012868 /* libGlasslabSDK.a */; };
+		97C1049018B6F5D300438A58 /* CppSQLite3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C1048E18B6F5D300438A58 /* CppSQLite3.cpp */; };
+		97C1049118B6F5D300438A58 /* CppSQLite3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C1048E18B6F5D300438A58 /* CppSQLite3.cpp */; };
+		97C1049218B6F5D300438A58 /* CppSQLite3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C1048E18B6F5D300438A58 /* CppSQLite3.cpp */; };
+		97C1049318B6F5D300438A58 /* CppSQLite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C1048F18B6F5D300438A58 /* CppSQLite3.h */; };
+		97C1049418B6F5D300438A58 /* CppSQLite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C1048F18B6F5D300438A58 /* CppSQLite3.h */; };
+		97C104BD18B7D26C00438A58 /* glsdk_const.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C104BA18B7D26C00438A58 /* glsdk_const.h */; };
+		97C104BE18B7D26C00438A58 /* glsdk_const.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C104BA18B7D26C00438A58 /* glsdk_const.h */; };
+		97C104BF18B7D26C00438A58 /* glsdk_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C104BB18B7D26C00438A58 /* glsdk_core.h */; };
+		97C104C018B7D26C00438A58 /* glsdk_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C104BB18B7D26C00438A58 /* glsdk_core.h */; };
+		97C104C118B7D26C00438A58 /* glsdk_data_sync.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C104BC18B7D26C00438A58 /* glsdk_data_sync.h */; };
+		97C104C218B7D26C00438A58 /* glsdk_data_sync.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C104BC18B7D26C00438A58 /* glsdk_data_sync.h */; };
+		97C104C418B7D27200438A58 /* glasslab_sdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C104C318B7D27200438A58 /* glasslab_sdk.h */; };
+		97C104C518B7D27200438A58 /* glasslab_sdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C104C318B7D27200438A58 /* glasslab_sdk.h */; };
+		9EAFC06D19B771BE0002134A /* glasslab_sdk_lib_export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC06B19B771BE0002134A /* glasslab_sdk_lib_export.cpp */; };
+		9EAFC06E19B771BE0002134A /* glasslab_sdk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC06C19B771BE0002134A /* glasslab_sdk.cpp */; };
+		9EAFC07519B771CE0002134A /* libevent_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC06F19B771CE0002134A /* libevent_core.a */; };
+		9EAFC07619B771CE0002134A /* libevent_extra.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07019B771CE0002134A /* libevent_extra.a */; };
+		9EAFC07719B771CE0002134A /* libevent_pthreads.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07119B771CE0002134A /* libevent_pthreads.a */; };
+		9EAFC07819B771CE0002134A /* libevent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07219B771CE0002134A /* libevent.a */; };
+		9EAFC07919B771CE0002134A /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07319B771CE0002134A /* libjansson.a */; };
+		9EAFC07A19B771CE0002134A /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07419B771CE0002134A /* libsqlite3.a */; };
+		9EAFC07B19B771E70002134A /* libevent_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC06F19B771CE0002134A /* libevent_core.a */; };
+		9EAFC07C19B771E70002134A /* libevent_extra.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07019B771CE0002134A /* libevent_extra.a */; };
+		9EAFC07D19B771E70002134A /* libevent_pthreads.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07119B771CE0002134A /* libevent_pthreads.a */; };
+		9EAFC07E19B771E70002134A /* libevent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07219B771CE0002134A /* libevent.a */; };
+		9EAFC07F19B771E70002134A /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07319B771CE0002134A /* libjansson.a */; };
+		9EAFC08019B771E70002134A /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07419B771CE0002134A /* libsqlite3.a */; };
+		9EAFC08119B771F30002134A /* glasslab_sdk_lib_export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC06B19B771BE0002134A /* glasslab_sdk_lib_export.cpp */; };
+		9EAFC08219B771F30002134A /* glasslab_sdk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC06C19B771BE0002134A /* glasslab_sdk.cpp */; };
+		9EAFC08319B772050002134A /* glasslab_sdk_lib_export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC06B19B771BE0002134A /* glasslab_sdk_lib_export.cpp */; };
+		9EAFC08419B772050002134A /* glasslab_sdk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC06C19B771BE0002134A /* glasslab_sdk.cpp */; };
+		9EAFC08719B772110002134A /* glsdk_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC08519B772110002134A /* glsdk_core.cpp */; };
+		9EAFC08819B772110002134A /* glsdk_data_sync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC08619B772110002134A /* glsdk_data_sync.cpp */; };
+		9ED082B818D2387B0089FD97 /* glsdk_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 9ED082B718D2387B0089FD97 /* glsdk_config.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		978B0052189C978300012868 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 977FDCDD18974C760058F3C9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 978B003C189C978200012868;
+			remoteInfo = "GlasslabSDK armv7 (iOS Device)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		974013D0189B253000A02BDA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "$(SRCROOT)/../../lib/osx";
+			dstSubfolderSpec = 0;
+			files = (
+				97583E31189B31FE001E1A5D /* GlasslabSDK_i386.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		977FDD051899A7BF0058F3C9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(SRCROOT)/../../lib/osx";
+			dstSubfolderSpec = 0;
+			files = (
+				977FDD071899A84C0058F3C9 /* GlasslabSDK_x86_64.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		978B003B189C978200012868 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(SRCROOT)/../../lib/ios";
+			dstSubfolderSpec = 0;
+			files = (
+				978B006A189C998700012868 /* libGlasslabSDK.a in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		974013D5189B253000A02BDA /* GlasslabSDK_i386.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = GlasslabSDK_i386.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		977FDCE518974C760058F3C9 /* GlasslabSDK_x86_64.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = GlasslabSDK_x86_64.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		977FDCE918974C760058F3C9 /* GlasslabSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GlasslabSDK-Prefix.pch"; sourceTree = "<group>"; };
+		977FDCEA18974C760058F3C9 /* GlasslabSDKProj.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GlasslabSDKProj.xcconfig; sourceTree = "<group>"; };
+		977FDCEB18974C760058F3C9 /* GlasslabSDKTarget.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GlasslabSDKTarget.xcconfig; sourceTree = "<group>"; };
+		978B003D189C978200012868 /* libGlasslabSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGlasslabSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		978B003F189C978200012868 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		978B0043189C978300012868 /* GlasslabSDK armv7 (iOS Device)-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GlasslabSDK armv7 (iOS Device)-Prefix.pch"; sourceTree = "<group>"; };
+		978B004C189C978300012868 /* GlasslabSDK armv7 (iOS Device)Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GlasslabSDK armv7 (iOS Device)Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		978B004D189C978300012868 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		978B0050189C978300012868 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		97C1048E18B6F5D300438A58 /* CppSQLite3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CppSQLite3.cpp; path = "../../../deps/src/CppSQLite-master/src/CppSQLite3.cpp"; sourceTree = "<group>"; };
+		97C1048F18B6F5D300438A58 /* CppSQLite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CppSQLite3.h; path = "../../../deps/src/CppSQLite-master/src/CppSQLite3.h"; sourceTree = "<group>"; };
+		97C104BA18B7D26C00438A58 /* glsdk_const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glsdk_const.h; path = ../../../headers/glsdk_const.h; sourceTree = "<group>"; };
+		97C104BB18B7D26C00438A58 /* glsdk_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glsdk_core.h; path = ../../../headers/glsdk_core.h; sourceTree = "<group>"; };
+		97C104BC18B7D26C00438A58 /* glsdk_data_sync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glsdk_data_sync.h; path = ../../../headers/glsdk_data_sync.h; sourceTree = "<group>"; };
+		97C104C318B7D27200438A58 /* glasslab_sdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glasslab_sdk.h; path = ../../../headers/glasslab_sdk.h; sourceTree = "<group>"; };
+		9EAFC06A19B771A70002134A /* GlasslabSDK.cs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GlasslabSDK.cs; path = "../../../platform-support/unity/GlasslabSDK.cs"; sourceTree = "<group>"; };
+		9EAFC06B19B771BE0002134A /* glasslab_sdk_lib_export.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glasslab_sdk_lib_export.cpp; path = ../../../src/glasslab_sdk_lib_export.cpp; sourceTree = "<group>"; };
+		9EAFC06C19B771BE0002134A /* glasslab_sdk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glasslab_sdk.cpp; path = ../../../src/glasslab_sdk.cpp; sourceTree = "<group>"; };
+		9EAFC06F19B771CE0002134A /* libevent_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent_core.a; path = "../../../deps/lib/ios-osx/libevent_core.a"; sourceTree = "<group>"; };
+		9EAFC07019B771CE0002134A /* libevent_extra.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent_extra.a; path = "../../../deps/lib/ios-osx/libevent_extra.a"; sourceTree = "<group>"; };
+		9EAFC07119B771CE0002134A /* libevent_pthreads.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent_pthreads.a; path = "../../../deps/lib/ios-osx/libevent_pthreads.a"; sourceTree = "<group>"; };
+		9EAFC07219B771CE0002134A /* libevent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent.a; path = "../../../deps/lib/ios-osx/libevent.a"; sourceTree = "<group>"; };
+		9EAFC07319B771CE0002134A /* libjansson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjansson.a; path = "../../../deps/lib/ios-osx/libjansson.a"; sourceTree = "<group>"; };
+		9EAFC07419B771CE0002134A /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite3.a; path = "../../../deps/lib/ios-osx/libsqlite3.a"; sourceTree = "<group>"; };
+		9EAFC08519B772110002134A /* glsdk_core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glsdk_core.cpp; path = ../../../src/glsdk_core.cpp; sourceTree = "<group>"; };
+		9EAFC08619B772110002134A /* glsdk_data_sync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glsdk_data_sync.cpp; path = ../../../src/glsdk_data_sync.cpp; sourceTree = "<group>"; };
+		9ED082B718D2387B0089FD97 /* glsdk_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glsdk_config.h; path = ../../../headers/glsdk_config.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		974013CA189B253000A02BDA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		977FDCE218974C760058F3C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EAFC07A19B771CE0002134A /* libsqlite3.a in Frameworks */,
+				9EAFC07619B771CE0002134A /* libevent_extra.a in Frameworks */,
+				9EAFC07519B771CE0002134A /* libevent_core.a in Frameworks */,
+				9EAFC07819B771CE0002134A /* libevent.a in Frameworks */,
+				9EAFC07919B771CE0002134A /* libjansson.a in Frameworks */,
+				9EAFC07719B771CE0002134A /* libevent_pthreads.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		978B003A189C978200012868 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EAFC07C19B771E70002134A /* libevent_extra.a in Frameworks */,
+				978B0040189C978200012868 /* Foundation.framework in Frameworks */,
+				9EAFC07D19B771E70002134A /* libevent_pthreads.a in Frameworks */,
+				9EAFC07F19B771E70002134A /* libjansson.a in Frameworks */,
+				9EAFC08019B771E70002134A /* libsqlite3.a in Frameworks */,
+				9EAFC07B19B771E70002134A /* libevent_core.a in Frameworks */,
+				9EAFC07E19B771E70002134A /* libevent.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		978B0049189C978300012868 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				978B004E189C978300012868 /* XCTest.framework in Frameworks */,
+				978B0054189C978300012868 /* libGlasslabSDK.a in Frameworks */,
+				978B0051189C978300012868 /* UIKit.framework in Frameworks */,
+				978B004F189C978300012868 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		976518DF189ACEB600459DA6 /* glp */ = {
+			isa = PBXGroup;
+			children = (
+				9EAFC08519B772110002134A /* glsdk_core.cpp */,
+				9EAFC08619B772110002134A /* glsdk_data_sync.cpp */,
+				9ED082B718D2387B0089FD97 /* glsdk_config.h */,
+				97C104BA18B7D26C00438A58 /* glsdk_const.h */,
+				97C104BB18B7D26C00438A58 /* glsdk_core.h */,
+				97C104BC18B7D26C00438A58 /* glsdk_data_sync.h */,
+			);
+			name = glp;
+			sourceTree = "<group>";
+		};
+		976518E0189ACECA00459DA6 /* Dependant Libs */ = {
+			isa = PBXGroup;
+			children = (
+				9EAFC06F19B771CE0002134A /* libevent_core.a */,
+				9EAFC07019B771CE0002134A /* libevent_extra.a */,
+				9EAFC07119B771CE0002134A /* libevent_pthreads.a */,
+				9EAFC07219B771CE0002134A /* libevent.a */,
+				9EAFC07319B771CE0002134A /* libjansson.a */,
+				9EAFC07419B771CE0002134A /* libsqlite3.a */,
+				97C1048E18B6F5D300438A58 /* CppSQLite3.cpp */,
+				97C1048F18B6F5D300438A58 /* CppSQLite3.h */,
+			);
+			name = "Dependant Libs";
+			sourceTree = "<group>";
+		};
+		976518E1189AD61C00459DA6 /* sdk */ = {
+			isa = PBXGroup;
+			children = (
+				9EAFC06B19B771BE0002134A /* glasslab_sdk_lib_export.cpp */,
+				9EAFC06C19B771BE0002134A /* glasslab_sdk.cpp */,
+				97C104C318B7D27200438A58 /* glasslab_sdk.h */,
+			);
+			name = sdk;
+			sourceTree = "<group>";
+		};
+		977FDCDC18974C760058F3C9 = {
+			isa = PBXGroup;
+			children = (
+				977FDCE718974C760058F3C9 /* GlasslabSDK */,
+				977FDCE818974C760058F3C9 /* Supporting Files */,
+				978B0041189C978200012868 /* GlasslabSDK armv7 (iOS Device) */,
+				978B003E189C978200012868 /* Frameworks */,
+				977FDCE618974C760058F3C9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		977FDCE618974C760058F3C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				977FDCE518974C760058F3C9 /* GlasslabSDK_x86_64.dylib */,
+				974013D5189B253000A02BDA /* GlasslabSDK_i386.dylib */,
+				978B003D189C978200012868 /* libGlasslabSDK.a */,
+				978B004C189C978300012868 /* GlasslabSDK armv7 (iOS Device)Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		977FDCE718974C760058F3C9 /* GlasslabSDK */ = {
+			isa = PBXGroup;
+			children = (
+				9EAFC06A19B771A70002134A /* GlasslabSDK.cs */,
+				976518E1189AD61C00459DA6 /* sdk */,
+				976518E0189ACECA00459DA6 /* Dependant Libs */,
+				976518DF189ACEB600459DA6 /* glp */,
+			);
+			path = GlasslabSDK;
+			sourceTree = "<group>";
+		};
+		977FDCE818974C760058F3C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				977FDCEA18974C760058F3C9 /* GlasslabSDKProj.xcconfig */,
+				977FDCEB18974C760058F3C9 /* GlasslabSDKTarget.xcconfig */,
+				977FDCE918974C760058F3C9 /* GlasslabSDK-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			path = GlasslabSDK;
+			sourceTree = "<group>";
+		};
+		978B003E189C978200012868 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				978B003F189C978200012868 /* Foundation.framework */,
+				978B004D189C978300012868 /* XCTest.framework */,
+				978B0050189C978300012868 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		978B0041189C978200012868 /* GlasslabSDK armv7 (iOS Device) */ = {
+			isa = PBXGroup;
+			children = (
+				978B0042189C978300012868 /* Supporting Files */,
+			);
+			path = "GlasslabSDK armv7 (iOS Device)";
+			sourceTree = "<group>";
+		};
+		978B0042189C978300012868 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				978B0043189C978300012868 /* GlasslabSDK armv7 (iOS Device)-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		974013CC189B253000A02BDA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97C104C518B7D27200438A58 /* glasslab_sdk.h in Headers */,
+				97C104BE18B7D26C00438A58 /* glsdk_const.h in Headers */,
+				97C104C218B7D26C00438A58 /* glsdk_data_sync.h in Headers */,
+				97C1049418B6F5D300438A58 /* CppSQLite3.h in Headers */,
+				97C104C018B7D26C00438A58 /* glsdk_core.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		977FDCE318974C760058F3C9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97C104C418B7D27200438A58 /* glasslab_sdk.h in Headers */,
+				97C104BD18B7D26C00438A58 /* glsdk_const.h in Headers */,
+				97C104C118B7D26C00438A58 /* glsdk_data_sync.h in Headers */,
+				97C1049318B6F5D300438A58 /* CppSQLite3.h in Headers */,
+				9ED082B818D2387B0089FD97 /* glsdk_config.h in Headers */,
+				97C104BF18B7D26C00438A58 /* glsdk_core.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		974013C5189B253000A02BDA /* GlasslabSDK i386 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 974013D2189B253000A02BDA /* Build configuration list for PBXNativeTarget "GlasslabSDK i386" */;
+			buildPhases = (
+				974013C6189B253000A02BDA /* Sources */,
+				974013CA189B253000A02BDA /* Frameworks */,
+				974013CC189B253000A02BDA /* Headers */,
+				974013D0189B253000A02BDA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GlasslabSDK i386";
+			productName = GlasslabSDK;
+			productReference = 974013D5189B253000A02BDA /* GlasslabSDK_i386.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		977FDCE418974C760058F3C9 /* GlasslabSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 977FDCF218974C760058F3C9 /* Build configuration list for PBXNativeTarget "GlasslabSDK" */;
+			buildPhases = (
+				977FDCE118974C760058F3C9 /* Sources */,
+				977FDCE218974C760058F3C9 /* Frameworks */,
+				977FDCE318974C760058F3C9 /* Headers */,
+				977FDD051899A7BF0058F3C9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GlasslabSDK;
+			productName = GlasslabSDK;
+			productReference = 977FDCE518974C760058F3C9 /* GlasslabSDK_x86_64.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		978B003C189C978200012868 /* GlasslabSDK armv7 (iOS Device) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 978B0061189C978300012868 /* Build configuration list for PBXNativeTarget "GlasslabSDK armv7 (iOS Device)" */;
+			buildPhases = (
+				978B0039189C978200012868 /* Sources */,
+				978B003A189C978200012868 /* Frameworks */,
+				978B003B189C978200012868 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GlasslabSDK armv7 (iOS Device)";
+			productName = "GlasslabSDK armv7 (iOS Device)";
+			productReference = 978B003D189C978200012868 /* libGlasslabSDK.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		978B004B189C978300012868 /* GlasslabSDK armv7 (iOS Device)Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 978B0062189C978300012868 /* Build configuration list for PBXNativeTarget "GlasslabSDK armv7 (iOS Device)Tests" */;
+			buildPhases = (
+				978B0048189C978300012868 /* Sources */,
+				978B0049189C978300012868 /* Frameworks */,
+				978B004A189C978300012868 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				978B0053189C978300012868 /* PBXTargetDependency */,
+			);
+			name = "GlasslabSDK armv7 (iOS Device)Tests";
+			productName = "GlasslabSDK armv7 (iOS Device)Tests";
+			productReference = 978B004C189C978300012868 /* GlasslabSDK armv7 (iOS Device)Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		977FDCDD18974C760058F3C9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Glasslab;
+				TargetAttributes = {
+					978B004B189C978300012868 = {
+						TestTargetID = 977FDCE418974C760058F3C9;
+					};
+				};
+			};
+			buildConfigurationList = 977FDCE018974C760058F3C9 /* Build configuration list for PBXProject "GlasslabSDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 977FDCDC18974C760058F3C9;
+			productRefGroup = 977FDCE618974C760058F3C9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				977FDCE418974C760058F3C9 /* GlasslabSDK */,
+				974013C5189B253000A02BDA /* GlasslabSDK i386 */,
+				978B003C189C978200012868 /* GlasslabSDK armv7 (iOS Device) */,
+				978B004B189C978300012868 /* GlasslabSDK armv7 (iOS Device)Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		978B004A189C978300012868 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		974013C6189B253000A02BDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EAFC08119B771F30002134A /* glasslab_sdk_lib_export.cpp in Sources */,
+				9EAFC08219B771F30002134A /* glasslab_sdk.cpp in Sources */,
+				97C1049118B6F5D300438A58 /* CppSQLite3.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		977FDCE118974C760058F3C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EAFC08819B772110002134A /* glsdk_data_sync.cpp in Sources */,
+				9EAFC08719B772110002134A /* glsdk_core.cpp in Sources */,
+				9EAFC06E19B771BE0002134A /* glasslab_sdk.cpp in Sources */,
+				9EAFC06D19B771BE0002134A /* glasslab_sdk_lib_export.cpp in Sources */,
+				97C1049018B6F5D300438A58 /* CppSQLite3.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		978B0039189C978200012868 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EAFC08319B772050002134A /* glasslab_sdk_lib_export.cpp in Sources */,
+				9EAFC08419B772050002134A /* glasslab_sdk.cpp in Sources */,
+				97C1049218B6F5D300438A58 /* CppSQLite3.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		978B0048189C978300012868 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		978B0053189C978300012868 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 978B003C189C978200012868 /* GlasslabSDK armv7 (iOS Device) */;
+			targetProxy = 978B0052189C978300012868 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		974013D3189B253000A02BDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				HEADER_SEARCH_PATHS = (
+					"../../deps/include/libevent/ios-osx",
+					../../deps/include/libsqlite,
+					../../deps/include/libjansson,
+					/usr/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../deps/lib/ios-osx",
+				);
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = GlasslabSDK_i386;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Debug;
+		};
+		974013D4189B253000A02BDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				HEADER_SEARCH_PATHS = (
+					"../../deps/include/libevent/ios-osx",
+					../../deps/include/libsqlite,
+					../../deps/include/libjansson,
+					/usr/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../deps/lib/ios-osx",
+				);
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = GlasslabSDK_i386;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Release;
+		};
+		977FDCF018974C760058F3C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Debug;
+		};
+		977FDCF118974C760058F3C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Release;
+		};
+		977FDCF318974C760058F3C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				HEADER_SEARCH_PATHS = (
+					"../../deps/include/libevent/ios-osx",
+					../../deps/include/libsqlite,
+					../../deps/include/libjansson,
+					/usr/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../deps/lib/ios-osx",
+				);
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-L/usr/lib/sqlite3";
+				PRODUCT_NAME = GlasslabSDK_x86_64;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				VALID_ARCHS = x86_64;
+			};
+			name = Debug;
+		};
+		977FDCF418974C760058F3C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				HEADER_SEARCH_PATHS = (
+					"../../deps/include/libevent/ios-osx",
+					../../deps/include/libsqlite,
+					../../deps/include/libjansson,
+					/usr/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../deps/lib/ios-osx",
+				);
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-L/usr/lib/sqlite3";
+				PRODUCT_NAME = GlasslabSDK_x86_64;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				VALID_ARCHS = x86_64;
+			};
+			name = Release;
+		};
+		978B005D189C978300012868 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				DSTROOT = /tmp/GlasslabSDK_armv7__iOS_Device_.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GlasslabSDK armv7 (iOS Device)/GlasslabSDK armv7 (iOS Device)-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../deps/include/libevent/ios-osx",
+					../../deps/include/libsqlite,
+					../../deps/include/libjansson,
+					/usr/include,
+					"../../deps/src/CppSQLite-master/src",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../deps/lib/ios-osx",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = GlasslabSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
+			};
+			name = Debug;
+		};
+		978B005E189C978300012868 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				DSTROOT = /tmp/GlasslabSDK_armv7__iOS_Device_.dst;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GlasslabSDK armv7 (iOS Device)/GlasslabSDK armv7 (iOS Device)-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../deps/include/libevent/ios-osx",
+					../../deps/include/libsqlite,
+					../../deps/include/libjansson,
+					/usr/include,
+					"../../deps/src/CppSQLite-master/src",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../deps/lib/ios-osx",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = GlasslabSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
+			};
+			name = Release;
+		};
+		978B005F189C978300012868 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GlasslabSDK_x86_64.dylib";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GlasslabSDK armv7 (iOS Device)/GlasslabSDK armv7 (iOS Device)-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "GlasslabSDK armv7 (iOS Device)Tests/GlasslabSDK armv7 (iOS Device)Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		978B0060189C978300012868 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GlasslabSDK_x86_64.dylib";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GlasslabSDK armv7 (iOS Device)/GlasslabSDK armv7 (iOS Device)-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "GlasslabSDK armv7 (iOS Device)Tests/GlasslabSDK armv7 (iOS Device)Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		974013D2189B253000A02BDA /* Build configuration list for PBXNativeTarget "GlasslabSDK i386" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				974013D3189B253000A02BDA /* Debug */,
+				974013D4189B253000A02BDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		977FDCE018974C760058F3C9 /* Build configuration list for PBXProject "GlasslabSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				977FDCF018974C760058F3C9 /* Debug */,
+				977FDCF118974C760058F3C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		977FDCF218974C760058F3C9 /* Build configuration list for PBXNativeTarget "GlasslabSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				977FDCF318974C760058F3C9 /* Debug */,
+				977FDCF418974C760058F3C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		978B0061189C978300012868 /* Build configuration list for PBXNativeTarget "GlasslabSDK armv7 (iOS Device)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				978B005D189C978300012868 /* Debug */,
+				978B005E189C978300012868 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		978B0062189C978300012868 /* Build configuration list for PBXNativeTarget "GlasslabSDK armv7 (iOS Device)Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				978B005F189C978300012868 /* Debug */,
+				978B0060189C978300012868 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 977FDCDD18974C760058F3C9 /* Project object */;
+}

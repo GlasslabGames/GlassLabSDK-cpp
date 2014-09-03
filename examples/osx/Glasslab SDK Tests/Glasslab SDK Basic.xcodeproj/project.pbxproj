@@ -1,0 +1,279 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		97583E2E189B3140001E1A5D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97583E2D189B3140001E1A5D /* main.cpp */; };
+		9E1BB0E8192C0460000AF282 /* GlasslabSDK_x86_64.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1BB0E7192C0460000AF282 /* GlasslabSDK_x86_64.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		97260E67188F3CA10000ABCF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		97260E69188F3CA10000ABCF /* Glasslab SDK Basic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Glasslab SDK Basic"; sourceTree = BUILT_PRODUCTS_DIR; };
+		97583E2D189B3140001E1A5D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "Glasslab SDK basic/main.cpp"; sourceTree = SOURCE_ROOT; };
+		9E1BB0E7192C0460000AF282 /* GlasslabSDK_x86_64.dylib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GlasslabSDK_x86_64.dylib; path = ../../../../lib/osx/GlasslabSDK_x86_64.dylib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		97260E66188F3CA10000ABCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E1BB0E8192C0460000AF282 /* GlasslabSDK_x86_64.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		97260E60188F3CA10000ABCF = {
+			isa = PBXGroup;
+			children = (
+				97260E6B188F3CA10000ABCF /* Glasslab SDK Hello World */,
+				97260E6A188F3CA10000ABCF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		97260E6A188F3CA10000ABCF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				97260E69188F3CA10000ABCF /* Glasslab SDK Basic */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		97260E6B188F3CA10000ABCF /* Glasslab SDK Hello World */ = {
+			isa = PBXGroup;
+			children = (
+				9E1BB0E7192C0460000AF282 /* GlasslabSDK_x86_64.dylib */,
+				97583E2D189B3140001E1A5D /* main.cpp */,
+			);
+			path = "Glasslab SDK Hello World";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		97260E68188F3CA10000ABCF /* Glasslab SDK Basic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97260E72188F3CA10000ABCF /* Build configuration list for PBXNativeTarget "Glasslab SDK Basic" */;
+			buildPhases = (
+				97260E65188F3CA10000ABCF /* Sources */,
+				97260E66188F3CA10000ABCF /* Frameworks */,
+				97260E67188F3CA10000ABCF /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Glasslab SDK Basic";
+			productName = "Glasslab SDK Hello World";
+			productReference = 97260E69188F3CA10000ABCF /* Glasslab SDK Basic */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		97260E61188F3CA10000ABCF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Glasslab;
+			};
+			buildConfigurationList = 97260E64188F3CA10000ABCF /* Build configuration list for PBXProject "Glasslab SDK Basic" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 97260E60188F3CA10000ABCF;
+			productRefGroup = 97260E6A188F3CA10000ABCF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				97260E68188F3CA10000ABCF /* Glasslab SDK Basic */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		97260E65188F3CA10000ABCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97583E2E189B3140001E1A5D /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		97260E70188F3CA10000ABCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
+				LIBRARY_SEARCH_PATHS = ../;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = i386;
+			};
+			name = Debug;
+		};
+		97260E71188F3CA10000ABCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
+				LIBRARY_SEARCH_PATHS = ../;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = i386;
+			};
+			name = Release;
+		};
+		97260E73188F3CA10000ABCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				HEADER_SEARCH_PATHS = (
+					"../../../deps/include/**",
+					../../../headers,
+					/usr/include,
+					"../../../deps/src/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					../../../lib/osx,
+					/Users/bendapkiewicz/Desktop/GlassLabProjects/PlatformSDK/lib/osx,
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-L/usr/lib/sqlite3",
+					"-lsqlite3",
+				);
+				PRODUCT_NAME = "Glasslab SDK Basic";
+				VALID_ARCHS = x86_64;
+			};
+			name = Debug;
+		};
+		97260E74188F3CA10000ABCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				HEADER_SEARCH_PATHS = (
+					"../../../deps/include/**",
+					../../../headers,
+					/usr/include,
+					"../../../deps/src/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					../../../lib/osx,
+					/Users/bendapkiewicz/Desktop/GlassLabProjects/PlatformSDK/lib/osx,
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-L/usr/lib/sqlite3",
+					"-lsqlite3",
+				);
+				PRODUCT_NAME = "Glasslab SDK Basic";
+				VALID_ARCHS = x86_64;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		97260E64188F3CA10000ABCF /* Build configuration list for PBXProject "Glasslab SDK Basic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97260E70188F3CA10000ABCF /* Debug */,
+				97260E71188F3CA10000ABCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97260E72188F3CA10000ABCF /* Build configuration list for PBXNativeTarget "Glasslab SDK Basic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97260E73188F3CA10000ABCF /* Debug */,
+				97260E74188F3CA10000ABCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 97260E61188F3CA10000ABCF /* Project object */;
+}

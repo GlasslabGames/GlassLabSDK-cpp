@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>GlasslabSDK armv7 (iOS Device).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>GlasslabSDK i386.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>GlasslabSDK.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>974013C5189B253000A02BDA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>977FDCE418974C760058F3C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>978B003C189C978200012868</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>978B004B189C978300012868</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

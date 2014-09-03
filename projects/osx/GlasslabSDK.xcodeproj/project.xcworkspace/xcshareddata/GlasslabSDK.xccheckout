@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8F317F58-51CC-4569-B1B7-E0E04D9D31B3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GlasslabSDK</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9A91095C-0391-4325-B799-479D4956207A</key>
+		<string>https://github.com/bendapkiewicz/GlassLabSDK.git</string>
+		<key>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</key>
+		<string>https://github.com/bendapkiewicz/GlassLabSDK-cpp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>projects/osx/GlasslabSDK.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9A91095C-0391-4325-B799-479D4956207A</key>
+		<string>../../../../../../GlasslabSDK</string>
+		<key>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bendapkiewicz/GlassLabSDK-cpp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9A91095C-0391-4325-B799-479D4956207A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GlasslabSDK</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GLSDK-cpp</string>
+		</dict>
+	</array>
+</dict>
+</plist>
