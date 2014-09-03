@@ -44,17 +44,17 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/lib;$(LibraryPath)</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/include;$(SolutionDir)/../../../deps/include/libevent;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/lib/win32;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libevent/win32;$(IncludePath)</IncludePath>
     <SourcePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(SourcePath)</SourcePath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/../../../deps/include;$(SolutionDir)/../../../deps/include/libevent;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/../../../deps/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libevent/win32;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/../../../deps/lib/win32;$(LibraryPath)</LibraryPath>
     <SourcePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include;$(SolutionDir)/../../../deps/include/libevent;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include/libevent/win32;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -79,18 +79,12 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include;$(SolutionDir)/../../../deps/include/libevent;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include/libevent/win32;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
-      <Command>"C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/bin/lib.exe" /OUT:"$(SolutionDir)\..\..\..\lib\win32\GlassLabSDK.lib" "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)\..\..\..\deps\lib\jansson.lib" "$(SolutionDir)\..\..\..\deps\lib\libevent.lib" "$(SolutionDir)\..\..\..\deps\lib\libevent_core.lib" "$(SolutionDir)\..\..\..\deps\lib\libevent_extras.lib" "$(SolutionDir)\..\..\..\deps\lib\SQLite_Static_Library.lib"</Command>
+      <Command>"C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/bin/lib.exe" /OUT:"$(SolutionDir)\..\..\..\lib\win32\GlassLabSDK.lib" "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\jansson.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent_core.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent_extras.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\SQLite_Static_Library.lib"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\source\glasslab_sdk.cpp" />
-    <ClCompile Include="..\..\..\..\source\glasslab_sdk_lib_export.cpp" />
-    <ClCompile Include="..\..\..\..\source\glsdk_core.cpp" />
-    <ClCompile Include="..\..\..\..\source\glsdk_data_sync.cpp" />
-  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\headers\glasslab_sdk.h" />
     <ClInclude Include="..\..\..\..\headers\glsdk_config.h" />
@@ -100,6 +94,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\glasslab_sdk.cpp" />
+    <ClCompile Include="..\..\..\..\src\glasslab_sdk_lib_export.cpp" />
+    <ClCompile Include="..\..\..\..\src\glsdk_core.cpp" />
+    <ClCompile Include="..\..\..\..\src\glsdk_data_sync.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

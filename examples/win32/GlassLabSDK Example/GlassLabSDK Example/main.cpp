@@ -40,8 +40,8 @@ int main( int argc, const char * argv[] )
     // These variables are required for making a connection to the server.
     // They include the URI, game Id, and location for the internal events
     // database.
-    //char host[] = "http://stage.argubotacademy.org";
-	char host[] = "http://127.0.0.1:8001";
+    char host[] = "http://stage.playfully.org";
+	//char host[] = "http://127.0.0.1:8001";
     char gameId[] = "AA-1";
     
     // These variables are required for logging in and enrolling with a course.
@@ -69,7 +69,7 @@ int main( int argc, const char * argv[] )
     // events to be dispatched to the server, a game identifier, the device Id, and
     // the URI to connect to.
     printf( "Basic: Creating SDK Instance connecting to %s\n", host );
-    glsdk = new GlasslabSDK( gameId, deviceId, NULL, host );
+    glsdk = new GlasslabSDK( gameId, deviceId, ":memory:", host );
     
     // Optionally set additional properties pertaining to the game, including the
     // name of the game, version number, and level.
