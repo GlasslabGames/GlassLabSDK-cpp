@@ -36,17 +36,17 @@ int main( int argc, const char * argv[] )
     //char host[] = "http://54.193.118.96";
     //char host[] = "http://192.168.1.101:8001";
     
-    char host[] = "http://stage.playfully.org";
-    //char host[] = "http://54.183.156.129";
-    char gameId[] = "AA-1";
+    //char host[] = "http://developer.playfully.org";
+    char host[] = "http://192.168.6.171:8001";
+    char gameId[] = "TEST";
     
     // These variables are required for logging in and enrolling with a course.
     // Once a connection is successful, the server is open to accept login and
     // enroll requests
-    //char username[] = "ben";
-    //char password[] = "glasslab";
-    char username[] = "annabellek";
+    char username[] = "ben";
     char password[] = "glasslab";
+    //char username[] = "annabellek";
+    //char password[] = "glasslab";
     char courseCode[] = "YW8XD";
     
     // The device Id is a way to uniquely identify a user with sessions and

@@ -33,7 +33,7 @@ The first thing you will need to do before recording any sessions or telemetry i
 
 The internal database location is used to store session and telemetry requests. These requests are dispatched in bulk rather than on demand in order to reduce server load. More on this below.
 
-The game identifier is a simple string used to distinguish your game. Game identifiers are provided to developers when they register for GlassLab Game Services. The device identifier is used to distinguish players using the same device (useful for games that support multiple save files). Finally, the URI denotes the server you wish to connect to.
+The game identifier is a simple string used to distinguish your game. Game identifiers are provided to developers when they register for GlassLab Game Services. The device identifier is an identifer sent with sessions and telmetry to distinguish their origin. See the Authentication section below for more information. Finally, the URI denotes the server you wish to connect to.
 
 Should the connection be successful, you will receive a "Message_Connect" response, otherwise a "Message_Error" will be returned. The next section describes how to intercept this message in your game code.
 
@@ -194,6 +194,37 @@ SDK->endSession();
 ```
 
 Note: you can only have one session active at a time per device Id. As explained above, device Ids are used to identify a single user within the game or app. Typically, the user's name is prepended to an identifier that defines the device being used.
+
+
+###Authentication
+
+User authentication is not required for managing sessions and sending telemetry. The session and telemetry information are identified by the deviceId that is set at the creation of the SDK instance. Usually, the deviceId is the unique identifier of the device being used. This Id is how we identify the origin of the events. However, user authentication is required for playfully.org student reporting. Services like achievements, SOWO (shout out, watch out), total time played, and game saves will only succeed if the user is authenticated. The SDK will report these failures back to the client but will not halt the app in any way.
+
+A common conflict with using just the device's unique identifier is shared data: a game that supports multiple saves, and thus multiple users, will share that device Id, session info, and telemetry. A good practice to avoid this is to prepend the device identifier with a user-identifying value, which can be accessed from successful authentication.
+
+There are two API calls used for authentication-related services:
+- login( username, password )
+- logout()
+
+The login API function requires the username and password as its parameters:
+
+```
+// Perform login with the following credentials
+char username[] = "ben";
+char password[] = "glasslab";
+SDK->login( username, password );
+```
+
+Once the request has been routed to the server and returned as successful, the "nsGlasslabSDK::Const::Message_Login" message will be waiting in the response queue. The response data is a JSON object containing the following important fields:
+- id
+- username
+- last name initial
+- first name
+- email
+- role
+- enrolled course list
+
+As mentioned above, it is a good practice to use the "id" field returned on successful login with the deviceId for sessions and telemetry.
 
 
 ###Telemetry
