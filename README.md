@@ -164,7 +164,7 @@ The GlassLabSDK exposes many functions that communicate with the server to perfo
 | getUserInfo() | retrieve user information for the current authenticated user | Message_GetUserInfo |
 | getPlayerInfo() | retrieve player information for the current authenticated user, including total time played | Message_GetPlayerInfo |
 | getCourses() | retrieve a list of enrolled courses for the current authenticated user | Message_GetCourses |
-| startSession() | attempt to start a new session for the authenticated user | Message_StartSession |
+| startSession() | attempt to start a new session for gathering telemetry | Message_StartSession |
 | endSession() | attempt to end the current session | Message_EndSession |
 | saveTelemEvent(eventName) | record a new telemetry event with previously appended data | Message_Event |
 | saveAchievementEvent(item, group, subgroup) | record a new achievement | Message_SaveAchievement |
@@ -172,7 +172,7 @@ The GlassLabSDK exposes many functions that communicate with the server to perfo
 | getSaveGame() | retrieves the save game for the current user | Message_GetGameSave |
 | deleteSaveGame() | deletes the save game record for the current user | Message_DeleteGameSave |
 
-The above repsonse messages assume a valid and successful request. If the request was unsuccessful, which could either be due to internet connection state or invalid data, the server will respond with "MESSAGE_ERROR" and attach an error message indicating the failure.
+The above repsonse messages assume a valid and successful request. If the request was unsuccessful, which could either be due to internet connection state or invalid data, the server will respond with "Message_Error" and attach an error message indicating the failure.
 
 Detailed below are examples of how to use some of the main SDK functions, including starting and ending sessions, sending telemetry, and sending achievements.
 
@@ -225,6 +225,12 @@ Once the request has been routed to the server and returned as successful, the "
 - enrolled course list
 
 As mentioned above, it is a good practice to use the "id" field returned on successful login with the deviceId for sessions and telemetry.
+
+<b>Login and registration modals:</b>
+
+Registration and login generally require modals. As a developer, you can either build these UI modules into the game yourself or you can use web view technology and link to modals we have created on the playfully.org site.
+
+The login webview page can be found [here](https://developer.playfully.org/sdk/login/ "Login.org Registration Webview"). The registration webview page can be found [here](https://developer.playfully.org/sdk/login/ "Playfully.org Registration Webview").
 
 
 ###Telemetry
