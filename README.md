@@ -230,7 +230,7 @@ As mentioned above, it is a good practice to use the "id" field returned on succ
 
 Registration and login generally require modals. As a developer, you can either build these UI modules into the game yourself or you can use web view technology and link to modals we have created on the playfully.org site.
 
-The login webview page can be found [here](https://developer.playfully.org/sdk/login/ "Login.org Registration Webview"). The registration webview page can be found [here](https://developer.playfully.org/sdk/login/ "Playfully.org Registration Webview").
+The login webview page can be found [here](http://developer.playfully.org/sdk/login/ "Login.org Registration Webview"). The registration webview page can be found [here](http://developer.playfully.org/sdk/login/ "Playfully.org Registration Webview").
 
 
 ###Telemetry
