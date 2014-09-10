@@ -293,3 +293,8 @@ Sample Projects and Wrapper
 A sample OSX project is included to demonstrate how to use the SDK in C++ and Xcode. This sample utilizes the majority of the SDK functions described in this document and implements a simple listener to intercept server responses. This project can be found at ROOT/examples/osx/Glasslab SDK Basic/. There is also a Windows sample using Visual Studio, which mocks the same functionality as the OSX project.
 
 A sample Unity project is also included to demonstrate how to use the SDK in C#. This sample can be found at ROOT/examples/unity/. The C# wrapper, which is required for the Unity sample, can be found at ROOT/platform-support/unity/.
+
+
+### License
+
+The GlassLab SDK is under the BSD license: [SDK license](https://github.com/GlasslabGames/GlassLabSDK-cpp/blob/master/LICENSE "SDK license")
