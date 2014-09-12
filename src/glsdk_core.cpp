@@ -1756,6 +1756,21 @@ namespace nsGlasslabSDK {
         // Set the URI, host, and port information
         url  = m_connectUri;
         uri  = evhttp_uri_parse( url.c_str() );
+
+        // If the parsed URL is null, there's something wrong
+        if( !uri ) {
+            if( coreCB.c_str() ) {
+                string errorMessage = "{\"status\":\"error\",\"error\":\"URL is invalid\"}";
+                p_glSDKInfo sdkInfo;
+                sdkInfo.sdk = m_sdk;
+                sdkInfo.core = this;
+                sdkInfo.data = errorMessage.c_str();
+                sdkInfo.success = false;
+                getCoreCallback( coreCB )( sdkInfo );
+            }
+            return;
+        }
+
         port = evhttp_uri_get_port( uri );
         host = evhttp_uri_get_host( uri );
         // Default to port 80
