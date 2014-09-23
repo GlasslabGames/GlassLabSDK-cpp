@@ -1755,6 +1755,10 @@ namespace nsGlasslabSDK {
 
         // Set the URI, host, and port information
         url  = m_connectUri;
+        
+        // Need to decode the URL in case there are escape characters
+        // This is needed for SimCityEDU addresses passed through URL
+        url = evhttp_uridecode(url.c_str(), 0, NULL);
         uri  = evhttp_uri_parse( url.c_str() );
 
         // If the parsed URL is null, there's something wrong
@@ -1777,6 +1781,20 @@ namespace nsGlasslabSDK {
         if( port == -1 ) {
             port = 80;
 		}
+        
+        // If the parsed URL is null, there's something wrong
+        if( !host ) {
+            if( coreCB.c_str() ) {
+                string errorMessage = "{\"status\":\"error\",\"error\":\"host is invalid\"}";
+                p_glSDKInfo sdkInfo;
+                sdkInfo.sdk = m_sdk;
+                sdkInfo.core = this;
+                sdkInfo.data = errorMessage.c_str();
+                sdkInfo.success = false;
+                getCoreCallback( coreCB )( sdkInfo );
+            }
+            return;
+        }
 
         //req.api = req.api.split( ":gameId" ).join( m_clientId );
         // Update the path to remove all ":gameId" occurrences, replacing them with the actual gameId
