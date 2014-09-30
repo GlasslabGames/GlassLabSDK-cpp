@@ -30,7 +30,7 @@ public class Main : MonoBehaviour {
 		
 		// Send some basic events.
 		Debug.Log( "Saving Events..." );
-		for( int i = 1; i < 30; i++ ){
+		for( int i = 1; i < 100; i++ ){
 			glsdk.AddTelemEventValue( "string key", "asd" );
 			glsdk.AddTelemEventValue( "int key", i );
 			glsdk.AddTelemEventValue( "float key", i * 1.23 );

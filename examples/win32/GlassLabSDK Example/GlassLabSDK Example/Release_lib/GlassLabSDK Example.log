@@ -1,14 +1,20 @@
-﻿Build started 9/30/2014 3:58:44 PM.
+﻿Build started 9/30/2014 4:21:04 PM.
      1>Project "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\GlassLabSDK Example\GlassLabSDK Example.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "Release_lib\GlassLabSDK Example.unsuccessfulbuild".
+         Creating "Release_lib\GlassLabSDK Example.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release_lib\\" /Fd"Release_lib\vc90.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release_lib\\" /Fd"Release_lib\vc90.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp" main.cpp
+         CppSQLite3.cpp
+     1>..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp(1078): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp(1226): warning C4101: 'i' : unreferenced local variable
+     1>..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp(1257): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
          main.cpp
-     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(64): warning C4068: unknown pragma
-     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(19): warning C4068: unknown pragma
-     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(264): warning C4068: unknown pragma
-     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(180): warning C4068: unknown pragma
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(100): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(51): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(296): warning C4068: unknown pragma
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(216): warning C4068: unknown pragma
      1>main.cpp(57): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
        Link:
@@ -30,4 +36,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:07.11
+Time Elapsed 00:00:07.36
