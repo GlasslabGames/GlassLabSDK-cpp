@@ -98,6 +98,7 @@ public class GlasslabSDK {
 	public enum Message {
 		None = 0,
 		Connect,
+		ConnectFail,
 		DeviceUpdate,
 		AuthStatus,
 		Register,
@@ -112,6 +113,10 @@ public class GlasslabSDK {
 		GetGameSave,
 		DeleteGameSave,
 		GetUserInfo,
+		SaveAchievement,
+		SavePlayerInfo,
+		GetPlayerInfo,
+		SendTotalTimePlayed,
 		Event,
 		Error
 	};
