@@ -1,0 +1,33 @@
+﻿Build started 9/30/2014 3:58:44 PM.
+     1>Project "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\GlassLabSDK Example\GlassLabSDK Example.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Release_lib\GlassLabSDK Example.unsuccessfulbuild".
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release_lib\\" /Fd"Release_lib\vc90.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(64): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(19): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(264): warning C4068: unknown pragma
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(180): warning C4068: unknown pragma
+     1>main.cpp(57): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_lib\GlassLabSDK Example.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\/../../../deps/lib/win32/lib" /LIBPATH:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\/../../../lib/win32" Ws2_32.lib GlassLabSDK.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release_lib\GlassLabSDK Example.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_lib\GlassLabSDK Example.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_lib\GlassLabSDK Example.lib" /MACHINE:X86 Release_lib\CppSQLite3.obj
+         Release_lib\main.obj
+     1>GlassLabSDK.lib(value.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:ICF' specification
+            Creating library C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_lib\GlassLabSDK Example.lib and object C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_lib\GlassLabSDK Example.exp
+     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+         Generating code
+         Finished generating code
+         GlassLabSDK Example.vcxproj -> C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_lib\GlassLabSDK Example.exe
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_lib\GlassLabSDK Example.exe;#1" /manifest "Release_lib\GlassLabSDK Example.exe.intermediate.manifest"
+       FinalizeBuildStatus:
+         Deleting file "Release_lib\GlassLabSDK Example.unsuccessfulbuild".
+         Touching "Release_lib\GlassLabSDK Example.lastbuildstate".
+     1>Done Building Project "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\GlassLabSDK Example\GlassLabSDK Example.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:07.11

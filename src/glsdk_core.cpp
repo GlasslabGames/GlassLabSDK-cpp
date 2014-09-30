@@ -254,7 +254,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
-                //returnMessage = Const::Message_Error;
+                returnMessage = Const::Message_ConnectFail;
             }
             else {
                 // Set the connected state
@@ -284,6 +284,10 @@ namespace nsGlasslabSDK {
         json_decref( root );
         
         sdkInfo.core->logMessage( "getConfig_Done: done reading json data");
+
+		if( !sdkInfo.success ) {
+			Const::Message returnMessage = Const::Message_ConnectFail;
+		}
         
         // Push Connect message
         sdkInfo.core->pushMessageStack( returnMessage, json );
@@ -1722,13 +1726,43 @@ namespace nsGlasslabSDK {
 		#endif
 
         // Set the URI, host, and port information
-        url  = m_connectUri;
-        uri  = evhttp_uri_parse( url.c_str() );
+        url = m_connectUri;
+		url = evhttp_uridecode( url.c_str(), 0, NULL );
+        uri = evhttp_uri_parse( url.c_str() );
+
+		// If the parsed URL is null, there's something wrong
+		if( !uri ) {
+			/*if( coreCB.c_str() ) {
+				string errorMessage = "{\"status\":\"error\",\"error\":\"request timed out\"}";
+				p_glSDKInfo sdkInfo;
+				sdkInfo.sdk = m_sdk;
+				sdkInfo.core = this;
+				sdkInfo.data = errorMessage.c_str();
+				sdkInfo.success = false;
+				getCoreCallback( coreCB )( sdkInfo );
+			}
+			return;*/
+		}
+
         port = evhttp_uri_get_port( uri );
         host = evhttp_uri_get_host( uri );
         // Default to port 80
         if( port == -1 ) {
             port = 80;
+		}
+
+		// If the parsed host is null, there's also something wrong
+		if( !host ) {
+			/*if( coreCB.c_str() ) {
+				string errorMessage = "{\"status\":\"error\",\"error\":\"request timed out\"}";
+				p_glSDKInfo sdkInfo;
+				sdkInfo.sdk = m_sdk;
+				sdkInfo.core = this;
+				sdkInfo.data = errorMessage.c_str();
+				sdkInfo.success = false;
+				getCoreCallback( coreCB )( sdkInfo );
+			}
+			return;*/
 		}
 
         //req.api = req.api.split( ":gameId" ).join( m_clientId );

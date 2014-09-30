@@ -1,0 +1,30 @@
+﻿Build started 9/30/2014 2:45:28 PM.
+     1>Project "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\GlassLabSDK\GlassLabSDK.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Release_dll\GlassLabSDK.unsuccessfulbuild".
+       ClCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+         GlassLabSDK.vcxproj -> C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll
+       PostBuildEvent:
+         xcopy /Y "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll" "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\\..\..\..\lib\win32\dll" & xcopy /Y "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.exp" "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\\..\..\..\lib\win32\dll" & xcopy /Y "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.lib" "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\\..\..\..\lib\win32\dll" & xcopy /Y "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll" "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\\..\..\..\examples\win32\GlassLabSDK Example\Release_dll" & xcopy /Y "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll" "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\\..\..\..\examples\unity\Assets\Plugins"
+         :VCEnd
+         C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll
+         1 File(s) copied
+         C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.exp
+         1 File(s) copied
+         C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.lib
+         1 File(s) copied
+         C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll
+         1 File(s) copied
+         C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll
+         1 File(s) copied
+       FinalizeBuildStatus:
+         Deleting file "Release_dll\GlassLabSDK.unsuccessfulbuild".
+         Touching "Release_dll\GlassLabSDK.lastbuildstate".
+     1>Done Building Project "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\GlassLabSDK\GlassLabSDK.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.15
