@@ -1305,9 +1305,9 @@ namespace nsGlasslabSDK {
         //sdkInfo.core->logMessage( "---------------------------" );
         //sdkInfo.core->logMessage( "saveAchievement_Done", json );
         //sdkInfo.core->logMessage( "---------------------------" );
-        //printf( "\n---------------------------\n" );
-        //printf( "saveAchievement_Done: %s", json );
-        //printf( "\n---------------------------\n" );
+        printf( "\n---------------------------\n" );
+        printf( "saveAchievement_Done: %s", json );
+        printf( "\n---------------------------\n" );
         
         json_t* root;
         json_error_t error;
@@ -1440,7 +1440,7 @@ namespace nsGlasslabSDK {
         json_decref( root );
         
         // Push SavePlayerInfo message
-        sdkInfo.core->pushMessageStack( returnMessage );
+        //sdkInfo.core->pushMessageStack( returnMessage );
     }
     
     /**
@@ -1600,23 +1600,23 @@ namespace nsGlasslabSDK {
 
         // If the seconds elapsed exceeds our interval, reset the current telemetry clock and
         // flush the message queue
-        //if( secondsElapsed > config.eventsPeriodSecs ) {
+        if( secondsElapsed > config.eventsPeriodSecs ) {
 
             //printf("secondsElapsed: %f,  getMessageTableSize: %d, config.eventsMinSize: %d\n", secondsElapsed, m_dataSync->getMessageTableSize(), config.eventsMinSize);
             // Check that we exceed the minimum number of events to send data
-            //if( m_dataSync->getMessageTableSize() > config.eventsMinSize ) {
+            if( m_dataSync->getMessageTableSize() > config.eventsMinSize ) {
                 // In addition to flushing the message queue, do a POST on the totalTimePlayed
                 sendTotalTimePlayed();
 
-                printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
+                //printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
 
                 // Only flush the queue if we are connected
-                //if( getConnectedState() ) {
+                if( getConnectedState() ) {
                     m_dataSync->flushMsgQ();
-                //}
+                }
                 m_telemetryLastTime = currentTime;
-            //}
-        //}
+            }
+        }
         // Or send events if we've exceeded the table size limit
         /*else if( m_dataSync->getMessageTableSize() > config.eventsMaxSize ) {
             printf( "reached max number of events: %i with %f elapsed with %i\n", m_dataSync->getMessageTableSize(), secondsElapsed, config.eventsPeriodSecs );
@@ -1642,7 +1642,7 @@ namespace nsGlasslabSDK {
         // Cast the argument to a request info object
         p_glHttpRequest *request = (p_glHttpRequest *)arg;
         
-        printf( "httpGetRequest_Done\n");
+        //printf( "httpGetRequest_Done\n");
         // If the request object exists, parse the response
         if( req ) {
             // There should be request info, including callbacks and statuses
@@ -1883,7 +1883,7 @@ namespace nsGlasslabSDK {
             }
             
             // Print the results
-            printf("connect url: %s, method: %s, host: %s, port:%d, path: %s, cookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
+            //printf("connect url: %s, method: %s, host: %s, port:%d, path: %s, cookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
 
             // Dispatch the request
             evhttp_connection_set_timeout( httpRequest->conn, 600 );
@@ -2451,7 +2451,7 @@ namespace nsGlasslabSDK {
 
         // Set the gameSessionId in the SESSION table
         if( m_dataSync != NULL ) {
-            logMessage( "setting game session Id:", m_sessionId.c_str() );
+            //logMessage( "setting game session Id:", m_sessionId.c_str() );
             m_dataSync->updateSessionTableWithGameSessionId( m_deviceId, m_sessionId );
 
             // Get the game session event order to update
