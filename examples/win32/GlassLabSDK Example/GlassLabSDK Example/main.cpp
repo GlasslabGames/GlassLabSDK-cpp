@@ -40,15 +40,15 @@ int main( int argc, const char * argv[] )
     // These variables are required for making a connection to the server.
     // They include the URI, game Id, and location for the internal events
     // database.
-    char host[] = "http://stage.playfully.org";
+    char host[] = "http://developer.playfully.org";
 	//char host[] = "http://127.0.0.1:8001";
-    char gameId[] = "AA-1";
+    char gameId[] = "SC";
     
     // These variables are required for logging in and enrolling with a course.
     // Once a connection is successful, the server is open to accept login and
     // enroll requests
-    char username[] = "test2";
-    char password[] = "test";
+    char username[] = "andrew";
+    char password[] = "glasslab";
     char courseCode[] = "83RLM";
     
     // The device Id is a way to uniquely identify a user with sessions and
@@ -81,7 +81,7 @@ int main( int argc, const char * argv[] )
     
 	//glsdk->startSession();
 	glsdk->startSession();
-	for( int i = 0; i < 100; i++ ) {
+	for( int i = 0; i < 10; i++ ) {
 		glsdk->saveTelemEvent( "event" );
 		glsdk->sendTelemEvents();
 		//glsdk->deviceUpdate();
@@ -102,7 +102,7 @@ int main( int argc, const char * argv[] )
         // A response object contains the message, denoted by an enum, and
         // the response data as a JSON string.
         resCode   = glsdk->readTopMessageCode();
-        //resString = glsdk->readTopMessageString();
+		resString = glsdk->readTopMessageString() || "";
         
         // Check the message type
         switch( resCode ) {

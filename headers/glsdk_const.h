@@ -71,6 +71,7 @@ namespace nsGlasslabSDK {
         enum Message {
             Message_None = 0,
             Message_Connect,
+			Message_ConnectFail,
             Message_DeviceUpdate,
             Message_AuthStatus,
             Message_Register,

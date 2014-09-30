@@ -1,0 +1,40 @@
+﻿Build started 9/30/2014 4:20:32 PM.
+     1>Project "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\GlassLabSDK Example\GlassLabSDK Example.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release_dll\GlassLabSDK Example.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       PreBuildEvent:
+         xcopy /Y "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\\..\..\..\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll" "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_dll"
+         :VCEnd
+         C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\\..\..\..\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll
+         1 File(s) copied
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release_dll\\" /Fd"Release_dll\vc90.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp" main.cpp
+         CppSQLite3.cpp
+     1>..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp(1078): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp(1226): warning C4101: 'i' : unreferenced local variable
+     1>..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp(1257): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+         main.cpp
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(100): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(51): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(296): warning C4068: unknown pragma
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(216): warning C4068: unknown pragma
+     1>main.cpp(57): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_dll\GlassLabSDK Example.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\/../../../deps/lib/win32" /LIBPATH:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\/../../../lib/win32/dll" SQLite_Static_Library.lib GlassLabSDK.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release_dll\GlassLabSDK Example.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_dll\GlassLabSDK Example.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_dll\GlassLabSDK Example.lib" /MACHINE:X86 Release_dll\CppSQLite3.obj
+         Release_dll\main.obj
+         Generating code
+         Finished generating code
+         GlassLabSDK Example.vcxproj -> C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_dll\GlassLabSDK Example.exe
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\Release_dll\GlassLabSDK Example.exe;#1" /manifest "Release_dll\GlassLabSDK Example.exe.intermediate.manifest"
+       FinalizeBuildStatus:
+         Deleting file "Release_dll\GlassLabSDK Example.unsuccessfulbuild".
+         Touching "Release_dll\GlassLabSDK Example.lastbuildstate".
+     1>Done Building Project "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\examples\win32\GlassLabSDK Example\GlassLabSDK Example\GlassLabSDK Example.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.32

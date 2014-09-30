@@ -1,0 +1,246 @@
+﻿Build started 9/30/2014 4:20:18 PM.
+     1>Project "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\GlassLabSDK\GlassLabSDK.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release_dll\GlassLabSDK.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\CL.exe /c /I"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\/../../../headers" /I"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\/../../../deps/include/libevent/win32" /I"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\/../../../deps/include/libjansson" /I"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\/../../../deps/include/libsqlite" /I"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\/../../../deps/src/CppSQLite-master/src" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release_dll\\" /Fd"Release_dll\vc90.pdb" /Gd /TP /analyze- /errorReport:prompt "..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp" ..\..\..\..\src\glasslab_sdk.cpp ..\..\..\..\src\glasslab_sdk_lib_export.cpp ..\..\..\..\src\glsdk_core.cpp ..\..\..\..\src\glsdk_data_sync.cpp
+         CppSQLite3.cpp
+     1>..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp(1078): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp(1226): warning C4101: 'i' : unreferenced local variable
+     1>..\..\..\..\deps\src\CppSQLite-master\src\CppSQLite3.cpp(1257): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+         glasslab_sdk.cpp
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(100): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(51): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(296): warning C4068: unknown pragma
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(216): warning C4068: unknown pragma
+     1>..\..\..\..\src\glasslab_sdk.cpp(47): warning C4273: 'GlasslabSDK::GlasslabSDK' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(123) : see previous definition of '{ctor}'
+     1>..\..\..\..\src\glasslab_sdk.cpp(52): warning C4273: 'GlasslabSDK::getLastStatus' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(126) : see previous definition of 'getLastStatus'
+     1>..\..\..\..\src\glasslab_sdk.cpp(57): warning C4273: 'GlasslabSDK::popMessageStack' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(127) : see previous definition of 'popMessageStack'
+     1>..\..\..\..\src\glasslab_sdk.cpp(61): warning C4273: 'GlasslabSDK::readTopMessageCode' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(128) : see previous definition of 'readTopMessageCode'
+     1>..\..\..\..\src\glasslab_sdk.cpp(66): warning C4273: 'GlasslabSDK::readTopMessageString' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(129) : see previous definition of 'readTopMessageString'
+     1>..\..\..\..\src\glasslab_sdk.cpp(72): warning C4273: 'GlasslabSDK::connect' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(132) : see previous definition of 'connect'
+     1>..\..\..\..\src\glasslab_sdk.cpp(76): warning C4273: 'GlasslabSDK::deviceUpdate' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(133) : see previous definition of 'deviceUpdate'
+     1>..\..\..\..\src\glasslab_sdk.cpp(80): warning C4273: 'GlasslabSDK::authStatus' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(134) : see previous definition of 'authStatus'
+     1>..\..\..\..\src\glasslab_sdk.cpp(84): warning C4273: 'GlasslabSDK::registerStudent' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(135) : see previous definition of 'registerStudent'
+     1>..\..\..\..\src\glasslab_sdk.cpp(88): warning C4273: 'GlasslabSDK::registerInstructor' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(136) : see previous definition of 'registerInstructor'
+     1>..\..\..\..\src\glasslab_sdk.cpp(92): warning C4273: 'GlasslabSDK::getUserInfo' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(137) : see previous definition of 'getUserInfo'
+     1>..\..\..\..\src\glasslab_sdk.cpp(96): warning C4273: 'GlasslabSDK::login' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(138) : see previous definition of 'login'
+     1>..\..\..\..\src\glasslab_sdk.cpp(100): warning C4273: 'GlasslabSDK::login' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(139) : see previous definition of 'login'
+     1>..\..\..\..\src\glasslab_sdk.cpp(104): warning C4273: 'GlasslabSDK::enroll' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(140) : see previous definition of 'enroll'
+     1>..\..\..\..\src\glasslab_sdk.cpp(108): warning C4273: 'GlasslabSDK::unenroll' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(141) : see previous definition of 'unenroll'
+     1>..\..\..\..\src\glasslab_sdk.cpp(112): warning C4273: 'GlasslabSDK::getCourses' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(142) : see previous definition of 'getCourses'
+     1>..\..\..\..\src\glasslab_sdk.cpp(116): warning C4273: 'GlasslabSDK::logout' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(143) : see previous definition of 'logout'
+     1>..\..\..\..\src\glasslab_sdk.cpp(120): warning C4273: 'GlasslabSDK::startSession' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(144) : see previous definition of 'startSession'
+     1>..\..\..\..\src\glasslab_sdk.cpp(124): warning C4273: 'GlasslabSDK::endSession' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(145) : see previous definition of 'endSession'
+     1>..\..\..\..\src\glasslab_sdk.cpp(128): warning C4273: 'GlasslabSDK::saveGame' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(146) : see previous definition of 'saveGame'
+     1>..\..\..\..\src\glasslab_sdk.cpp(132): warning C4273: 'GlasslabSDK::getSaveGame' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(147) : see previous definition of 'getSaveGame'
+     1>..\..\..\..\src\glasslab_sdk.cpp(136): warning C4273: 'GlasslabSDK::deleteSaveGame' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(148) : see previous definition of 'deleteSaveGame'
+     1>..\..\..\..\src\glasslab_sdk.cpp(140): warning C4273: 'GlasslabSDK::saveAchievement' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(149) : see previous definition of 'saveAchievement'
+     1>..\..\..\..\src\glasslab_sdk.cpp(144): warning C4273: 'GlasslabSDK::sendTelemEvents' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(150) : see previous definition of 'sendTelemEvents'
+     1>..\..\..\..\src\glasslab_sdk.cpp(148): warning C4273: 'GlasslabSDK::forceFlushTelemEvents' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(151) : see previous definition of 'forceFlushTelemEvents'
+     1>..\..\..\..\src\glasslab_sdk.cpp(152): warning C4273: 'GlasslabSDK::cancelRequest' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(152) : see previous definition of 'cancelRequest'
+     1>..\..\..\..\src\glasslab_sdk.cpp(157): warning C4273: 'GlasslabSDK::addTelemEventValue' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(156) : see previous definition of 'addTelemEventValue'
+     1>..\..\..\..\src\glasslab_sdk.cpp(158): warning C4273: 'GlasslabSDK::addTelemEventValue' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(157) : see previous definition of 'addTelemEventValue'
+     1>..\..\..\..\src\glasslab_sdk.cpp(159): warning C4273: 'GlasslabSDK::addTelemEventValue' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(158) : see previous definition of 'addTelemEventValue'
+     1>..\..\..\..\src\glasslab_sdk.cpp(160): warning C4273: 'GlasslabSDK::addTelemEventValue' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(159) : see previous definition of 'addTelemEventValue'
+     1>..\..\..\..\src\glasslab_sdk.cpp(161): warning C4273: 'GlasslabSDK::addTelemEventValue' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(160) : see previous definition of 'addTelemEventValue'
+     1>..\..\..\..\src\glasslab_sdk.cpp(162): warning C4273: 'GlasslabSDK::addTelemEventValue' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(161) : see previous definition of 'addTelemEventValue'
+     1>..\..\..\..\src\glasslab_sdk.cpp(163): warning C4273: 'GlasslabSDK::addTelemEventValue' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(162) : see previous definition of 'addTelemEventValue'
+     1>..\..\..\..\src\glasslab_sdk.cpp(164): warning C4273: 'GlasslabSDK::addTelemEventValue' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(163) : see previous definition of 'addTelemEventValue'
+     1>..\..\..\..\src\glasslab_sdk.cpp(165): warning C4273: 'GlasslabSDK::addTelemEventValue' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(164) : see previous definition of 'addTelemEventValue'
+     1>..\..\..\..\src\glasslab_sdk.cpp(166): warning C4273: 'GlasslabSDK::addTelemEventValue' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(165) : see previous definition of 'addTelemEventValue'
+     1>..\..\..\..\src\glasslab_sdk.cpp(168): warning C4273: 'GlasslabSDK::clearTelemEventValues' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(168) : see previous definition of 'clearTelemEventValues'
+     1>..\..\..\..\src\glasslab_sdk.cpp(172): warning C4273: 'GlasslabSDK::saveTelemEvent' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(169) : see previous definition of 'saveTelemEvent'
+     1>..\..\..\..\src\glasslab_sdk.cpp(177): warning C4273: 'GlasslabSDK::updatePlayerInfoKey' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(172) : see previous definition of 'updatePlayerInfoKey'
+     1>..\..\..\..\src\glasslab_sdk.cpp(178): warning C4273: 'GlasslabSDK::updatePlayerInfoKey' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(173) : see previous definition of 'updatePlayerInfoKey'
+     1>..\..\..\..\src\glasslab_sdk.cpp(179): warning C4273: 'GlasslabSDK::updatePlayerInfoKey' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(174) : see previous definition of 'updatePlayerInfoKey'
+     1>..\..\..\..\src\glasslab_sdk.cpp(180): warning C4273: 'GlasslabSDK::updatePlayerInfoKey' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(175) : see previous definition of 'updatePlayerInfoKey'
+     1>..\..\..\..\src\glasslab_sdk.cpp(181): warning C4273: 'GlasslabSDK::updatePlayerInfoKey' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(176) : see previous definition of 'updatePlayerInfoKey'
+     1>..\..\..\..\src\glasslab_sdk.cpp(182): warning C4273: 'GlasslabSDK::updatePlayerInfoKey' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(177) : see previous definition of 'updatePlayerInfoKey'
+     1>..\..\..\..\src\glasslab_sdk.cpp(183): warning C4273: 'GlasslabSDK::updatePlayerInfoKey' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(178) : see previous definition of 'updatePlayerInfoKey'
+     1>..\..\..\..\src\glasslab_sdk.cpp(184): warning C4273: 'GlasslabSDK::updatePlayerInfoKey' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(179) : see previous definition of 'updatePlayerInfoKey'
+     1>..\..\..\..\src\glasslab_sdk.cpp(185): warning C4273: 'GlasslabSDK::updatePlayerInfoKey' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(180) : see previous definition of 'updatePlayerInfoKey'
+     1>..\..\..\..\src\glasslab_sdk.cpp(186): warning C4273: 'GlasslabSDK::updatePlayerInfoKey' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(181) : see previous definition of 'updatePlayerInfoKey'
+     1>..\..\..\..\src\glasslab_sdk.cpp(187): warning C4273: 'GlasslabSDK::removePlayerInfoKey' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(182) : see previous definition of 'removePlayerInfoKey'
+     1>..\..\..\..\src\glasslab_sdk.cpp(190): warning C4273: 'GlasslabSDK::setName' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(185) : see previous definition of 'setName'
+     1>..\..\..\..\src\glasslab_sdk.cpp(194): warning C4273: 'GlasslabSDK::setVersion' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(186) : see previous definition of 'setVersion'
+     1>..\..\..\..\src\glasslab_sdk.cpp(198): warning C4273: 'GlasslabSDK::setGameLevel' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(187) : see previous definition of 'setGameLevel'
+     1>..\..\..\..\src\glasslab_sdk.cpp(202): warning C4273: 'GlasslabSDK::setUserId' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(188) : see previous definition of 'setUserId'
+     1>..\..\..\..\src\glasslab_sdk.cpp(206): warning C4273: 'GlasslabSDK::setConfig' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(189) : see previous definition of 'setConfig'
+     1>..\..\..\..\src\glasslab_sdk.cpp(210): warning C4273: 'GlasslabSDK::setTime' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(190) : see previous definition of 'setTime'
+     1>..\..\..\..\src\glasslab_sdk.cpp(214): warning C4273: 'GlasslabSDK::setPlayerHandle' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(191) : see previous definition of 'setPlayerHandle'
+     1>..\..\..\..\src\glasslab_sdk.cpp(218): warning C4273: 'GlasslabSDK::removePlayerHandle' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(192) : see previous definition of 'removePlayerHandle'
+     1>..\..\..\..\src\glasslab_sdk.cpp(222): warning C4273: 'GlasslabSDK::setCookie' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(193) : see previous definition of 'setCookie'
+     1>..\..\..\..\src\glasslab_sdk.cpp(226): warning C4273: 'GlasslabSDK::setAutoSessionManagement' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(194) : see previous definition of 'setAutoSessionManagement'
+     1>..\..\..\..\src\glasslab_sdk.cpp(231): warning C4273: 'GlasslabSDK::startGameTimer' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(197) : see previous definition of 'startGameTimer'
+     1>..\..\..\..\src\glasslab_sdk.cpp(235): warning C4273: 'GlasslabSDK::stopGameTimer' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(198) : see previous definition of 'stopGameTimer'
+     1>..\..\..\..\src\glasslab_sdk.cpp(239): warning C4273: 'GlasslabSDK::resetDatabase' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(201) : see previous definition of 'resetDatabase'
+     1>..\..\..\..\src\glasslab_sdk.cpp(244): warning C4273: 'GlasslabSDK::getConnectUri' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(204) : see previous definition of 'getConnectUri'
+     1>..\..\..\..\src\glasslab_sdk.cpp(253): warning C4273: 'GlasslabSDK::getUserId' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(205) : see previous definition of 'getUserId'
+     1>..\..\..\..\src\glasslab_sdk.cpp(262): warning C4273: 'GlasslabSDK::getCookie' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(206) : see previous definition of 'getCookie'
+     1>..\..\..\..\src\glasslab_sdk.cpp(272): warning C4273: 'GlasslabSDK::popLogQueue' : inconsistent dll linkage
+                 C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(209) : see previous definition of 'popLogQueue'
+         glasslab_sdk_lib_export.cpp
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(100): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(51): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(296): warning C4068: unknown pragma
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(216): warning C4068: unknown pragma
+         glsdk_core.cpp
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(100): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(51): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(296): warning C4068: unknown pragma
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(216): warning C4068: unknown pragma
+     1>..\..\..\..\src\glsdk_core.cpp(1088): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_core.cpp(1164): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_core.cpp(1459): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_core.cpp(1525): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>..\..\..\..\src\glsdk_core.cpp(1602): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>..\..\..\..\src\glsdk_core.cpp(1853): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_core.cpp(1864): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_core.cpp(1866): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_core.cpp(1870): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_core.cpp(2176): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>..\..\..\..\src\glsdk_core.cpp(2400): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\string.h(74) : see declaration of 'strcpy'
+     1>..\..\..\..\src\glsdk_core.cpp(2401): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\string.h(79) : see declaration of 'strcat'
+     1>..\..\..\..\src\glsdk_core.cpp(2402): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\string.h(79) : see declaration of 'strcat'
+     1>..\..\..\..\src\glsdk_core.cpp(2432): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\string.h(74) : see declaration of 'strcpy'
+     1>..\..\..\..\src\glsdk_core.cpp(2433): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\string.h(79) : see declaration of 'strcat'
+     1>..\..\..\..\src\glsdk_core.cpp(2434): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\string.h(79) : see declaration of 'strcat'
+         glsdk_data_sync.cpp
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(100): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(51): warning C4068: unknown pragma
+     1>c:\users\ben\desktop\dashboard projects\bendapkiewicz\sdk\glsdk-cpp\headers\glsdk_core.h(296): warning C4068: unknown pragma
+     1>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\headers\glasslab_sdk.h(216): warning C4068: unknown pragma
+     1>..\..\..\..\src\glsdk_data_sync.cpp(73): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_data_sync.cpp(73): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdlib.h(447) : see declaration of 'getenv'
+     1>..\..\..\..\src\glsdk_data_sync.cpp(358): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_data_sync.cpp(397): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_data_sync.cpp(717): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_data_sync.cpp(720): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_data_sync.cpp(764): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>..\..\..\..\src\glsdk_data_sync.cpp(797): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+     1>..\..\..\..\src\glsdk_data_sync.cpp(1048): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\include\stdio.h(366) : see declaration of 'sprintf'
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll" /NOLOGO /LIBPATH:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\deps\lib\win32" SQLite_Static_Library.lib jansson.lib libevent.lib libevent_core.lib libevent_extras.lib Ws2_32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release_dll\GlassLabSDK.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.pdb" /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.lib" /MACHINE:X86 /DLL Release_dll\CppSQLite3.obj
+         Release_dll\glasslab_sdk.obj
+         Release_dll\glasslab_sdk_lib_export.obj
+         Release_dll\glsdk_core.obj
+         Release_dll\glsdk_data_sync.obj
+     1>jansson.lib(value.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:ICF' specification
+            Creating library C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.lib and object C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.exp
+     1>LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+         Generating code
+         Finished generating code
+         GlassLabSDK.vcxproj -> C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v6.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll;#2" /manifest Release_dll\GlassLabSDK.dll.intermediate.manifest
+       PostBuildEvent:
+         xcopy /Y "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll" "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\\..\..\..\lib\win32\dll" & xcopy /Y "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.exp" "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\\..\..\..\lib\win32\dll" & xcopy /Y "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.lib" "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\\..\..\..\lib\win32\dll" & xcopy /Y "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll" "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\\..\..\..\examples\win32\GlassLabSDK Example\Release_dll" & xcopy /Y "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll" "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\\..\..\..\examples\unity\Assets\Plugins"
+         :VCEnd
+         C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll
+         1 File(s) copied
+         C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.exp
+         1 File(s) copied
+         C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.lib
+         1 File(s) copied
+         C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll
+         1 File(s) copied
+         C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll
+         1 File(s) copied
+       FinalizeBuildStatus:
+         Deleting file "Release_dll\GlassLabSDK.unsuccessfulbuild".
+         Touching "Release_dll\GlassLabSDK.lastbuildstate".
+     1>Done Building Project "C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\projects\win32\GlassLabSDK\GlassLabSDK\GlassLabSDK.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:09.97

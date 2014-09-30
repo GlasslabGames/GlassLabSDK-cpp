@@ -48,6 +48,10 @@
 		9EAFC08419B772050002134A /* glasslab_sdk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC06C19B771BE0002134A /* glasslab_sdk.cpp */; };
 		9EAFC08719B772110002134A /* glsdk_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC08519B772110002134A /* glsdk_core.cpp */; };
 		9EAFC08819B772110002134A /* glsdk_data_sync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC08619B772110002134A /* glsdk_data_sync.cpp */; };
+		9EB604CD19D23A2000AB25F6 /* glsdk_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC08519B772110002134A /* glsdk_core.cpp */; };
+		9EB604CE19D23A2800AB25F6 /* glsdk_data_sync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC08619B772110002134A /* glsdk_data_sync.cpp */; };
+		9EB604CF19D23A2F00AB25F6 /* glsdk_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC08519B772110002134A /* glsdk_core.cpp */; };
+		9EB604D019D23A2F00AB25F6 /* glsdk_data_sync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC08619B772110002134A /* glsdk_data_sync.cpp */; };
 		9ED082B818D2387B0089FD97 /* glsdk_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 9ED082B718D2387B0089FD97 /* glsdk_config.h */; };
 /* End PBXBuildFile section */
 
@@ -434,6 +438,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EB604CF19D23A2F00AB25F6 /* glsdk_core.cpp in Sources */,
+				9EB604D019D23A2F00AB25F6 /* glsdk_data_sync.cpp in Sources */,
 				9EAFC08119B771F30002134A /* glasslab_sdk_lib_export.cpp in Sources */,
 				9EAFC08219B771F30002134A /* glasslab_sdk.cpp in Sources */,
 				97C1049118B6F5D300438A58 /* CppSQLite3.cpp in Sources */,
@@ -456,6 +462,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EB604CE19D23A2800AB25F6 /* glsdk_data_sync.cpp in Sources */,
+				9EB604CD19D23A2000AB25F6 /* glsdk_core.cpp in Sources */,
 				9EAFC08319B772050002134A /* glasslab_sdk_lib_export.cpp in Sources */,
 				9EAFC08419B772050002134A /* glasslab_sdk.cpp in Sources */,
 				97C1049218B6F5D300438A58 /* CppSQLite3.cpp in Sources */,
