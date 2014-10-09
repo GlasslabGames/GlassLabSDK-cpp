@@ -861,6 +861,9 @@ public class GlasslabSDK {
 	 * Variable and state setter functions.
 	 */
 	[DllImport ("__Internal")]
+	private static extern void GlasslabSDK_SetGameSecret(System.IntPtr inst, string gameSecret);
+
+	[DllImport ("__Internal")]
 	private static extern void GlasslabSDK_SetName(System.IntPtr inst, string name);
 	
 	[DllImport ("__Internal")]

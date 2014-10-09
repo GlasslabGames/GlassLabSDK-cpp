@@ -57,6 +57,7 @@ namespace nsGlasslabSDK {
         m_dbName = "";
         if( dbPath ) {
             m_dbName += dbPath;
+            m_dbName += "/glasslabsdk.db";
         } else {
 			char cwd[1024];
 #if __APPLE__
@@ -76,11 +77,11 @@ namespace nsGlasslabSDK {
 		}
 
 
-        
         // If the database path exists, append the glasslabsdk.db, unless it is ":memory:"
         if( !dbPath ) {
             m_dbName += "/glasslabsdk.db";
         }
+        printf( "database name: %s\n", m_dbName.c_str() );
         
         m_core->logMessage( "Database file:", m_dbName.c_str() );
         //cout << "Database file: " << result << endl;
@@ -359,7 +360,7 @@ namespace nsGlasslabSDK {
             s += t;
             //cout << "delete SQL: " << m_sql << endl;
             r = m_db.execDML( s.c_str() );
-            printf("Deleting result: %d\n", r);
+            //printf("Deleting result: %d\n", r);
 
             // Set the message table size
             m_messageTableSize--;
@@ -379,7 +380,7 @@ namespace nsGlasslabSDK {
         try {
             // If the status is success, remove the entry from the db
             if( status == "success" ) {
-                cout << "Successful request, removing entry from database." << endl;
+                //cout << "Successful request, removing entry from database." << endl;
                 removeFromMsgQ( rowId );
             }
             // Else, update the entry's status field
@@ -628,9 +629,9 @@ namespace nsGlasslabSDK {
             s += " where deviceId='";
             s += deviceId;
             s += "';";
-            printf("delete SQL: %s\n", s.c_str());
+            //printf("delete SQL: %s\n", s.c_str());
             int r = m_db.execDML( s.c_str() );
-            printf("Deleting result: %d\n", r);
+            //printf("Deleting result: %d\n", r);
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::removeSessionWithDeviceId()", e.errorMessage() );
@@ -829,12 +830,12 @@ namespace nsGlasslabSDK {
 
             // If the count is 0, no entry exists with deviceId, return a default value of 1
             if( sessionQuery.eof() ) {
-                cout << "gameSessionEventOrder does not exist for " << deviceId.c_str() << endl;
+                //cout << "gameSessionEventOrder does not exist for " << deviceId.c_str() << endl;
             }
             // An entry does exist, grab the gameSessionEventOrder and return it
             else if( sessionQuery.fieldValue( 3 ) != NULL ) {
                 gameSessionEventOrder = atoi( sessionQuery.fieldValue( 3 ) );
-                cout << "gameSessionEventOrder exists for " << deviceId.c_str() << ": " << gameSessionEventOrder << endl;
+                //cout << "gameSessionEventOrder exists for " << deviceId.c_str() << ": " << gameSessionEventOrder << endl;
             }
             
             // Finalize the query
@@ -938,7 +939,7 @@ namespace nsGlasslabSDK {
             // Begin display out
             //cout << "\n\n\n-----------------------------------" << endl;
             //printf("\tflushing MSG_QUEUE: %d\n", m_messageTableSize);
-            m_core->logMessage( "flushing MSG_QUEUE" );
+            //m_core->logMessage( "flushing MSG_QUEUE" );
 
             // Select all entries in MSG_QUEUE
             s = "select * from " MSG_QUEUE_TABLE_NAME ";";
@@ -1097,7 +1098,7 @@ namespace nsGlasslabSDK {
         // End display out
         //cout << "reached the end of MSG_QUEUE" << endl;
         //cout << "-----------------------------------\n\n\n" << endl;
-        m_core->logMessage( "reached the end of MSG_QUEUE" );
+        //m_core->logMessage( "reached the end of MSG_QUEUE" );
         //displayTable( MSG_QUEUE_TABLE_NAME );
         //displayTable( SESSION_TABLE_NAME );
     }

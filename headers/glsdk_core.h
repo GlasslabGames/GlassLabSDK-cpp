@@ -191,6 +191,7 @@ namespace nsGlasslabSDK {
 
             // Setters
             void setConnectUri( const char* uri );
+            void setGameSecret( const char* gameSecret );
             void setName( const char* name );
             void setVersion( const char* version );
             void setGameLevel( const char* gameLevel );
@@ -249,6 +250,7 @@ namespace nsGlasslabSDK {
             string m_connectUri;
             string m_cookie;
             string m_gameId;
+            string m_gameSecret;
             string m_deviceId;
             string m_baseDeviceId;
             string m_sessionId;

@@ -69,6 +69,7 @@ namespace nsGlasslabSDK {
 
         // Set the default information
         m_connectUri    = "http://127.0.0.1:8000";
+        m_gameSecret    = "";
         m_clientName    = "";
         m_clientVersion = "";
         m_gameId        = "";
@@ -1606,13 +1607,13 @@ namespace nsGlasslabSDK {
         // flush the message queue
         if( secondsElapsed > config.eventsPeriodSecs ) {
 
-            //printf("secondsElapsed: %f,  getMessageTableSize: %d, config.eventsMinSize: %d\n", secondsElapsed, m_dataSync->getMessageTableSize(), config.eventsMinSize);
+            printf("secondsElapsed: %f,  getMessageTableSize: %d, config.eventsMinSize: %d\n", secondsElapsed, m_dataSync->getMessageTableSize(), config.eventsMinSize);
             // Check that we exceed the minimum number of events to send data
             if( m_dataSync->getMessageTableSize() > config.eventsMinSize ) {
                 // In addition to flushing the message queue, do a POST on the totalTimePlayed
                 sendTotalTimePlayed();
 
-                //printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
+                printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
 
                 // Only flush the queue if we are connected
                 if( getConnectedState() ) {
@@ -1646,7 +1647,7 @@ namespace nsGlasslabSDK {
         // Cast the argument to a request info object
         p_glHttpRequest *request = (p_glHttpRequest *)arg;
         
-        //printf( "httpGetRequest_Done\n");
+        printf( "httpGetRequest_Done\n");
         // If the request object exists, parse the response
         if( req ) {
             // There should be request info, including callbacks and statuses
@@ -1870,6 +1871,7 @@ namespace nsGlasslabSDK {
             sprintf(headerHost, "%s:%d", host, port);
             evhttp_add_header( httpRequest->req->output_headers, "Host", headerHost );
             evhttp_add_header( httpRequest->req->output_headers, "Accept", "*/*" );
+            evhttp_add_header( httpRequest->req->output_headers, "Game-Secret", m_gameSecret.c_str() );
 
 
             // Update the request type based on the parameter, if it exists
@@ -1887,7 +1889,7 @@ namespace nsGlasslabSDK {
             }
             
             // Print the results
-            //printf("connect url: %s, method: %s, host: %s, port:%d, path: %s, cookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
+            printf("connect url: %s, method: %s, host: %s, port:%d, path: %s, cookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
 
             // Dispatch the request
             evhttp_connection_set_timeout( httpRequest->conn, 600 );
@@ -2364,6 +2366,10 @@ namespace nsGlasslabSDK {
      */
     void Core::setConnectUri( const char* uri ) {
         m_connectUri = uri;
+    }
+
+    void Core::setGameSecret( const char* gameSecret ) {
+        m_gameSecret = gameSecret;
     }
 
     void Core::setName( const char* name ) {

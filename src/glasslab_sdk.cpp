@@ -187,6 +187,10 @@ void GlasslabSDK::updatePlayerInfoKey( const char* key, bool value )        { if
 void GlasslabSDK::removePlayerInfoKey( const char* key )                    { if( m_core != NULL ) m_core->removePlayerInfoKey( key ); }
 
 
+void GlasslabSDK::setGameSecret( const char* gameSecret ) {
+    if( m_core != NULL ) m_core->setGameSecret( gameSecret );
+}
+
 void GlasslabSDK::setName( const char* name ) {
     if( m_core != NULL ) m_core->setName( name );
 }

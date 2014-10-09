@@ -248,6 +248,12 @@ extern "C"
     APIEXPORT void GlasslabSDK_RemovePlayerInfoKey( void* inst, const char* key ) { if( inst != NULL ) static_cast<GlasslabSDK *>( inst )->removePlayerInfoKey( key ); }
 
 
+    APIEXPORT void GlasslabSDK_SetGameSecret( void* inst, const char* gameSecret ) {
+        if( inst != NULL ) {
+            static_cast<GlasslabSDK *>( inst )->setGameSecret( gameSecret );
+        }
+    }
+
     APIEXPORT void GlasslabSDK_SetName( void* inst, const char* name ) {
         if( inst != NULL ) {
             static_cast<GlasslabSDK *>( inst )->setName( name );

@@ -182,6 +182,7 @@ class GlasslabSDK {
         void APIIMPORT removePlayerInfoKey( const char* key );
 
         // Setters
+        void APIIMPORT setGameSecret( const char* gameSecret );
         void APIIMPORT setName( const char* name );
         void APIIMPORT setVersion ( const char* version );
         void APIIMPORT setGameLevel( const char* gameLevel );
