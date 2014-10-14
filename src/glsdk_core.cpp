@@ -1607,20 +1607,20 @@ namespace nsGlasslabSDK {
         // flush the message queue
         if( secondsElapsed > config.eventsPeriodSecs ) {
 
-            printf("secondsElapsed: %f,  getMessageTableSize: %d, config.eventsMinSize: %d\n", secondsElapsed, m_dataSync->getMessageTableSize(), config.eventsMinSize);
+            //printf( "secondsElapsed: %f,  getMessageTableSize: %d, config.eventsMinSize: %d\n", secondsElapsed, m_dataSync->getMessageTableSize(), config.eventsMinSize);
             // Check that we exceed the minimum number of events to send data
             if( m_dataSync->getMessageTableSize() > config.eventsMinSize ) {
                 // In addition to flushing the message queue, do a POST on the totalTimePlayed
                 sendTotalTimePlayed();
 
-                printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
+                //printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
 
                 // Only flush the queue if we are connected
                 if( getConnectedState() ) {
                     m_dataSync->flushMsgQ();
                 }
-                m_telemetryLastTime = currentTime;
             }
+            m_telemetryLastTime = currentTime;
         }
         // Or send events if we've exceeded the table size limit
         /*else if( m_dataSync->getMessageTableSize() > config.eventsMaxSize ) {
