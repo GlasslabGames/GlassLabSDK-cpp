@@ -41,7 +41,7 @@ either expressed or implied, of the FreeBSD Project.
 //
 
 
-#define SDK_VERSION	"1.2"
+#define SDK_VERSION	"1.3.0"
 
 #define DB_MESSAGE_CAP 32000
 
