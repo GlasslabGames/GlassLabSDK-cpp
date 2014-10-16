@@ -73,13 +73,14 @@ namespace nsGlasslabSDK {
         m_clientName    = "";
         m_clientVersion = "";
         m_gameId        = "";
+        m_playSessionId = "";
         m_sessionId     = "";
         m_gameLevel     = "";
         m_userId        = 0;
         m_lastStatus    = Const::Status_Ok;
         m_userInfo      = NULL;
         m_playerInfo    = json_object();
-        m_autoSessionManagement = false;
+        m_autoSessionManagement = true;
         
         // Set JSON telemetry objects
         m_telemEvents       = json_array();
@@ -115,6 +116,7 @@ namespace nsGlasslabSDK {
         m_telemetryLastTime = time( NULL );
         // Get the game session event order to update
         m_gameSessionEventOrder = m_dataSync->getGameSessionEventOrderFromDeviceId( m_deviceId );
+        m_playSessionEventOrder = 1;
 
         // Stop the timers, initially
         stopGameTimer();
@@ -324,6 +326,11 @@ namespace nsGlasslabSDK {
         
         // Push Connect message
         sdkInfo.core->pushMessageStack( returnMessage, json );
+
+        // If this request was successful, start the play session
+        if( sdkInfo.success && strcmp( sdkInfo.core->getPlaySessionId(), "" ) == 0 ) {
+            sdkInfo.core->startPlaySession();
+        }
     }
 
     /**
@@ -984,6 +991,72 @@ namespace nsGlasslabSDK {
     //--------------------------------------
     //--------------------------------------
     /**
+     *
+     */
+    void startPlaySession_Done( p_glSDKInfo sdkInfo ) {
+        const char* json = sdkInfo.data.c_str();
+        sdkInfo.core->logMessage( "---------------------------" );
+        sdkInfo.core->logMessage( "startPlaySession_Done", json );
+        sdkInfo.core->logMessage( "---------------------------" );
+        //printf( "\n---------------------------\n" );
+        //printf( "startPlaySession_Done: \n%s", json );
+        //printf( "\n---------------------------\n" );
+        
+        json_t* root;
+        json_error_t error;
+        
+        // Parse the JSON data from the response
+        root = json_loads( json, 0, &error );
+        if( root && json_is_object( root ) ) {
+            // First, check for errors
+            if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                // do nothing
+            }
+            else {
+                // We receive back a gameSessionId, which is important for sending telemetry and closing sessions
+                json_t* sessionId = json_object_get( root, "playSessionId" );
+
+                // The gameSessionId must be valid
+                if( sessionId && json_is_string( sessionId ) ) {
+                    sdkInfo.core->setPlaySessionId( json_string_value( sessionId ) );
+                    //printf( "sessionId: %s\n", sdkInfo.core->getPlaySessionId() );
+                    
+                    // Decrease the reference count, this way Jansson can release "sessionId" resources
+#if !WIN32
+                    json_decref( root );
+#endif
+                }
+                // Invalid or non-existent playSessionId
+                else {
+                    sdkInfo.core->displayError( "startPlaySession_Done()", "The playSessionId is missing from the startPlaySession callback response!" );
+                }
+            }
+        }
+        // There is no data in the response
+        else {
+            sdkInfo.core->displayError( "startPlaySession_Done()", "The startPlaySession callback response is empty!" );
+        }
+        
+        // Decrease the reference count, this way Jansson can release "root" resources
+        json_decref( root );
+    }
+
+    /**
+     *
+     */
+    void Core::startPlaySession() {
+        // Start the session timer
+        startSessionTimer();
+
+        // Add this message to the message queue
+        mf_httpGetRequest( API_GET_PLAY_SESSION_START, "GET", "startPlaySession_Done" );
+    }
+
+
+    //--------------------------------------
+    //--------------------------------------
+    //--------------------------------------
+    /**
      * Callback function occurs when API_POST_SESSION_START is successful.
      *
      * Extracts the gameSessionId from the server response to be used later for
@@ -1051,9 +1124,6 @@ namespace nsGlasslabSDK {
      * also sent along but optional.
      */
     void Core::startSession() {
-        // Start the session timer
-        startSessionTimer();
-
         // Set initial parameters to set in the API call
         string courseOut = "";
         string dataOut = "";
@@ -1094,7 +1164,7 @@ namespace nsGlasslabSDK {
         mf_addMessageToDataQueue( API_POST_SESSION_START, "POST", "startSession_Done", dataOut, "application/x-www-form-urlencoded" );
 
         // Record an "start session" telemetry event
-        saveTelemEvent( "Game_start_session" );
+        saveTelemEvent( "Game_start_unit_of_analysis" );
     }
 
 
@@ -1148,11 +1218,8 @@ namespace nsGlasslabSDK {
      * during the message queue flushing.
      */
     void Core::endSession() {
-        // Stop the session timer
-        stopSessionTimer();
-
         // Record an "end session" telemetry event
-        saveTelemEvent( "Game_end_session" );
+        saveTelemEvent( "Game_end_unit_of_analysis" );
 
         // Send all events before end session
         sendTelemEvents();
@@ -1341,6 +1408,12 @@ namespace nsGlasslabSDK {
      *  - subGroup
      */
     void Core::saveAchievement( const char* item, const char* group, const char* subGroup ) {
+        // Store this achievement as a telemetry event also
+        addTelemEventValue( "item", item );
+        addTelemEventValue( "group", group );
+        addTelemEventValue( "subGroup", subGroup );
+        saveTelemEvent( "Achievement" );
+
         // Append the parameter information to the postdata
         string dataOut = "{\"item\":\"";
         dataOut += item;
@@ -1987,6 +2060,11 @@ namespace nsGlasslabSDK {
         getCourses_Structure.cancel = false;
         m_coreCallbackMap[ "getCourses_Done" ] = getCourses_Structure;
 
+        coreCallbackStructure startPlaySession_Structure;
+        startPlaySession_Structure.coreCB = startPlaySession_Done;
+        startPlaySession_Structure.cancel = false;
+        m_coreCallbackMap[ "startPlaySession_Done" ] = startPlaySession_Structure;
+
         coreCallbackStructure startSession_Structure;
         startSession_Structure.coreCB = startSession_Done;
         startSession_Structure.cancel = false;
@@ -2178,10 +2256,9 @@ namespace nsGlasslabSDK {
                 float delta = difftime( t, m_sessionTimerLast );
                 m_sessionTimerLast = t;
 
-                // If the time since last event is greater than the SESSION_TIMEOUT, start a new session
+                // If the time since last event is greater than the SESSION_TIMEOUT, start a new play session
                 if( delta >= SESSION_TIMEOUT ) {
-                    endSession();
-                    startSession();
+                    startPlaySession();
                 }
             }
 
@@ -2190,7 +2267,9 @@ namespace nsGlasslabSDK {
             json_object_set_new( event, "eventName", json_string( name ) );
             json_object_set_new( event, "gameId",  json_string( m_gameId.c_str() ) );
             json_object_set_new( event, "gameSessionId", json_string( "$gameSessionId$" ) );
-            json_object_set_new( event, "gameSessionEventOrder", json_integer( m_gameSessionEventOrder++ ) );//"$gameSessionEventOrder$" ) );
+            json_object_set_new( event, "playSessionId", json_string( m_playSessionId.c_str() ) );
+            json_object_set_new( event, "gameSessionEventOrder", json_integer( m_gameSessionEventOrder++ ) );
+            json_object_set_new( event, "playSessionEventOrder", json_integer( m_playSessionEventOrder++ ) );
 
             // Set the deviceId if it exists
             if( m_deviceId.length() > 0 ) {
@@ -2456,6 +2535,11 @@ namespace nsGlasslabSDK {
         }
     }
 
+    void Core::setPlaySessionId( const char* playSessionId ) {
+        m_playSessionId = playSessionId;
+        m_playSessionEventOrder = 1;
+    }
+
     void Core::setSessionId( const char* sessionId ) {
         m_sessionId = sessionId;
 
@@ -2494,6 +2578,10 @@ namespace nsGlasslabSDK {
 
     const char* Core::getCookie() {
         return m_cookie.c_str();
+    }
+
+    const char* Core::getPlaySessionId() {
+        return m_playSessionId.c_str();
     }
 
     const char* Core::getSessionId() {

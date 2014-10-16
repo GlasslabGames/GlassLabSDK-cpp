@@ -41,7 +41,7 @@ either expressed or implied, of the FreeBSD Project.
 //
 
 
-#define SDK_VERSION	"1.3.0"
+#define SDK_VERSION	"1.4.0"
 
 #define DB_MESSAGE_CAP 32000
 
@@ -62,6 +62,7 @@ either expressed or implied, of the FreeBSD Project.
 #define API_POST_ENROLL       		"/api/v2/lms/course/enroll"
 #define API_POST_UNENROLL     		"/api/v2/lms/course/unenroll"
 #define API_GET_COURSES       		"/api/v2/lms/courses"
+#define API_GET_PLAY_SESSION_START 	"/api/v2/data/playSession/start"
 #define API_POST_SESSION_START 		"/api/v2/data/session/start"
 #define API_POST_SESSION_END   		"/api/v2/data/session/end"
 #define API_POST_DEVICE_UPDATE		"/api/v2/data/game/device"
