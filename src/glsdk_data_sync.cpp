@@ -151,13 +151,96 @@ namespace nsGlasslabSDK {
         }
     }
 
+    bool isVersionOutOfDate( string currentVersion, string newVersion ) {
+        int v1Major, v1Minor, v1Revision = 0;
+        int v2Major, v2Minor, v2Revision = 0;
+
+        // Get the info for current version
+        {
+            size_t first = currentVersion.find( "." );
+            size_t second = currentVersion.rfind( "." );
+            if( first == second ) {
+                second = string::npos;
+            }
+
+            int major, minor, revision = 0;
+            
+            if( first != string::npos ) {
+                major = (int)atoi( currentVersion.substr( 0, first ).c_str() );
+                
+                if( second != string::npos ) {
+                    minor = (int)atoi( currentVersion.substr( first + 1, second - first - 1 ).c_str() );
+                    revision = (int)atoi( currentVersion.substr( second + 1 ).c_str() );
+                }
+                else {
+                    minor = (int)atoi( currentVersion.substr( first + 1 ).c_str() );
+                }
+            }
+            else {
+                major = (int)atoi( currentVersion.c_str() );
+            }
+
+            v1Major = major;
+            v1Minor = minor;
+            v1Revision = revision;
+
+            printf( "current version: %d.%d.%d\n", v1Major, v1Minor, v1Revision );
+        }
+
+        // Get the info for new version
+        {
+            size_t first = newVersion.find( "." );
+            size_t second = newVersion.rfind( "." );
+            if( first == second ) {
+                second = string::npos;
+            }
+
+            int major, minor, revision = 0;
+            
+            if( first != string::npos ) {
+                major = (int)atoi( newVersion.substr( 0, first ).c_str() );
+                
+                if( second != string::npos ) {
+                    minor = (int)atoi( newVersion.substr( first + 1, second - first - 1 ).c_str() );
+                    revision = (int)atoi( newVersion.substr( second + 1 ).c_str() );
+                }
+                else {
+                    minor = (int)atoi( newVersion.substr( first + 1 ).c_str() );
+                }
+            }
+            else {
+                major = (int)atoi( newVersion.c_str() );
+            }
+
+            v2Major = major;
+            v2Minor = minor;
+            v2Revision = revision;
+
+            printf( "new version: %d.%d.%d\n", v2Major, v2Minor, v2Revision );
+        }
+
+        // Do our comparison
+        if( v1Major < v2Major ) {
+            return true;
+        }
+        else if( v1Minor < v2Minor ) {
+            return true;
+        }
+        else if( v1Revision < v2Revision ) {
+            return true;
+        }
+
+        // We are up to date
+        return false;
+    }
+
     /**
      * Function validates the SDK version by searching for an entry in the CONFIG table.
      * If there is a version mismatch, the database is reset.
      */
     void DataSync::validateSDKVersion() {
         try {
-            printf("Current SDK_VERSION: %s\n", SDK_VERSION);
+            printf("SDK_VERSION: %s\n", SDK_VERSION);
 
             // Set a state for if we need to drop the tables and reset
             bool resetTables = false;
@@ -187,11 +270,10 @@ namespace nsGlasslabSDK {
                 }
                 // There is an entry, grab it
                 else {
-                    float configSDKVersion = (float)atof( q.fieldValue( 0 ) );
-                    printf("CONFIG entry: %s", q.fieldValue( 0 ));
+                    // Get the SDK versions, old and new [MAJOR.MINOR.REVISION], and compare
+                    if( isVersionOutOfDate( q.fieldValue( 0 ), SDK_VERSION ) ) {
+                        printf( "detected out of date version, performing migration\n" );
 
-                    // If the stored SDK version is less than current, update it
-                    if( configSDKVersion < (float)atof( SDK_VERSION ) ) {
                         s = "";
                         s += "update ";
                         s += CONFIG_TABLE_NAME;
@@ -204,6 +286,9 @@ namespace nsGlasslabSDK {
 
                         // Indicate that a table migration is required
                         performMigration = true;
+                    }
+                    else {
+                        printf( "SDK version is valid.\n" );
                     }
                 }
 

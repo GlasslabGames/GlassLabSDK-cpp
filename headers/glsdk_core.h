@@ -120,6 +120,7 @@ namespace nsGlasslabSDK {
             void unenroll( const char* courseId );
             void getCourses();
             void logout();
+            void startPlaySession();
             void startSession();
             void endSession();
             void saveGame( const char* gameData );
@@ -201,6 +202,7 @@ namespace nsGlasslabSDK {
             void setPlayerHandle( const char* handle );
             void removePlayerHandle( const char* handle );
             void setCookie( const char* cookie );
+            void setPlaySessionId( const char* sessionId );
             void setSessionId( const char* sessionId );
             void setAutoSessionManagement( bool state );
         
@@ -209,6 +211,7 @@ namespace nsGlasslabSDK {
             int getUserId();
             const char* getId();
             const char* getCookie();
+            const char* getPlaySessionId();
             const char* getSessionId();
             Const::Status getLastStatus();
             float getTotalTimePlayed();
@@ -253,6 +256,7 @@ namespace nsGlasslabSDK {
             string m_gameSecret;
             string m_deviceId;
             string m_baseDeviceId;
+            string m_playSessionId;
             string m_sessionId;
             int    m_userId;
             string m_gameLevel;
@@ -273,6 +277,7 @@ namespace nsGlasslabSDK {
 
             // Local variable for event order
             int m_gameSessionEventOrder;
+            int m_playSessionEventOrder;
 
             // Game timer variables used for total time played
             time_t m_gameTimerLast;
