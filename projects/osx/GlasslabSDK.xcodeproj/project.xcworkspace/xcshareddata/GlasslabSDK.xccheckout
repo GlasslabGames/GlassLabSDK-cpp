@@ -5,46 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>8F317F58-51CC-4569-B1B7-E0E04D9D31B3</string>
+	<string>E755796B-A725-43F7-80A8-B528E0C41903</string>
 	<key>IDESourceControlProjectName</key>
 	<string>GlasslabSDK</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>9A91095C-0391-4325-B799-479D4956207A</key>
-		<string>https://github.com/bendapkiewicz/GlassLabSDK.git</string>
-		<key>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</key>
-		<string>https://github.com/bendapkiewicz/GlassLabSDK-cpp.git</string>
+		<key>44E87CBF-1B29-42DE-BAE0-10B1B5FABCFC</key>
+		<string>https://github.com/bendapkiewicz/GlassLabSDK-cpp-1.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>projects/osx/GlasslabSDK.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>9A91095C-0391-4325-B799-479D4956207A</key>
-		<string>../../../../../../GlasslabSDK</string>
-		<key>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</key>
+		<key>44E87CBF-1B29-42DE-BAE0-10B1B5FABCFC</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/bendapkiewicz/GlassLabSDK-cpp.git</string>
+	<string>https://github.com/bendapkiewicz/GlassLabSDK-cpp-1.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</string>
+	<string>44E87CBF-1B29-42DE-BAE0-10B1B5FABCFC</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9A91095C-0391-4325-B799-479D4956207A</string>
-			<key>IDESourceControlWCCName</key>
-			<string>GlasslabSDK</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>AD80DB2F-71AF-4764-8D8A-2547DB5EB09E</string>
+			<string>44E87CBF-1B29-42DE-BAE0-10B1B5FABCFC</string>
 			<key>IDESourceControlWCCName</key>
 			<string>GLSDK-cpp</string>
 		</dict>

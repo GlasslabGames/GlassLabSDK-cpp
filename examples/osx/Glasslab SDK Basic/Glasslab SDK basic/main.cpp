@@ -13,8 +13,8 @@ GlasslabSDK *glsdk;
 //
 char host[]         =   "http://developer.playfully.org";
 
-char gameId[]       =   "SC";
-char gameName[]     =   "SimCityEDU";
+char gameId[]       =   "TEST";
+char gameName[]     =   "Test Game";
 char gameVersion[]  =   "1.0";
 char gameLevel[]    =   "Level 1";
 
@@ -100,7 +100,7 @@ void* sdkResponses( void* threadId )
                 
                 glsdk->saveAchievement( "Evidence Cadet", "CCSS.ELA-Literacy.WHST.6-8.1", "a" );
                 
-                glsdk->saveGame( "simple JSON save data" );
+                glsdk->saveGame( "{ \"test\": \"test\" }" );
                 
                 
                 glsdk->endSession();
