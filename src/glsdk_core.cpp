@@ -44,6 +44,10 @@ either expressed or implied, of the FreeBSD Project.
 #include "glasslab_sdk.h"
 #include "glsdk_config.h"
 
+#ifdef MULTITHREADED
+#include <pthread.h>
+#endif
+
 
 namespace nsGlasslabSDK {
 
@@ -253,7 +257,11 @@ namespace nsGlasslabSDK {
         }
         
         // Make the request
+#ifdef MULTITHREADED
+        do_httpRequest( API_CONNECT, "GET", "getConnect_Done", "", "text/plain; charset=utf-8" );
+#else
         mf_httpGetRequest( API_CONNECT, "GET", "getConnect_Done", "", "text/plain; charset=utf-8" );
+#endif
         
         // Success
         return 0;
@@ -1813,7 +1821,49 @@ namespace nsGlasslabSDK {
             }
         }
     }
+    
+#ifdef MULTITHREADED
+    // TODO: CLEAN UP
+    struct testThreadData
+    {
+        Core* instance;
+        string path;
+        string requestType;
+        string coreCB;
+        string postdata;
+        const char* contentType;
+        int rowId;
+    };
+    
+    void* startIt(void* data)
+    {
+        testThreadData* threadData = static_cast<testThreadData*>(data);
+        threadData->instance->mf_httpGetRequest(threadData->path, threadData->requestType, threadData->coreCB, threadData->postdata, threadData->contentType, threadData->rowId);
+        
+        delete threadData;
+        pthread_exit(NULL);
+    }
+#endif
 
+    void Core::do_httpRequest( string path, string requestType, string coreCB, string postdata, const char* contentType, int rowId )
+    {
+#ifdef MULTITHREADED
+        pthread_t thread;
+        testThreadData* data = new testThreadData();
+        data->instance = this;
+        data->path = path;
+        data->requestType = requestType;
+        data->coreCB = coreCB;
+        data->postdata = postdata;
+        data->contentType = contentType;
+        data->rowId = rowId;
+        if (pthread_create(&thread, NULL, startIt, (void*) data))
+        {
+            printf("???");
+        }
+#endif
+    }
+    
     /**
      * HttpGetRequest function performs a GET/POST request to the server for
      * a single event extracted from the SQLite database.
@@ -1962,12 +2012,14 @@ namespace nsGlasslabSDK {
             }
             
             // Print the results
-            printf("connect url: %s, method: %s, host: %s, port:%d, path: %s, cookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
+            printf("Connection Request -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
 
             // Dispatch the request
-            evhttp_connection_set_timeout( httpRequest->conn, 600 );
+            evhttp_connection_set_timeout( httpRequest->conn, 10 );
             evhttp_make_request( httpRequest->conn, httpRequest->req, requestCmd, path.c_str() );
             event_base_dispatch( httpRequest->base );
+            
+            printf("Connection Complete -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
             
             // Free the connection
             evhttp_connection_free(httpRequest->conn);

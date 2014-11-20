@@ -133,7 +133,8 @@ namespace nsGlasslabSDK {
             void forceFlushTelemEvents();
             void attemptMessageDispatch();
             void mf_httpGetRequest( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL, int rowId = -1 );
-
+        
+            void do_httpRequest( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL, int rowId = -1 );
             // Allow the user to cancel a request from being sent to the server, or ignore the response
             void cancelRequest( const char* requestKey );
 
