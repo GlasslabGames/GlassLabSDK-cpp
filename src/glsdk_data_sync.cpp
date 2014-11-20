@@ -623,8 +623,8 @@ namespace nsGlasslabSDK {
                 s += "UPDATE ";
                 s += SESSION_TABLE_NAME;
                 s += " SET gameSessionId='";
-                s += gameSessionId;
-                s += "', gameSessionEventOrder='1'";
+                s += gameSessionId + "'";
+                //s += ", gameSessionEventOrder='1'";
                 s += " WHERE deviceId='";
                 s += deviceId;
                 s += "'";
