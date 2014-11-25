@@ -1139,7 +1139,7 @@ namespace nsGlasslabSDK {
                                 //printf("Updating result: %d\n", r);
 
                                 // Perform the get request using the message information
-                                m_core->mf_httpGetRequest( apiPath, requestType, coreCB, postdata, contentType, rowId );
+                                m_core->do_httpGetRequest( apiPath, requestType, coreCB, postdata, contentType, rowId );
                                 requestsMade++;
                             }
                             else {
