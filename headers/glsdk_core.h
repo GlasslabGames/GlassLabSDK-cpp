@@ -68,6 +68,7 @@ namespace nsGlasslabSDK {
     typedef struct _coreCallbackStructure {
         CoreCallback_Func coreCB;
         bool cancel;
+        string requestType;
     } coreCallbackStructure;
 
     typedef struct _p_glSDKInfo {
@@ -151,6 +152,7 @@ namespace nsGlasslabSDK {
             CoreCallback_Func getCoreCallback( string key );
             bool getCoreCallbackCancelState( string key );
             void setCoreCallbackCancelState( string key, bool state );
+            const char* getCoreCallbackRequestType( string key );
 
             // SQLite message queue functions
             void mf_addMessageToDataQueue( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL );

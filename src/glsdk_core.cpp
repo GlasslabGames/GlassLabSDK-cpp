@@ -1702,7 +1702,7 @@ namespace nsGlasslabSDK {
                 // In addition to flushing the message queue, do a POST on the totalTimePlayed
                 sendTotalTimePlayed();
 
-                //printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
+                printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
 
                 // Only flush the queue if we are connected
                 if( getConnectedState() ) {
@@ -2110,7 +2110,10 @@ namespace nsGlasslabSDK {
 
 
             // Update the request type based on the parameter, if it exists
-            if( requestType.c_str() != NULL ) {
+            if( strstr( requestType.c_str(), "NULL" ) ) {
+                requestMethod = getCoreCallbackRequestType( coreCB );
+            }
+            else if( requestType.c_str() != NULL ) {
                 requestMethod = requestType;
             }
 
@@ -2124,14 +2127,14 @@ namespace nsGlasslabSDK {
             }
             
             // Print the results
-            printf("Connection Request -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
+            //printf("Connection Request -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n\tpostdata: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str(), postdata.c_str());
 
             // Dispatch the request
             evhttp_connection_set_timeout( httpRequest->conn, 10 );
             evhttp_make_request( httpRequest->conn, httpRequest->req, requestCmd, path.c_str() );
             event_base_dispatch( httpRequest->base );
             
-            printf("Connection Complete -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
+            //printf("Connection Complete -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
             
             // Free the connection
             evhttp_connection_free(httpRequest->conn);
@@ -2167,111 +2170,133 @@ namespace nsGlasslabSDK {
         coreCallbackStructure getConnect_Structure;
         getConnect_Structure.coreCB = getConnect_Done;
         getConnect_Structure.cancel = false;
+        getConnect_Structure.requestType = "GET";
         m_coreCallbackMap[ "getConnect_Done" ] = getConnect_Structure;
 
         coreCallbackStructure getConfig_Structure;
         getConfig_Structure.coreCB = getConfig_Done;
         getConfig_Structure.cancel = false;
+        getConfig_Structure.requestType = "GET";
         m_coreCallbackMap[ "getConfig_Done" ] = getConfig_Structure;
 
         coreCallbackStructure deviceUpdate_Structure;
         deviceUpdate_Structure.coreCB = deviceUpdate_Done;
         deviceUpdate_Structure.cancel = false;
+        deviceUpdate_Structure.requestType = "POST";
         m_coreCallbackMap[ "deviceUpdate_Done" ] = deviceUpdate_Structure;
 
         coreCallbackStructure authStatus_Structure;
         authStatus_Structure.coreCB = authStatus_Done;
         authStatus_Structure.cancel = false;
+        authStatus_Structure.requestType = "GET";
         m_coreCallbackMap[ "authStatus_Done" ] = authStatus_Structure;
 
         coreCallbackStructure register_Structure;
         register_Structure.coreCB = register_Done;
         register_Structure.cancel = false;
+        register_Structure.requestType = "POST";
         m_coreCallbackMap[ "register_Done" ] = register_Structure;
 
         coreCallbackStructure getPlayerInfo_Structure;
         getPlayerInfo_Structure.coreCB = getPlayerInfo_Done;
         getPlayerInfo_Structure.cancel = false;
+        getPlayerInfo_Structure.requestType = "GET";
         m_coreCallbackMap[ "getPlayerInfo_Done" ] = getPlayerInfo_Structure;
 
         coreCallbackStructure getUserInfo_Structure;
         getUserInfo_Structure.coreCB = getUserInfo_Done;
         getUserInfo_Structure.cancel = false;
+        getUserInfo_Structure.requestType = "GET";
         m_coreCallbackMap[ "getUserInfo_Done" ] = getUserInfo_Structure;
 
         coreCallbackStructure login_Structure;
         login_Structure.coreCB = login_Done;
         login_Structure.cancel = false;
+        login_Structure.requestType = "POST";
         m_coreCallbackMap[ "login_Done" ] = login_Structure;
 
         coreCallbackStructure logout_Structure;
         logout_Structure.coreCB = logout_Done;
         logout_Structure.cancel = false;
+        logout_Structure.requestType = "POST";
         m_coreCallbackMap[ "logout_Done" ] = logout_Structure;
 
         coreCallbackStructure enroll_Structure;
         enroll_Structure.coreCB = enroll_Done;
         enroll_Structure.cancel = false;
+        enroll_Structure.requestType = "POST";
         m_coreCallbackMap[ "enroll_Done" ] = enroll_Structure;
 
         coreCallbackStructure unenroll_Structure;
         unenroll_Structure.coreCB = unenroll_Done;
         unenroll_Structure.cancel = false;
+        unenroll_Structure.requestType = "POST";
         m_coreCallbackMap[ "unenroll_Done" ] = unenroll_Structure;
 
         coreCallbackStructure getCourses_Structure;
         getCourses_Structure.coreCB = getCourses_Done;
         getCourses_Structure.cancel = false;
+        getCourses_Structure.requestType = "GET";
         m_coreCallbackMap[ "getCourses_Done" ] = getCourses_Structure;
 
         coreCallbackStructure startPlaySession_Structure;
         startPlaySession_Structure.coreCB = startPlaySession_Done;
         startPlaySession_Structure.cancel = false;
+        startPlaySession_Structure.requestType = "GET";
         m_coreCallbackMap[ "startPlaySession_Done" ] = startPlaySession_Structure;
 
         coreCallbackStructure startSession_Structure;
         startSession_Structure.coreCB = startSession_Done;
         startSession_Structure.cancel = false;
+        startSession_Structure.requestType = "POST";
         m_coreCallbackMap[ "startSession_Done" ] = startSession_Structure;
 
         coreCallbackStructure endSession_Structure;
         endSession_Structure.coreCB = endSession_Done;
         endSession_Structure.cancel = false;
+        endSession_Structure.requestType = "POST";
         m_coreCallbackMap[ "endSession_Done" ] = endSession_Structure;
         
         coreCallbackStructure saveGame_Structure;
         saveGame_Structure.coreCB = saveGame_Done;
         saveGame_Structure.cancel = false;
+        saveGame_Structure.requestType = "POST";
         m_coreCallbackMap[ "saveGame_Done" ] = saveGame_Structure;
 
         coreCallbackStructure getSaveGame_Structure;
         getSaveGame_Structure.coreCB = getSaveGame_Done;
         getSaveGame_Structure.cancel = false;
+        getSaveGame_Structure.requestType = "GET";
         m_coreCallbackMap[ "getSaveGame_Done" ] = getSaveGame_Structure;
 
         coreCallbackStructure deleteSaveGame_Structure;
         deleteSaveGame_Structure.coreCB = deleteSaveGame_Done;
         deleteSaveGame_Structure.cancel = false;
+        deleteSaveGame_Structure.requestType = "DELETE";
         m_coreCallbackMap[ "deleteSaveGame_Done" ] = deleteSaveGame_Structure;
 
         coreCallbackStructure saveAchievement_Structure;
         saveAchievement_Structure.coreCB = saveAchievement_Done;
         saveAchievement_Structure.cancel = false;
+        saveAchievement_Structure.requestType = "POST";
         m_coreCallbackMap[ "saveAchievement_Done" ] = saveAchievement_Structure;
 
         coreCallbackStructure savePlayerInfo_Structure;
         savePlayerInfo_Structure.coreCB = savePlayerInfo_Done;
         savePlayerInfo_Structure.cancel = false;
+        savePlayerInfo_Structure.requestType = "POST";
         m_coreCallbackMap[ "savePlayerInfo_Done" ] = savePlayerInfo_Structure;
 
         coreCallbackStructure sendTotalTimePlayed_Structure;
         sendTotalTimePlayed_Structure.coreCB = sendTotalTimePlayed_Done;
         sendTotalTimePlayed_Structure.cancel = false;
+        sendTotalTimePlayed_Structure.requestType = "POST";
         m_coreCallbackMap[ "sendTotalTimePlayed_Done" ] = sendTotalTimePlayed_Structure;
 
         coreCallbackStructure sendTelemEvent_Structure;
         sendTelemEvent_Structure.coreCB = sendTelemEvent_Done;
         sendTelemEvent_Structure.cancel = false;
+        sendTelemEvent_Structure.requestType = "POST";
         m_coreCallbackMap[ "sendTelemEvent_Done" ] = sendTelemEvent_Structure;
     }
 
@@ -2308,6 +2333,19 @@ namespace nsGlasslabSDK {
         // Callback function does not exist
         if( m_coreCallbackMap.find( key ) != m_coreCallbackMap.end() ) {
             m_coreCallbackMap[ key ].cancel = state;
+        }
+    }
+    /**
+     * Function returns the request type of the Core Callback function requested.
+     */
+    const char* Core::getCoreCallbackRequestType( string key ) {
+        // Callback function does not exist
+        if( m_coreCallbackMap.find( key ) == m_coreCallbackMap.end() ) {
+            return "GET";
+        }
+        // Callback function exists
+        else {
+            return m_coreCallbackMap[ key ].requestType.c_str();
         }
     }
 
