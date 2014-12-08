@@ -226,11 +226,74 @@ Once the request has been routed to the server and returned as successful, the "
 
 As mentioned above, it is a good practice to use the "id" field returned on successful login with the deviceId for sessions and telemetry.
 
-<b>Login and registration modals:</b>
+###GlassLab Webview
 
 Registration and login generally require modals. As a developer, you can either build these UI modules into the game yourself or you can use web view technology and link to modals we have created on the playfully.org site.
 
-The login webview page can be found [here](http://developer.playfully.org/sdk/login "Login.org Registration Webview"). The registration webview page can be found [here](http://developer.playfully.org/sdk/register "Playfully.org Registration Webview").
+You can access the GlassLab webview modal for Mars Generation One [here](http://developer.playfully.org/sdk/v2/game/AA-1/login "GlassLab Webview Modal"). The format of this URL is:
+```
+http://{GLASSLAB_GAMES_HOST}/sdk/v2/game/{GAMEID}/login
+OR
+http://developer.playfully.org/sdk/v2/game/AA-1/login
+```
+
+This webview allows you to access login and registration for both teachers and students.
+
+While GlassLab provides the URLs for webviews that handle the authentication, it is up to the developer to find a library to display and control these webviews. For games built in Unity/Objective-C, we recommend the [UniWebView](http://uniwebview.onevcat.com/ "UniWebView") solution.
+
+<b>General Usage</b>
+
+This section will detail the general usage of the GlassLab webview and describe how to take advantage of the <i>Login</i>, <i>Reauthentication</i>, and <i>Reset Progress</i> webviews. Note that some of this is explained with UniWebView in mind, but most of the concepts carry over into other webview technologies.
+
+Step 1: Display a webview for the authentication page:
+
+To construct the http web address, you'll need:
+
+* The GlassLab Games URI - This can usually be accessed by the SDK using GetConnectURI(). Otherwise, it's usually http://developer.playfully.org for debugging purposes.
+* A cookie string - This can be retrieved by calling the SDK's GetCookie() function. The string will be constructed like this:
+```
+connect.sid={cookie}; Path=/
+```
+* You will need to parse the string to get the {cookie} part of the string.
+* Construct the webview using:
+```
+{GLASSLAB_GAMES_HOST}/sdk?cookie={COOKIE}&redirect=sdk/v2/game/{GAMEID}/login
+```
+
+Step 2: Set a callback function to listen for changes to the URL. The event you are listening for is one that contains "action=SUCCESS" in the address query. This occurs when the server has completed the login process. In UniWebView, you'll setup the callback function using UniWebViewSetCallEventHandler.
+
+Step 3: Close the login webview.
+
+Step 4: After login has been completed, game-side info for the SDK must be updated. To do this, retrieve the current user's information from the server by calling:
+```
+GlasslabSDK->GetUserInfo()
+```
+In most implementations, a loop looks over the stack and grabs the nsGlasslabSDK::Const::Message_GetUserInfo message and implements a callback there.
+
+Step 5: Upon return, GetUserInfo will return a blob that looks something like this:
+```
+{"id":49,"username":"Aaa","firstName":"Jerry","lastName":"F","email":"","role":"student","type":null,"institution":null,"collectTelemetry":false,"enabled":true,"loginType":"glasslabv2"}
+```
+
+Step 6: Using a JSON parser, grab the username from this blob (in this case, "Aaa") and use that as the username in-game.
+
+Step 7: After all this is done, you must do the following. This brings the device up to date with all the correct authentication information. This step may be updated in the future to make it easier to handle.
+
+* Get the cookie from the SDK and store it in a temp variable
+* call GlasslabSDK->SetPlayerHandle(username)
+* call GlasslabSDK->SetCookie({string from a, this call should include the "connect.sid=...; Path=/"})
+* call GlasslabSDK->DeviceUpdate()
+
+Step 8: As a last note, the user must be logged out at some point. Usually in GlassLab Games, this is always performed when the main menu is shown, which means the authentication modal will appear again.
+
+Note that there is a similar process for the other two webviews: Reauthentication and Reset Progress. Perform steps 1-3 from above and change the URL for step 1 to:
+```
+{GLASSLAB_GAMES_HOST}/sdk?cookie={COOKIE}&redirect=sdk/v2/login/confirm
+OR
+{GLASSLAB_GAMES_HOST}/sdk?cookie={COOKIE}&redirect=sdk/v2/login/resetdata
+```
+
+Afterwards you listen for the same success call. You may additionally wish to listen for action=FAILURE or action=CLOSE for failing to log back in, in which case you must log the user out and stop the game, or ignore and don't delete the save.
 
 
 ###Telemetry

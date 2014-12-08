@@ -60,7 +60,11 @@ void GlasslabSDK::popMessageStack() {
 
 nsGlasslabSDK::Const::Message GlasslabSDK::readTopMessageCode() {
     if( m_core != NULL ) return m_core->readTopMessageCode();
-    else                 return nsGlasslabSDK::Const::Message_Error;
+    else
+    {
+        cout << "GlasslabSDK::readTopMessageCode() - Core Instance is null!" << std::endl;
+        return nsGlasslabSDK::Const::Message_Error;
+    }
 }
 
 const char * GlasslabSDK::readTopMessageString() {
