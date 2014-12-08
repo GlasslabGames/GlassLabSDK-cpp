@@ -68,6 +68,7 @@ namespace nsGlasslabSDK {
     typedef struct _coreCallbackStructure {
         CoreCallback_Func coreCB;
         bool cancel;
+        string requestType;
     } coreCallbackStructure;
 
     typedef struct _p_glSDKInfo {
@@ -87,7 +88,16 @@ namespace nsGlasslabSDK {
         string                      coreCBKey;
         int                         msgQRowId;
     } p_glHttpRequest;
-
+    
+    struct HTTPThreadData
+    {
+        string path;
+        string requestType;
+        string coreCB;
+        string postdata;
+        const char* contentType;
+        int rowId;
+    };
 
     // used for client connection (get config), login, start/end session
     //   - future feature: set/get client data (cloud saves)
@@ -132,8 +142,9 @@ namespace nsGlasslabSDK {
             void sendTelemEvents();
             void forceFlushTelemEvents();
             void attemptMessageDispatch();
-            void mf_httpGetRequest( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL, int rowId = -1 );
-
+            void mf_httpGetRequest( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL, int rowId = -1 ); // Synchronous HTTP Get Request
+        
+            void do_httpGetRequest( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL, int rowId = -1 ); // Selects whether to do async or not
             // Allow the user to cancel a request from being sent to the server, or ignore the response
             void cancelRequest( const char* requestKey );
 
@@ -141,6 +152,7 @@ namespace nsGlasslabSDK {
             CoreCallback_Func getCoreCallback( string key );
             bool getCoreCallbackCancelState( string key );
             void setCoreCallbackCancelState( string key, bool state );
+            const char* getCoreCallbackRequestType( string key );
 
             // SQLite message queue functions
             void mf_addMessageToDataQueue( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL );
@@ -298,6 +310,14 @@ namespace nsGlasslabSDK {
             void mf_setupCallbacks();
             // Callback function maps
             map<string, coreCallbackStructure> m_coreCallbackMap;
+        
+            // Async http GET request queue
+        pthread_mutex_t m_jobQueueMutex = PTHREAD_MUTEX_INITIALIZER;
+        pthread_cond_t m_jobTriggerCondition = PTHREAD_COND_INITIALIZER;
+        std::queue<HTTPThreadData*> m_httpGetJobs;
+        static void* proc_asyncHTTPGetRequests(void*);
+        int mf_startAsyncHTTPRequestThread(); // Starts the async http GET request processor thread. Returns 0 on success.
+        bool threadStarted = false;
     };
 };
 #pragma GCC visibility pop

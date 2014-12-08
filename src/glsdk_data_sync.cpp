@@ -623,8 +623,8 @@ namespace nsGlasslabSDK {
                 s += "UPDATE ";
                 s += SESSION_TABLE_NAME;
                 s += " SET gameSessionId='";
-                s += gameSessionId;
-                s += "', gameSessionEventOrder='1'";
+                s += gameSessionId + "'";
+                //s += ", gameSessionEventOrder='1'";
                 s += " WHERE deviceId='";
                 s += deviceId;
                 s += "'";
@@ -1038,11 +1038,11 @@ namespace nsGlasslabSDK {
             while ( !msgQuery.eof() )
             {
                 // Print the entry to consider
-                /*cout << "Entry: ";
+                /*printf( "Entry: " );
                 for( int fld = 0; fld < msgQuery.numFields(); fld++ ) {
-                    cout << msgQuery.fieldValue( fld ) << "|";
-                }
-                cout << endl;*/
+                    printf( "value: %s", msgQuery.fieldValue( fld ) );
+                    printf( "|" );
+                }*/
 
                 /*
                 This message will contain the following information:
@@ -1085,10 +1085,13 @@ namespace nsGlasslabSDK {
                         // Only continue if the cookie exists
                         if( cookie.c_str() != NULL ) {
                             //cout << "cookie is: " << cookie << endl;
-
+                            
                             // Get the path from MSG_QUEUE
                             string apiPath = msgQuery.fieldValue( 2 );
-                            string requestType = msgQuery.fieldValue( 3 );
+                            string requestType = "NULL";
+                            if( msgQuery.fieldValue( 3 ) != NULL ) {
+                                requestType = msgQuery.fieldValue( 3 );
+                            }
                             string coreCB = msgQuery.fieldValue( 4 );
                             //cout << "coreCB is: " << coreCB << endl;
 
@@ -1139,7 +1142,7 @@ namespace nsGlasslabSDK {
                                 //printf("Updating result: %d\n", r);
 
                                 // Perform the get request using the message information
-                                m_core->mf_httpGetRequest( apiPath, requestType, coreCB, postdata, contentType, rowId );
+                                m_core->do_httpGetRequest( apiPath, requestType, coreCB, postdata, contentType, rowId );
                                 requestsMade++;
                             }
                             else {

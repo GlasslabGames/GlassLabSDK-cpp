@@ -83,6 +83,7 @@ extern "C"
         if( inst != NULL ) {
             return ( static_cast<GlasslabSDK *>( inst )->readTopMessageCode() );
         } else {
+            cout << "GlasslabSDK_ReadTopMessageCode() - GlasslabSDK Instance is null!" << std::endl;
             return nsGlasslabSDK::Const::Message_Error;
         }
     }

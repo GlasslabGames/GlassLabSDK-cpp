@@ -44,6 +44,10 @@ either expressed or implied, of the FreeBSD Project.
 #include "glasslab_sdk.h"
 #include "glsdk_config.h"
 
+#ifdef MULTITHREADED
+#include <pthread.h>
+#endif
+
 
 namespace nsGlasslabSDK {
 
@@ -253,7 +257,7 @@ namespace nsGlasslabSDK {
         }
         
         // Make the request
-        mf_httpGetRequest( API_CONNECT, "GET", "getConnect_Done", "", "text/plain; charset=utf-8" );
+        do_httpGetRequest( API_CONNECT, "GET", "getConnect_Done", "", "text/plain; charset=utf-8" );
         
         // Success
         return 0;
@@ -321,7 +325,7 @@ namespace nsGlasslabSDK {
         sdkInfo.core->logMessage( "getConfig_Done: done reading json data");
 
 		if( !sdkInfo.success ) {
-			Const::Message returnMessage = Const::Message_ConnectFail;
+			returnMessage = Const::Message_ConnectFail;
 		}
         
         // Push Connect message
@@ -351,7 +355,7 @@ namespace nsGlasslabSDK {
         setConnectedState( false );
         
         // Make the request
-        mf_httpGetRequest( API_GET_CONFIG, "GET", "getConfig_Done" );
+        do_httpGetRequest( API_GET_CONFIG, "GET", "getConfig_Done" );
     }
 
 
@@ -381,6 +385,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "deviceUpdate_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
         }
@@ -403,7 +408,7 @@ namespace nsGlasslabSDK {
         data += m_gameId;
 
         // Make the request
-        mf_httpGetRequest( API_POST_DEVICE_UPDATE, "POST", "deviceUpdate_Done", data );
+        do_httpGetRequest( API_POST_DEVICE_UPDATE, "POST", "deviceUpdate_Done", data );
     }
 
     //--------------------------------------
@@ -450,7 +455,7 @@ namespace nsGlasslabSDK {
      */
     void Core::authStatus() {
         // Make the request
-        mf_httpGetRequest( API_GET_AUTH_STATUS, "GET", "authStatus_Done", "" );
+        do_httpGetRequest( API_GET_AUTH_STATUS, "GET", "authStatus_Done", "" );
     }
 
 
@@ -482,6 +487,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "register_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
         }
@@ -516,7 +522,7 @@ namespace nsGlasslabSDK {
         data += password;
         
         // Make the request
-        mf_httpGetRequest( API_POST_REGISTER, "POST", "register_Done", data );
+        do_httpGetRequest( API_POST_REGISTER, "POST", "register_Done", data );
     }
 
     /**
@@ -542,7 +548,7 @@ namespace nsGlasslabSDK {
         data += newsletter;
         
         // Make the request
-        mf_httpGetRequest( API_POST_REGISTER, "POST", "register_Done", data );
+        do_httpGetRequest( API_POST_REGISTER, "POST", "register_Done", data );
     }
 
 
@@ -574,6 +580,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "getPlayerInfo_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
 
@@ -615,7 +622,7 @@ namespace nsGlasslabSDK {
      */
     void Core::getPlayerInfo() {
         // Make the request
-        mf_httpGetRequest( API_GET_PLAYERINFO, "GET", "getPlayerInfo_Done" );
+        do_httpGetRequest( API_GET_PLAYERINFO, "GET", "getPlayerInfo_Done" );
     }
 
 
@@ -690,7 +697,7 @@ namespace nsGlasslabSDK {
      */
     void Core::getUserInfo() {
         // Make the request
-        mf_httpGetRequest( API_GET_USER_PROFILE, "GET", "getUserInfo_Done" );
+        do_httpGetRequest( API_GET_USER_PROFILE, "GET", "getUserInfo_Done" );
     }
 
     /**
@@ -787,7 +794,7 @@ namespace nsGlasslabSDK {
             data += password;
             
             // Make the request
-            mf_httpGetRequest( API_POST_LOGIN, "POST", "login_Done", data );
+            do_httpGetRequest( API_POST_LOGIN, "POST", "login_Done", data );
         }
         // Type is unrecognized
         else {
@@ -842,7 +849,7 @@ namespace nsGlasslabSDK {
         data += courseCode;
         
         // Make the request
-        mf_httpGetRequest( API_POST_ENROLL, "POST", "enroll_Done", data );
+        do_httpGetRequest( API_POST_ENROLL, "POST", "enroll_Done", data );
     }
     
     /**
@@ -870,6 +877,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "unenroll_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
         }
@@ -888,7 +896,7 @@ namespace nsGlasslabSDK {
         data += courseId;
 
         // Make the request
-        mf_httpGetRequest( API_POST_UNENROLL, "POST", "unenroll_Done", data );
+        do_httpGetRequest( API_POST_UNENROLL, "POST", "unenroll_Done", data );
     }
 
 
@@ -920,6 +928,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "getCourses_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
         }
@@ -934,7 +943,7 @@ namespace nsGlasslabSDK {
      */
     void Core::getCourses() {
         // Make the request
-        mf_httpGetRequest( API_GET_COURSES, "GET", "getCourses_Done" );
+        do_httpGetRequest( API_GET_COURSES, "GET", "getCourses_Done" );
     }
     
 
@@ -966,6 +975,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "logout_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
         }
@@ -983,7 +993,7 @@ namespace nsGlasslabSDK {
         string data = " ";
 
         // Make the request
-        mf_httpGetRequest( API_POST_LOGOUT, "POST", "logout_Done", data );
+        do_httpGetRequest( API_POST_LOGOUT, "POST", "logout_Done", data );
     }
 
 
@@ -1049,7 +1059,7 @@ namespace nsGlasslabSDK {
         startSessionTimer();
 
         // Add this message to the message queue
-        mf_httpGetRequest( API_GET_PLAY_SESSION_START, "GET", "startPlaySession_Done" );
+        do_httpGetRequest( API_GET_PLAY_SESSION_START, "GET", "startPlaySession_Done" );
     }
 
 
@@ -1082,6 +1092,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "startSession_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
             else {
@@ -1196,6 +1207,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "endSession_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
         }
@@ -1279,7 +1291,7 @@ namespace nsGlasslabSDK {
     void Core::saveGame( const char* gameData ) {
         // Add this message to the message queue
         //mf_addMessageToDataQueue( url, "saveGame_Done", cb, gameData, "application/json" );
-        mf_httpGetRequest( API_POST_SAVEGAME, "POST", "saveGame_Done", gameData, "application/json" );
+        do_httpGetRequest( API_POST_SAVEGAME, "POST", "saveGame_Done", gameData, "application/json" );
     }
 
     /**
@@ -1320,7 +1332,7 @@ namespace nsGlasslabSDK {
     void Core::getSaveGame() {
         // Add this message to the message queue
         //mf_addMessageToDataQueue( url, "getSaveGame_Done", cb );
-        mf_httpGetRequest( API_GET_SAVEGAME, "GET", "getSaveGame_Done" );
+        do_httpGetRequest( API_GET_SAVEGAME, "GET", "getSaveGame_Done" );
     }
 
 
@@ -1362,7 +1374,7 @@ namespace nsGlasslabSDK {
     void Core::deleteSaveGame() {
         // Add this message to the message queue
         //mf_addMessageToDataQueue( url, "deleteSaveGame_Done", cb );
-        mf_httpGetRequest( API_DELETE_SAVEGAME, "DELETE", "deleteSaveGame_Done" );
+        do_httpGetRequest( API_DELETE_SAVEGAME, "DELETE", "deleteSaveGame_Done" );
     }
 
 
@@ -1392,6 +1404,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "saveAchievement_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
         }
@@ -1455,6 +1468,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "savePlayerInfo_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
         }
@@ -1512,6 +1526,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "sendTotalTimePlayed_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
         }
@@ -1570,6 +1585,7 @@ namespace nsGlasslabSDK {
         if( root && json_is_object( root ) ) {
             // First, check for errors
             if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "sendTelemEvent_Done()", "The callback response had an error!" );
                 returnMessage = Const::Message_Error;
             }
         }
@@ -1686,7 +1702,7 @@ namespace nsGlasslabSDK {
                 // In addition to flushing the message queue, do a POST on the totalTimePlayed
                 sendTotalTimePlayed();
 
-                //printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
+                printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
 
                 // Only flush the queue if we are connected
                 if( getConnectedState() ) {
@@ -1814,6 +1830,152 @@ namespace nsGlasslabSDK {
         }
     }
 
+    /**
+     * do_httpGetRequest - takes in the specified request and selects the correct method to execute the request.
+     * If multithreaded processing is enabled, it creates a job and starts the job processor thread. If it fails at making
+     * the thread for whatever reason, it performs a synchronous request.
+     * If multithreaded processing is disabled, it simply performs a synchronous request.
+     */
+    void Core::do_httpGetRequest( string path, string requestType, string coreCB, string postdata, const char* contentType, int rowId )
+    {
+#ifdef MULTITHREADED
+        // Check if thread has been started.
+        if (!threadStarted)
+        {
+            // Attempt thread start.
+            if (mf_startAsyncHTTPRequestThread() != 0)
+            {
+                // Async failed!
+                logMessage("Couldn't start http async get request thread, proceeding synchronously...");
+                
+                // Do synchronous request
+                mf_httpGetRequest(path, requestType, coreCB, postdata, contentType, rowId);
+                
+                // Exit
+                return;
+            }
+        }
+        
+        // Create job
+        HTTPThreadData* jobData = new HTTPThreadData();
+        jobData->path = path;
+        jobData->requestType = requestType;
+        jobData->coreCB = coreCB;
+        jobData->postdata = postdata;
+        jobData->contentType = contentType;
+        jobData->rowId = rowId;
+        
+        // Lock job queue, add job to queue, then unlock
+        pthread_mutex_lock(&m_jobQueueMutex);
+        bool shouldTriggerRequestThread = m_httpGetJobs.size() == 0;
+        m_httpGetJobs.push(jobData);
+        pthread_mutex_unlock(&m_jobQueueMutex);
+        
+        // If we had no jobs before, the processor thread needs to know. Broadcast it.
+        if (shouldTriggerRequestThread)
+        {
+            pthread_cond_broadcast(&m_jobTriggerCondition);
+        }
+#else
+        // Perform synchronous call
+        mf_httpGetRequest(path, requestType, coreCB, postdata, contentType, rowId);
+#endif
+    }
+    
+    /**
+     * mf_startAsyncHTTPRequestThread - starts a thread to process jobs in Core's m_httpGetJobs queue
+     * Returns:
+     *  0 on success
+     *  1 on failure due to thread already being started
+     *  2 on failure due to inability to start thread
+     */
+    int Core::mf_startAsyncHTTPRequestThread()
+    {
+        // Check if thread is already started
+        if (threadStarted)
+        {
+            // If thread has already started, return error
+            logMessage("Tried to start async thread when it was already started!");
+            return 1;
+        }
+        
+        // Mark thread as started
+        threadStarted = true;
+        
+        // Initialize thread variables
+        pthread_t thread;
+        pthread_mutex_init(&m_jobQueueMutex, NULL);
+        
+        // Attempt thread creation
+        int pthreadError;
+        if ((pthreadError = pthread_create(&thread, NULL, proc_asyncHTTPGetRequests, (void*) this)) != 0)
+        {
+            // If thread creation returned code that wasn't 0, it failed. Exit immediately!
+            char errorStr[256];
+            
+            sprintf(errorStr, "ERROR: Could not create pthread in startAsyncHTTPRequestThread - Error code: %i", pthreadError);
+            logMessage(errorStr);
+            
+            pthread_mutex_destroy(&m_jobQueueMutex);
+            
+            return 2;
+        }
+        
+        // Return success
+        return 0;
+    }
+    
+    /**
+     * proc_asyncHTTPGetRequests is a THREADED STATIC function that takes in a Core instance.
+     * The function then loops through all of the http request jobs queued up, doing a request one-by-one
+     * and checking for jobs using the m_jobQueueMutex lock. If there are no jobs, it waits for m_jobTriggerCondition
+     * to be broadcast before continuing.
+     */
+    void* Core::proc_asyncHTTPGetRequests(void* coreInstance)
+    {
+        Core* pCore = static_cast<Core*>(coreInstance);
+        
+        for (;;)
+        {
+            // Lock the job queue
+            pthread_mutex_lock(&pCore->m_jobQueueMutex);
+            
+            // Wait if there are no jobs.
+            // NOTE: This is necessary or the m_jobQueueMutex is essentially perma-locked if we do nothing else.
+            if (pCore->m_httpGetJobs.size() == 0)
+            {
+                int waitReturnCode = pthread_cond_wait(&pCore->m_jobTriggerCondition, &pCore->m_jobQueueMutex);
+                if (waitReturnCode != 0)
+                {
+                    char errorStr[256];
+                    
+                    sprintf(errorStr, "proc_asyncHTTPGetRequests: Error occured when waiting on condition, return code received: %i", waitReturnCode);
+                    cout << errorStr << std::endl;
+                    
+                    // Something terrible happened. Exit the thread
+                    break;
+                }
+            }
+            
+            // Get the job at the front of the queue and remove it from the queue
+            HTTPThreadData* jobData = pCore->m_httpGetJobs.front();
+            pCore->m_httpGetJobs.pop();
+            
+            // Release our lock on the job queue
+            pthread_mutex_unlock(&pCore->m_jobQueueMutex);
+            
+            // Make synchronous request for the job
+            pCore->mf_httpGetRequest(jobData->path, jobData->requestType, jobData->coreCB, jobData->postdata, jobData->contentType, jobData->rowId);
+            
+            // Delete the job data
+            delete jobData;
+        }
+        
+        // Exit
+        pCore->threadStarted = false;
+        pthread_exit(NULL);
+    }
+    
     /**
      * HttpGetRequest function performs a GET/POST request to the server for
      * a single event extracted from the SQLite database.
@@ -1948,7 +2110,10 @@ namespace nsGlasslabSDK {
 
 
             // Update the request type based on the parameter, if it exists
-            if( requestType.c_str() != NULL ) {
+            if( strstr( requestType.c_str(), "NULL" ) ) {
+                requestMethod = getCoreCallbackRequestType( coreCB );
+            }
+            else if( requestType.c_str() != NULL ) {
                 requestMethod = requestType;
             }
 
@@ -1962,12 +2127,14 @@ namespace nsGlasslabSDK {
             }
             
             // Print the results
-            printf("connect url: %s, method: %s, host: %s, port:%d, path: %s, cookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
+            //printf("Connection Request -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n\tpostdata: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str(), postdata.c_str());
 
             // Dispatch the request
-            evhttp_connection_set_timeout( httpRequest->conn, 600 );
+            evhttp_connection_set_timeout( httpRequest->conn, 10 );
             evhttp_make_request( httpRequest->conn, httpRequest->req, requestCmd, path.c_str() );
             event_base_dispatch( httpRequest->base );
+            
+            //printf("Connection Complete -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
             
             // Free the connection
             evhttp_connection_free(httpRequest->conn);
@@ -2003,111 +2170,133 @@ namespace nsGlasslabSDK {
         coreCallbackStructure getConnect_Structure;
         getConnect_Structure.coreCB = getConnect_Done;
         getConnect_Structure.cancel = false;
+        getConnect_Structure.requestType = "GET";
         m_coreCallbackMap[ "getConnect_Done" ] = getConnect_Structure;
 
         coreCallbackStructure getConfig_Structure;
         getConfig_Structure.coreCB = getConfig_Done;
         getConfig_Structure.cancel = false;
+        getConfig_Structure.requestType = "GET";
         m_coreCallbackMap[ "getConfig_Done" ] = getConfig_Structure;
 
         coreCallbackStructure deviceUpdate_Structure;
         deviceUpdate_Structure.coreCB = deviceUpdate_Done;
         deviceUpdate_Structure.cancel = false;
+        deviceUpdate_Structure.requestType = "POST";
         m_coreCallbackMap[ "deviceUpdate_Done" ] = deviceUpdate_Structure;
 
         coreCallbackStructure authStatus_Structure;
         authStatus_Structure.coreCB = authStatus_Done;
         authStatus_Structure.cancel = false;
+        authStatus_Structure.requestType = "GET";
         m_coreCallbackMap[ "authStatus_Done" ] = authStatus_Structure;
 
         coreCallbackStructure register_Structure;
         register_Structure.coreCB = register_Done;
         register_Structure.cancel = false;
+        register_Structure.requestType = "POST";
         m_coreCallbackMap[ "register_Done" ] = register_Structure;
 
         coreCallbackStructure getPlayerInfo_Structure;
         getPlayerInfo_Structure.coreCB = getPlayerInfo_Done;
         getPlayerInfo_Structure.cancel = false;
+        getPlayerInfo_Structure.requestType = "GET";
         m_coreCallbackMap[ "getPlayerInfo_Done" ] = getPlayerInfo_Structure;
 
         coreCallbackStructure getUserInfo_Structure;
         getUserInfo_Structure.coreCB = getUserInfo_Done;
         getUserInfo_Structure.cancel = false;
+        getUserInfo_Structure.requestType = "GET";
         m_coreCallbackMap[ "getUserInfo_Done" ] = getUserInfo_Structure;
 
         coreCallbackStructure login_Structure;
         login_Structure.coreCB = login_Done;
         login_Structure.cancel = false;
+        login_Structure.requestType = "POST";
         m_coreCallbackMap[ "login_Done" ] = login_Structure;
 
         coreCallbackStructure logout_Structure;
         logout_Structure.coreCB = logout_Done;
         logout_Structure.cancel = false;
+        logout_Structure.requestType = "POST";
         m_coreCallbackMap[ "logout_Done" ] = logout_Structure;
 
         coreCallbackStructure enroll_Structure;
         enroll_Structure.coreCB = enroll_Done;
         enroll_Structure.cancel = false;
+        enroll_Structure.requestType = "POST";
         m_coreCallbackMap[ "enroll_Done" ] = enroll_Structure;
 
         coreCallbackStructure unenroll_Structure;
         unenroll_Structure.coreCB = unenroll_Done;
         unenroll_Structure.cancel = false;
+        unenroll_Structure.requestType = "POST";
         m_coreCallbackMap[ "unenroll_Done" ] = unenroll_Structure;
 
         coreCallbackStructure getCourses_Structure;
         getCourses_Structure.coreCB = getCourses_Done;
         getCourses_Structure.cancel = false;
+        getCourses_Structure.requestType = "GET";
         m_coreCallbackMap[ "getCourses_Done" ] = getCourses_Structure;
 
         coreCallbackStructure startPlaySession_Structure;
         startPlaySession_Structure.coreCB = startPlaySession_Done;
         startPlaySession_Structure.cancel = false;
+        startPlaySession_Structure.requestType = "GET";
         m_coreCallbackMap[ "startPlaySession_Done" ] = startPlaySession_Structure;
 
         coreCallbackStructure startSession_Structure;
         startSession_Structure.coreCB = startSession_Done;
         startSession_Structure.cancel = false;
+        startSession_Structure.requestType = "POST";
         m_coreCallbackMap[ "startSession_Done" ] = startSession_Structure;
 
         coreCallbackStructure endSession_Structure;
         endSession_Structure.coreCB = endSession_Done;
         endSession_Structure.cancel = false;
+        endSession_Structure.requestType = "POST";
         m_coreCallbackMap[ "endSession_Done" ] = endSession_Structure;
         
         coreCallbackStructure saveGame_Structure;
         saveGame_Structure.coreCB = saveGame_Done;
         saveGame_Structure.cancel = false;
+        saveGame_Structure.requestType = "POST";
         m_coreCallbackMap[ "saveGame_Done" ] = saveGame_Structure;
 
         coreCallbackStructure getSaveGame_Structure;
         getSaveGame_Structure.coreCB = getSaveGame_Done;
         getSaveGame_Structure.cancel = false;
+        getSaveGame_Structure.requestType = "GET";
         m_coreCallbackMap[ "getSaveGame_Done" ] = getSaveGame_Structure;
 
         coreCallbackStructure deleteSaveGame_Structure;
         deleteSaveGame_Structure.coreCB = deleteSaveGame_Done;
         deleteSaveGame_Structure.cancel = false;
+        deleteSaveGame_Structure.requestType = "DELETE";
         m_coreCallbackMap[ "deleteSaveGame_Done" ] = deleteSaveGame_Structure;
 
         coreCallbackStructure saveAchievement_Structure;
         saveAchievement_Structure.coreCB = saveAchievement_Done;
         saveAchievement_Structure.cancel = false;
+        saveAchievement_Structure.requestType = "POST";
         m_coreCallbackMap[ "saveAchievement_Done" ] = saveAchievement_Structure;
 
         coreCallbackStructure savePlayerInfo_Structure;
         savePlayerInfo_Structure.coreCB = savePlayerInfo_Done;
         savePlayerInfo_Structure.cancel = false;
+        savePlayerInfo_Structure.requestType = "POST";
         m_coreCallbackMap[ "savePlayerInfo_Done" ] = savePlayerInfo_Structure;
 
         coreCallbackStructure sendTotalTimePlayed_Structure;
         sendTotalTimePlayed_Structure.coreCB = sendTotalTimePlayed_Done;
         sendTotalTimePlayed_Structure.cancel = false;
+        sendTotalTimePlayed_Structure.requestType = "POST";
         m_coreCallbackMap[ "sendTotalTimePlayed_Done" ] = sendTotalTimePlayed_Structure;
 
         coreCallbackStructure sendTelemEvent_Structure;
         sendTelemEvent_Structure.coreCB = sendTelemEvent_Done;
         sendTelemEvent_Structure.cancel = false;
+        sendTelemEvent_Structure.requestType = "POST";
         m_coreCallbackMap[ "sendTelemEvent_Done" ] = sendTelemEvent_Structure;
     }
 
@@ -2144,6 +2333,19 @@ namespace nsGlasslabSDK {
         // Callback function does not exist
         if( m_coreCallbackMap.find( key ) != m_coreCallbackMap.end() ) {
             m_coreCallbackMap[ key ].cancel = state;
+        }
+    }
+    /**
+     * Function returns the request type of the Core Callback function requested.
+     */
+    const char* Core::getCoreCallbackRequestType( string key ) {
+        // Callback function does not exist
+        if( m_coreCallbackMap.find( key ) == m_coreCallbackMap.end() ) {
+            return "GET";
+        }
+        // Callback function exists
+        else {
+            return m_coreCallbackMap[ key ].requestType.c_str();
         }
     }
 
