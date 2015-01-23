@@ -117,6 +117,9 @@ public class GlasslabSDK {
 		SavePlayerInfo,
 		GetPlayerInfo,
 		SendTotalTimePlayed,
+		CreateMatch,
+        UpdateMatch,
+        PollMatches,
 		Event,
 		Error
 	};
@@ -166,6 +169,8 @@ public class GlasslabSDK {
 		m_GetGameSave_CBList = new ArrayList();
 		m_DeleteGameSave_CBList = new ArrayList();
 		m_GetUserInfo_CBList = new ArrayList();
+		m_CreateMatch_CBList = new ArrayList();
+		m_UpdateMatch_CBList = new ArrayList();
 		mInstSet = false;
 		
 		mMsgCode   = 0;
@@ -348,6 +353,22 @@ public class GlasslabSDK {
 				if(m_GetUserInfo_CBList.Count > 0){
 					ResponseCallback cb = (ResponseCallback)m_GetUserInfo_CBList[0];
 					m_GetUserInfo_CBList.RemoveAt (0);
+					cb( mMsgString );
+				}
+			} break;
+
+			case (int)GlasslabSDK.Message.CreateMatch: {
+				if(m_CreateMatch_CBList.Count > 0){
+					ResponseCallback cb = (ResponseCallback)m_CreateMatch_CBList[0];
+					m_CreateMatch_CBList.RemoveAt (0);
+					cb( mMsgString );
+				}
+			} break;
+
+			case (int)GlasslabSDK.Message.UpdateMatch: {
+				if(m_UpdateMatch_CBList.Count > 0){
+					ResponseCallback cb = (ResponseCallback)m_UpdateMatch_CBList[0];
+					m_UpdateMatch_CBList.RemoveAt (0);
 					cb( mMsgString );
 				}
 			} break;
@@ -548,6 +569,28 @@ public class GlasslabSDK {
 		
 		GlasslabSDK_GetUserInfo( mInst );
 	}
+
+	public void CreateMatch(int opponentId, ResponseCallback cb = null) {
+		if (cb != null) {
+			m_CreateMatch_CBList.Add (cb);
+		} else {
+			ResponseCallback tempCB = ResponseCallback_Stub;
+			m_CreateMatch_CBList.Add (tempCB);
+		}
+		
+		GlasslabSDK_CreateMatch( mInst, opponentId );
+	}
+
+	public void UpdateMatch(int matchId, string data, int nextPlayerTurn, ResponseCallback cb = null) {
+		if (cb != null) {
+			m_UpdateMatch_CBList.Add (cb);
+		} else {
+			ResponseCallback tempCB = ResponseCallback_Stub;
+			m_UpdateMatch_CBList.Add (tempCB);
+		}
+		
+		GlasslabSDK_UpdateMatch( mInst, matchId, data, nextPlayerTurn );
+	}
 	
 	// ----------------------------
 	/**
@@ -682,6 +725,21 @@ public class GlasslabSDK {
 		
 		// Returned the parsed cookie
 		return parsedCookie;
+	}
+
+	public string GetMatchForId( int matchId ) {
+		// Get the match data
+		IntPtr matchPtr = GlasslabSDK_GetMatchForId( mInst, matchId );
+		string matchData = System.Runtime.InteropServices.Marshal.PtrToStringAuto( matchPtr );
+		
+		// Return the match data from SDK if it exists
+		if( matchData != null ) {
+			return matchData;
+		}
+		// Otherwise and empty string
+		else {
+			return "";
+		}
 	}
 	
 	// ----------------------------
@@ -835,6 +893,16 @@ public class GlasslabSDK {
 
 
 	/**
+	 * Additional request functions used for multiplayer.
+	 */
+	[DllImport ("__Internal")]
+	private static extern void GlasslabSDK_CreateMatch(System.IntPtr inst, int opponentId);
+
+	[DllImport ("__Internal")]
+	private static extern void GlasslabSDK_UpdateMatch(System.IntPtr inst, int matchId, string data, int nextPlayerTurn);
+
+
+	/**
 	 * These functions allow for control over the game timer which is necessary for throttling
 	 * telemetry to the server.
 	 */
@@ -856,6 +924,9 @@ public class GlasslabSDK {
 
 	[DllImport ("__Internal")]
 	private static extern IntPtr GlasslabSDK_GetCookie(System.IntPtr inst);
+
+	[DllImport ("__Internal")]
+	private static extern IntPtr GlasslabSDK_GetMatchForId(System.IntPtr inst, int matchId);
 
 	/**
 	 * Variable and state setter functions.

@@ -139,6 +139,9 @@ namespace nsGlasslabSDK {
             void saveAchievement( const char* item, const char* group, const char* subGroup );
             void savePlayerInfo();
             void sendTotalTimePlayed();
+            void createMatch( int opponentId );
+            void updateMatch( int matchId, const char* data, int nextPlayerTurn );
+            void pollMatches();
             void sendTelemEvents();
             void forceFlushTelemEvents();
             void attemptMessageDispatch();
@@ -153,6 +156,10 @@ namespace nsGlasslabSDK {
             bool getCoreCallbackCancelState( string key );
             void setCoreCallbackCancelState( string key, bool state );
             const char* getCoreCallbackRequestType( string key );
+
+            // Match map functions
+            const char* getMatchWithId( int matchId );
+            void setMatchForId( int id, const char* data );
 
             // SQLite message queue functions
             void mf_addMessageToDataQueue( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL );
@@ -310,14 +317,17 @@ namespace nsGlasslabSDK {
             void mf_setupCallbacks();
             // Callback function maps
             map<string, coreCallbackStructure> m_coreCallbackMap;
+
+            // Match maps
+            map<int, const char*> m_matchesMap;
         
             // Async http GET request queue
-        pthread_mutex_t m_jobQueueMutex = PTHREAD_MUTEX_INITIALIZER;
-        pthread_cond_t m_jobTriggerCondition = PTHREAD_COND_INITIALIZER;
-        std::queue<HTTPThreadData*> m_httpGetJobs;
-        static void* proc_asyncHTTPGetRequests(void*);
-        int mf_startAsyncHTTPRequestThread(); // Starts the async http GET request processor thread. Returns 0 on success.
-        bool threadStarted = false;
+            pthread_mutex_t m_jobQueueMutex = PTHREAD_MUTEX_INITIALIZER;
+            pthread_cond_t m_jobTriggerCondition = PTHREAD_COND_INITIALIZER;
+            std::queue<HTTPThreadData*> m_httpGetJobs;
+            static void* proc_asyncHTTPGetRequests(void*);
+            int mf_startAsyncHTTPRequestThread(); // Starts the async http GET request processor thread. Returns 0 on success.
+            bool threadStarted = false;
     };
 };
 #pragma GCC visibility pop

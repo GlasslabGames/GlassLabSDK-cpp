@@ -147,6 +147,8 @@ class GlasslabSDK {
         void APIIMPORT getSaveGame();
         void APIIMPORT deleteSaveGame();
         void APIIMPORT saveAchievement( const char* item, const char* group, const char* subGroup );
+        void APIIMPORT createMatch( int opponentId );
+        void APIIMPORT updateMatch( int matchId, const char* data, int nextPlayerTurn );
         void APIIMPORT sendTelemEvents();
         void APIIMPORT forceFlushTelemEvents();
         void APIIMPORT cancelRequest( const char* key );
@@ -205,6 +207,7 @@ class GlasslabSDK {
         const char APIIMPORT *getConnectUri();
         int APIIMPORT getUserId();
         const char APIIMPORT *getCookie();
+        const char APIIMPORT *getMatchForId( int matchId )
 
         // Debug logging pop
         const char APIIMPORT *popLogQueue();

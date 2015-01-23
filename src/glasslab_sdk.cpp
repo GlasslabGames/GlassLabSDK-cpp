@@ -145,6 +145,14 @@ void GlasslabSDK::saveAchievement( const char* item, const char* group, const ch
     if( m_core != NULL ) m_core->saveAchievement( item, group, subGroup );
 }
 
+void GlasslabSDK::createMatch( int opponentId ) {
+    if( m_core != NULL ) m_core->createMatch( opponentId );
+}
+
+void GlasslabSDK::updateMatch( int matchId, const char* data, int nextPlayerTurn ) {
+    if( m_core != NULL ) m_core->updateMatch( matchId, data, nextPlayerTurn );
+}
+
 void GlasslabSDK::sendTelemEvents() {
     if( m_core != NULL ) m_core->sendTelemEvents();
 }
@@ -270,6 +278,15 @@ int GlasslabSDK::getUserId() {
 const char* GlasslabSDK::getCookie() {
     if( m_core != NULL ) {
         return m_core->getCookie();
+    }
+    else {
+        return "";
+    }
+}
+
+const char* GlasslabSDK::getMatchForId( int matchId ) {
+    if( m_core != NULL ) {
+        return m_core->getMatchForId( matchId );
     }
     else {
         return "";
