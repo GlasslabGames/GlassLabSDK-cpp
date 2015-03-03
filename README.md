@@ -356,7 +356,7 @@ The SDK requires a stable internet connection to send requests, otherwise it sil
 
 To accomplish this, setup a script on the client that calls the Connect() function every 30 seconds. To ease up the number of requests your game is sending, keep it at this frequency. This function requires the same parameters as before: gameId and URL - so keep those consistent.
 
-The callback message will indicate whether the request was successful or not. If the response is an empty string or contains an "error" key in the JSON, then the connection is not valid. At this point, display a message to the user that indicating the connection failure.
+The callback message will indicate whether the request was successful or not. If the response is an empty string or contains an "error" key in the JSON, then the connection is not valid. At this point, display a message to the user indicating the connection failure.
 
 
 Sample Projects and Wrapper
