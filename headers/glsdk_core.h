@@ -158,7 +158,7 @@ namespace nsGlasslabSDK {
             const char* getCoreCallbackRequestType( string key );
 
             // Match map functions
-            const char* getMatchWithId( int matchId );
+            const char* getMatchForId( int matchId );
             void setMatchForId( int id, const char* data );
 
             // SQLite message queue functions

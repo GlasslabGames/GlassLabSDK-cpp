@@ -2477,11 +2477,11 @@ namespace nsGlasslabSDK {
         createMatch_Structure.requestType = "POST";
         m_coreCallbackMap[ "createMatch_Done" ] = createMatch_Structure;
 
-        coreCallbackStructure createMatch_Structure;
-        createMatch_Structure.coreCB = updateMatch_Done;
-        createMatch_Structure.cancel = false;
-        createMatch_Structure.requestType = "POST";
-        m_coreCallbackMap[ "updateMatch_Done" ] = createMatch_Structure;
+        coreCallbackStructure updateMatch_Structure;
+        updateMatch_Structure.coreCB = updateMatch_Done;
+        updateMatch_Structure.cancel = false;
+        updateMatch_Structure.requestType = "POST";
+        m_coreCallbackMap[ "updateMatch_Done" ] = updateMatch_Structure;
 
         coreCallbackStructure pollMatches_Structure;
         pollMatches_Structure.coreCB = pollMatches_Done;
@@ -2548,7 +2548,7 @@ namespace nsGlasslabSDK {
     /**
      * Function returns the match for the match Id.
      */
-    const char* Core::getMatchWithId( int matchId ) {
+    const char* Core::getMatchForId( int matchId ) {
         // Match does not exist
         if( m_matchesMap.find( matchId ) == m_matchesMap.end() ) {
             return "{ \"error\": \"match does not exist\" }";
@@ -2560,7 +2560,7 @@ namespace nsGlasslabSDK {
     }
 
     void Core::setMatchForId( int id, const char* data ) {
-        m_matchesMap[ json_integer_value( matchId ) ] = json_string_value( matchData );
+        m_matchesMap[ id ] = data;
     }
 
 

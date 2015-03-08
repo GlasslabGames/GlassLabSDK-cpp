@@ -207,7 +207,7 @@ class GlasslabSDK {
         const char APIIMPORT *getConnectUri();
         int APIIMPORT getUserId();
         const char APIIMPORT *getCookie();
-        const char APIIMPORT *getMatchForId( int matchId )
+    const char APIIMPORT *getMatchForId( int matchId );
 
         // Debug logging pop
         const char APIIMPORT *popLogQueue();
