@@ -16,7 +16,8 @@ public class Main : MonoBehaviour {
 		// Connect to the server and set basic app information
 		// The first parameter indicates the location of the internal SDK database
 		// for storing telemetry information. Leave this blank for iOS deployment.
-		glsdk.Connect( "", "TEST", "http://developer.playfully.org", ConnectDone );
+		Debug.Log( "Attempting to connect..." );
+		glsdk.Connect( Application.persistentDataPath, "TEST", "http://developer.playfully.org", ConnectDone );
 		glsdk.SetName( "My Awesome Game" );
 		glsdk.SetVersion( "1.0" );
 	}
@@ -52,13 +53,23 @@ public class Main : MonoBehaviour {
 		Debug.Log( "End Session complete: " + response );
 	}
 
+	/*void Update() {
+		if( Input.touchCount > 0 ) {
+			glsdk.AddTelemEventValue( "string key", "asd" );
+			glsdk.AddTelemEventValue( "int key", 0 );
+			glsdk.AddTelemEventValue( "float key", 1.23 );
+			
+			glsdk.SaveTelemEvent( "SampleEvent" );
+		}
+	}*/
+
 	/*
 	 * Unity Editor keeps SDK thread alive even when not running, causing a huge server load.
 	 * This rectifies that issue.
 	 */
 	public void OnApplicationQuit()
 	{
-		glsdk.StopThread();
+		//glsdk.StopThread();
 		glsdk = null;
 	}
 }
