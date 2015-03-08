@@ -1033,7 +1033,7 @@ namespace nsGlasslabSDK {
                     
                     // Decrease the reference count, this way Jansson can release "sessionId" resources
 #if !WIN32
-                    json_decref( root );
+                    //json_decref( root );
 #endif
                 }
                 // Invalid or non-existent playSessionId
@@ -1106,7 +1106,7 @@ namespace nsGlasslabSDK {
                     
                     // Decrease the reference count, this way Jansson can release "sessionId" resources
 #if !WIN32
-                    json_decref( root );
+                    //json_decref( root );
 #endif
                 }
                 // Invalid or non-existent gameSessionId
