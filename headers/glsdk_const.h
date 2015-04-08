@@ -90,6 +90,9 @@ namespace nsGlasslabSDK {
             Message_SavePlayerInfo,
             Message_GetPlayerInfo,
             Message_SendTotalTimePlayed,
+            Message_CreateMatch,
+            Message_UpdateMatch,
+            Message_PollMatches,
             Message_Event,
             Message_Error
         };

@@ -199,6 +199,18 @@ extern "C"
         }
     }
 
+    APIEXPORT void GlasslabSDK_CreateMatch( void* inst, int opponentId ) {
+        if( inst != NULL ) {
+            static_cast<GlasslabSDK *>( inst )->createMatch( opponentId );
+        }
+    }
+
+    APIEXPORT void GlasslabSDK_UpdateMatch( void* inst, int matchId, const char* data, int nextPlayerTurn ) {
+        if( inst != NULL ) {
+            static_cast<GlasslabSDK *>( inst )->updateMatch( matchId, data, nextPlayerTurn );
+        }
+    }
+
     APIEXPORT void GlasslabSDK_SendTelemEvents( void* inst ) {
         if( inst != NULL ) {
             static_cast<GlasslabSDK *>( inst )->sendTelemEvents();
@@ -345,6 +357,16 @@ extern "C"
     APIEXPORT  const char* GlasslabSDK_GetCookie( void* inst ) {
         if( inst != NULL ) {
             return static_cast<GlasslabSDK *>( inst )->getCookie();
+        }
+        else {
+            return NULL;
+        }
+    }
+
+
+    APIEXPORT  const char* GlasslabSDK_GetMatchForId( void* inst, int matchId ) {
+        if( inst != NULL ) {
+            return static_cast<GlasslabSDK *>( inst )->getMatchForId( matchId );
         }
         else {
             return NULL;
