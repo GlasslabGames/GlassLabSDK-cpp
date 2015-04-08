@@ -1677,7 +1677,7 @@ namespace nsGlasslabSDK {
         
         // Only flush the queue if we are connected
         if( getConnectedState() ) {
-            m_dataSync->flushMsgQ();
+            m_dataSync->doFlushMsgQ();
         }
     }
 
@@ -1706,7 +1706,7 @@ namespace nsGlasslabSDK {
 
                 // Only flush the queue if we are connected
                 if( getConnectedState() ) {
-                    m_dataSync->flushMsgQ();
+                    m_dataSync->doFlushMsgQ();
                 }
             }
             m_telemetryLastTime = currentTime;
@@ -1715,7 +1715,7 @@ namespace nsGlasslabSDK {
         /*else if( m_dataSync->getMessageTableSize() > config.eventsMaxSize ) {
             printf( "reached max number of events: %i with %f elapsed with %i\n", m_dataSync->getMessageTableSize(), secondsElapsed, config.eventsPeriodSecs );
             m_telemetryLastTime = currentTime;
-            m_dataSync->flushMsgQ();
+            m_dataSync->doFlushMsgQ();
 
             // In addition to flushing the message queue, do a POST on the player info
             savePlayerInfo();
@@ -1836,7 +1836,7 @@ namespace nsGlasslabSDK {
      * the thread for whatever reason, it performs a synchronous request.
      * If multithreaded processing is disabled, it simply performs a synchronous request.
      */
-    void Core::do_httpGetRequest( string path, string requestType, string coreCB, string postdata, const char* contentType, int rowId )
+    void Core::do_httpGetRequest( string path, string requestType, string coreCB, string postdata, string contentType, int rowId )
     {
 #ifdef MULTITHREADED
         // Check if thread has been started.
@@ -1849,7 +1849,7 @@ namespace nsGlasslabSDK {
                 logMessage("Couldn't start http async get request thread, proceeding synchronously...");
                 
                 // Do synchronous request
-                mf_httpGetRequest(path, requestType, coreCB, postdata, contentType, rowId);
+                mf_httpGetRequest(path, requestType, coreCB, postdata, contentType.c_str(), rowId);
                 
                 // Exit
                 return;
@@ -1857,7 +1857,9 @@ namespace nsGlasslabSDK {
         }
         
         // Create job
+        // TODO: Look into std::move to copy data as value instead of reference?
         HTTPThreadData* jobData = new HTTPThreadData();
+        jobData->id = DEBUG_NUMBER++;
         jobData->path = path;
         jobData->requestType = requestType;
         jobData->coreCB = coreCB;
@@ -1868,6 +1870,9 @@ namespace nsGlasslabSDK {
         // Lock job queue, add job to queue, then unlock
         pthread_mutex_lock(&m_jobQueueMutex);
         bool shouldTriggerRequestThread = m_httpGetJobs.size() == 0;
+#ifdef VERBOSE
+        printf("QUEUE %i - %s - %s - %s - %s - %s\n", jobData->id, jobData->path.c_str(), jobData->requestType.c_str(), jobData->coreCB.c_str(), jobData->postdata.c_str(), jobData ->contentType.c_str());
+#endif
         m_httpGetJobs.push(jobData);
         pthread_mutex_unlock(&m_jobQueueMutex);
         
@@ -1878,7 +1883,7 @@ namespace nsGlasslabSDK {
         }
 #else
         // Perform synchronous call
-        mf_httpGetRequest(path, requestType, coreCB, postdata, contentType, rowId);
+        mf_httpGetRequest(path, requestType, coreCB, postdata, contentType == "" ? NULL : contentType.c_str(), rowId);
 #endif
     }
     
@@ -1947,26 +1952,38 @@ namespace nsGlasslabSDK {
                 int waitReturnCode = pthread_cond_wait(&pCore->m_jobTriggerCondition, &pCore->m_jobQueueMutex);
                 if (waitReturnCode != 0)
                 {
-                    char errorStr[256];
-                    
-                    sprintf(errorStr, "proc_asyncHTTPGetRequests: Error occured when waiting on condition, return code received: %i", waitReturnCode);
-                    cout << errorStr << std::endl;
+                    cout << "proc_asyncHTTPGetRequests: Error occured when waiting on condition, return code received: " << waitReturnCode << std::endl;
                     
                     // Something terrible happened. Exit the thread
                     break;
                 }
             }
             
+            if (pCore->m_dataSync->queueFlushRequested)
+            {
+                pthread_mutex_unlock(&pCore->m_jobQueueMutex);
+                pCore->m_dataSync->flushMsgQ();
+                continue;
+            }
+            
             // Get the job at the front of the queue and remove it from the queue
             HTTPThreadData* jobData = pCore->m_httpGetJobs.front();
+#ifdef VERBOSE
+            printf("\nREMOVE %i - %s - %s - %s - %s - %s\n", jobData->id, jobData->path.c_str(), jobData->requestType.c_str(), jobData->coreCB.c_str(), jobData->postdata.c_str(), jobData ->contentType.c_str());
+#endif
             pCore->m_httpGetJobs.pop();
+#ifdef VERBOSE
+            printf("\nPOPPED %i - %s - %s - %s - %s - %s\n", jobData->id, jobData->path.c_str(), jobData->requestType.c_str(), jobData->coreCB.c_str(), jobData->postdata.c_str(), jobData ->contentType.c_str());
+#endif
             
             // Release our lock on the job queue
             pthread_mutex_unlock(&pCore->m_jobQueueMutex);
             
+#ifdef VERBOSE
             // Make synchronous request for the job
-            pCore->mf_httpGetRequest(jobData->path, jobData->requestType, jobData->coreCB, jobData->postdata, jobData->contentType, jobData->rowId);
-            
+            printf("\nREQUEST %i - %s - %s - %s - %s - %s\n", jobData->id, jobData->path.c_str(), jobData->requestType.c_str(), jobData->coreCB.c_str(), jobData->postdata.c_str(), jobData ->contentType.c_str());
+#endif
+            pCore->mf_httpGetRequest(jobData->path, jobData->requestType, jobData->coreCB, jobData->postdata, jobData->contentType == "" ? NULL : jobData->contentType.c_str(), jobData->rowId);
             // Delete the job data
             delete jobData;
         }
@@ -2127,14 +2144,18 @@ namespace nsGlasslabSDK {
             }
             
             // Print the results
-            //printf("Connection Request -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n\tpostdata: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str(), postdata.c_str());
+#ifdef VERBOSE
+            printf("Connection Request -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n\tpostdata: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str(), postdata.c_str());
+#endif
 
             // Dispatch the request
             evhttp_connection_set_timeout( httpRequest->conn, 10 );
             evhttp_make_request( httpRequest->conn, httpRequest->req, requestCmd, path.c_str() );
             event_base_dispatch( httpRequest->base );
             
-            //printf("Connection Complete -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
+#ifdef VERBOSE
+            printf("Connection Complete -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
+#endif
             
             // Free the connection
             evhttp_connection_free(httpRequest->conn);

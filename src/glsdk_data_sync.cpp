@@ -335,7 +335,7 @@ namespace nsGlasslabSDK {
         string s = "";
         
         try {
-            //cout << "------------------------------------" << endl;
+            cout << "------------------------------------" << endl;
             s += "INSERT INTO ";
             s += MSG_QUEUE_TABLE_NAME;
             s += " (deviceId, path, requestType, coreCB, postdata, contentType, status) VALUES ('";
@@ -408,20 +408,20 @@ namespace nsGlasslabSDK {
             s += ");";
         
             // Execute the insertion
-            //printf("SQL: %s\n", s.c_str());
+            printf("SQL: %s\n", s.c_str());
             nRows = m_db.execDML( s.c_str() );
-            //printf("%d rows inserted\n", nRows);
-            //printf("------------------------------------\n");
+            printf("%d rows inserted\n", nRows);
+            printf("------------------------------------\n");
 
             // Set the message table size
             m_messageTableSize++;
             
             // Debug display
-            //displayTable( MSG_QUEUE_TABLE_NAME );
+            displayTable( MSG_QUEUE_TABLE_NAME );
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::addToMsgQ()", e.errorMessage() );
-            //cout << "Exception in addToMsgQ() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            cout << "Exception in addToMsgQ() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
         }
     }
 
@@ -1008,6 +1008,16 @@ namespace nsGlasslabSDK {
         return "";
     }
 
+    void DataSync::doFlushMsgQ()
+    {
+#ifdef MULTITHREADED
+        queueFlushRequested = true;
+        pthread_cond_broadcast(&m_core->m_jobTriggerCondition);
+#else
+        flushMsgQ();
+#endif
+        
+    }
 
     //--------------------------------------
     //--------------------------------------
@@ -1140,13 +1150,16 @@ namespace nsGlasslabSDK {
                                 //printf("update SQL: %s\n", s.c_str());
                                 int r = m_db.execDML( s.c_str() );
                                 //printf("Updating result: %d\n", r);
-
+                                
                                 // Perform the get request using the message information
-                                m_core->do_httpGetRequest( apiPath, requestType, coreCB, postdata, contentType, rowId );
+                                m_core->mf_httpGetRequest( apiPath, requestType, coreCB, postdata, contentType, rowId );
+                                
                                 requestsMade++;
                             }
                             else {
-                                m_core->displayWarning( "DataSync::flushMsgQ()", "The API path specified was invalid. Removing the entry from the queue." );
+                                ostringstream oss;
+                                oss << "The API path specified was invalid. Removing the entry from the queue. Got: " << apiPath;
+                                m_core->displayWarning( "DataSync::flushMsgQ()", oss.str() );
                                 removeFromMsgQ( rowId );
                             }
                         }
@@ -1183,6 +1196,7 @@ namespace nsGlasslabSDK {
             //cout << "Exception in flushMsgQ() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
         }
         
+        queueFlushRequested = false;
         // End display out
         //cout << "reached the end of MSG_QUEUE" << endl;
         //cout << "-----------------------------------\n\n\n" << endl;
@@ -1516,7 +1530,8 @@ namespace nsGlasslabSDK {
      * Functions displays the contents of a given table.
      */
     void DataSync::displayTable( string table ) {
-        /*try {
+#ifdef VERBOSE
+        try {
             // display out
             cout << "------------------------------------" << endl;
             cout << "all rows in " << table << endl;
@@ -1546,7 +1561,8 @@ namespace nsGlasslabSDK {
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::displayTable()", e.errorMessage() );
             //cout << "Exception in displayTable() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
-        }*/
+        }
+#endif
     }
     
 }; // end nsGlasslabSDK

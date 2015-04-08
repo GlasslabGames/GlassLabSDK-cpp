@@ -77,6 +77,10 @@ namespace nsGlasslabSDK {
         int getGameSessionEventOrderFromDeviceId( string deviceId );
 
         // Function flushes MSG_QUEUE, converting all stored API events into HTTP requests on Core
+        void doFlushMsgQ();
+#ifdef MULTITHREADED
+        bool queueFlushRequested = false;
+#endif
         void flushMsgQ();
 
         // Function forces a database reset

@@ -89,13 +89,16 @@ namespace nsGlasslabSDK {
         int                         msgQRowId;
     } p_glHttpRequest;
     
+    static int DEBUG_NUMBER = 0;
+    
     struct HTTPThreadData
     {
+        int id;
         string path;
         string requestType;
         string coreCB;
         string postdata;
-        const char* contentType;
+        string contentType;
         int rowId;
     };
 
@@ -144,7 +147,7 @@ namespace nsGlasslabSDK {
             void attemptMessageDispatch();
             void mf_httpGetRequest( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL, int rowId = -1 ); // Synchronous HTTP Get Request
         
-            void do_httpGetRequest( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL, int rowId = -1 ); // Selects whether to do async or not
+            void do_httpGetRequest( string path, string requestType, string coreCB, string postdata = "", string contentType = "", int rowId = -1 ); // Selects whether to do async or not
             // Allow the user to cancel a request from being sent to the server, or ignore the response
             void cancelRequest( const char* requestKey );
 
@@ -247,7 +250,8 @@ namespace nsGlasslabSDK {
             // Debug logging pop
             const char* popLogQueue();
 
-
+        
+            pthread_cond_t m_jobTriggerCondition = PTHREAD_COND_INITIALIZER;
         private:
             // SDK object
             GlasslabSDK* m_sdk;
@@ -313,7 +317,6 @@ namespace nsGlasslabSDK {
         
             // Async http GET request queue
         pthread_mutex_t m_jobQueueMutex = PTHREAD_MUTEX_INITIALIZER;
-        pthread_cond_t m_jobTriggerCondition = PTHREAD_COND_INITIALIZER;
         std::queue<HTTPThreadData*> m_httpGetJobs;
         static void* proc_asyncHTTPGetRequests(void*);
         int mf_startAsyncHTTPRequestThread(); // Starts the async http GET request processor thread. Returns 0 on success.
