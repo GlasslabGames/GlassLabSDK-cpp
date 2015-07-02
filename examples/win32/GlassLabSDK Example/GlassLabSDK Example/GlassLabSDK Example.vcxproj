@@ -70,7 +70,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_lib|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include/libevent/win32;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)/../../../deps/include/pthread;$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include/libevent/win32;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)/../../../lib/win32/lib;$(SolutionDir)/../../../deps/lib/win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_dll|Win32'">

@@ -54,7 +54,10 @@ namespace nsGlasslabSDK {
     /**
      * Core constructor to setup the SDK and perform an initial connection to the server.
      */
-    Core::Core( GlasslabSDK* sdk, const char* gameId, const char* deviceId, const char* dataPath, const char* uri ) {
+    Core::Core( GlasslabSDK* sdk, const char* gameId, const char* deviceId, const char* dataPath, const char* uri ) : 
+      m_jobQueueMutex(PTHREAD_MUTEX_INITIALIZER),
+      m_jobTriggerCondition(PTHREAD_COND_INITIALIZER),
+      threadStarted(false) {
         logMessage( "Initializing the SDK" );
 
         // set device ID only if not null and contains a string of length 0
@@ -1974,6 +1977,8 @@ namespace nsGlasslabSDK {
         // Exit
         pCore->threadStarted = false;
         pthread_exit(NULL);
+
+        return NULL;
     }
     
     /**

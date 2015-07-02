@@ -55,6 +55,10 @@ using namespace std;
 #include "glsdk_const.h"
 #include "glsdk_data_sync.h"
 
+#ifdef _WIN32
+  #include "pthread.h"
+#endif
+
 
 namespace nsGlasslabSDK {
 
@@ -312,12 +316,12 @@ namespace nsGlasslabSDK {
             map<string, coreCallbackStructure> m_coreCallbackMap;
         
             // Async http GET request queue
-        pthread_mutex_t m_jobQueueMutex = PTHREAD_MUTEX_INITIALIZER;
-        pthread_cond_t m_jobTriggerCondition = PTHREAD_COND_INITIALIZER;
+        pthread_mutex_t m_jobQueueMutex;
+        pthread_cond_t m_jobTriggerCondition;
         std::queue<HTTPThreadData*> m_httpGetJobs;
         static void* proc_asyncHTTPGetRequests(void*);
         int mf_startAsyncHTTPRequestThread(); // Starts the async http GET request processor thread. Returns 0 on success.
-        bool threadStarted = false;
+        bool threadStarted;
     };
 };
 #pragma GCC visibility pop
