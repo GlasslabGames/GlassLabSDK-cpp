@@ -26,6 +26,8 @@
 #include <iostream>
 #include "glasslab_sdk.h"
 
+// Change this line to change the location of the DB. NULL defaults to your home folder or documents folder.
+#define DB_LOCATION NULL
 
 // A reference to the GlassLabSDK object, of which we'll create an instance
 GlasslabSDK *glsdk;
@@ -69,7 +71,7 @@ int main( int argc, const char * argv[] )
     // events to be dispatched to the server, a game identifier, the device Id, and
     // the URI to connect to.
     printf( "Basic: Creating SDK Instance connecting to %s\n", host );
-    glsdk = new GlasslabSDK( gameId, deviceId, ":memory:", host );
+    glsdk = new GlasslabSDK(gameId, deviceId, DB_LOCATION, host);
     
     // Optionally set additional properties pertaining to the game, including the
     // name of the game, version number, and level.

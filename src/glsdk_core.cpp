@@ -54,10 +54,13 @@ namespace nsGlasslabSDK {
     /**
      * Core constructor to setup the SDK and perform an initial connection to the server.
      */
-    Core::Core( GlasslabSDK* sdk, const char* gameId, const char* deviceId, const char* dataPath, const char* uri ) : 
-      m_jobQueueMutex(PTHREAD_MUTEX_INITIALIZER),
+    Core::Core( GlasslabSDK* sdk, const char* gameId, const char* deviceId, const char* dataPath, const char* uri )
+#ifdef MULTITHREADED
+      : m_jobQueueMutex(PTHREAD_MUTEX_INITIALIZER),
       m_jobTriggerCondition(PTHREAD_COND_INITIALIZER),
-      threadStarted(false) {
+      threadStarted(false)
+#endif
+    {
         logMessage( "Initializing the SDK" );
 
         // set device ID only if not null and contains a string of length 0
@@ -1892,6 +1895,7 @@ namespace nsGlasslabSDK {
      *  1 on failure due to thread already being started
      *  2 on failure due to inability to start thread
      */
+#ifdef MULTITHREADED
     int Core::mf_startAsyncHTTPRequestThread()
     {
         // Check if thread is already started
@@ -1927,6 +1931,7 @@ namespace nsGlasslabSDK {
         // Return success
         return 0;
     }
+#endif
     
     /**
      * proc_asyncHTTPGetRequests is a THREADED STATIC function that takes in a Core instance.
@@ -1934,6 +1939,7 @@ namespace nsGlasslabSDK {
      * and checking for jobs using the m_jobQueueMutex lock. If there are no jobs, it waits for m_jobTriggerCondition
      * to be broadcast before continuing.
      */
+#ifdef MULTITHREADED
     void* Core::proc_asyncHTTPGetRequests(void* coreInstance)
     {
         Core* pCore = static_cast<Core*>(coreInstance);
@@ -1980,6 +1986,7 @@ namespace nsGlasslabSDK {
 
         return NULL;
     }
+#endif
     
     /**
      * HttpGetRequest function performs a GET/POST request to the server for
