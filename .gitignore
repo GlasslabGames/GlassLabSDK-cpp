@@ -1,2 +1,4 @@
 examples/unity/Library/*
 examples/unity/Build/*
+*.obj
+*.tlog
