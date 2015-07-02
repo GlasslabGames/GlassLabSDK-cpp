@@ -8,3 +8,4 @@ examples/unity/Build/*
 *.unsuccessfulbuild
 *.lastbuildstate
 *.user
+*.idb

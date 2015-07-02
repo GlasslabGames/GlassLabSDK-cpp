@@ -95,7 +95,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <PostBuildEvent>
-      <Command>"C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/bin/lib.exe" /OUT:$(SolutionDir)/../../../lib/win32/GlassLabSDK.lib $(SolutionDir)$(Configuration)\GlassLabSDKLib.lib $(SolutionDir)/../../../deps/lib/jansson.lib $(SolutionDir)/../../../deps/lib/libevent.lib $(SolutionDir)/../../../deps/lib/libevent_core.lib $(SolutionDir)/../../../deps/lib/libevent_extras.lib $(SolutionDir)/../../../deps/lib/SQLite_Static_Library.lib</Command>
+      <Command>"$(VCInstallDir)bin/lib.exe" /OUT:"$(SolutionDir)/../../../lib/win32/lib/GlassLabSDK.lib" "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)../../../deps/lib/$(Platform)/jansson.lib" "$(SolutionDir)../../../deps/lib/$(Platform)/libevent.lib" "$(SolutionDir)../../../deps/lib/$(Platform)/libevent_core.lib" "$(SolutionDir)../../../deps/lib/$(Platform)/libevent_extras.lib" "$(SolutionDir)../../../deps/lib/$(Platform)/SQLite_Static_Library.lib" "$(SolutionDir)../../../deps/lib/$(Platform)/pthreadVC2.lib"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_dll|Win32'">
