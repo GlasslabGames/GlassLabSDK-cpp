@@ -2,3 +2,8 @@ examples/unity/Library/*
 examples/unity/Build/*
 *.obj
 *.tlog
+*.sdf
+*.opensdf
+*.exp
+*.unsuccessfulbuild
+*.lastbuildstate
