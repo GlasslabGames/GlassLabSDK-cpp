@@ -7,3 +7,4 @@ examples/unity/Build/*
 *.exp
 *.unsuccessfulbuild
 *.lastbuildstate
+*.user
