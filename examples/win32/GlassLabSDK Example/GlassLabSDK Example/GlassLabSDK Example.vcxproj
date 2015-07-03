@@ -66,7 +66,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include;$(SolutionDir)/../../../deps/include/libevent/win32;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)/../../../lib/win32/lib;$(SolutionDir)/../../../deps/lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)/../../../lib/win32/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_lib|Win32'">
     <LinkIncremental>false</LinkIncremental>
