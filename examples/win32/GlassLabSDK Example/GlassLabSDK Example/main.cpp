@@ -67,7 +67,7 @@ int main( int argc, const char * argv[] )
     // Create an instance of the GlassLab SDK and begin testing the SDK functions.
     //
     
-    // A GlassLabSDK instnace requries a local database location to store queued
+    // A GlassLabSDK instnace requires a local database location to store queued
     // events to be dispatched to the server, a game identifier, the device Id, and
     // the URI to connect to.
     printf( "Basic: Creating SDK Instance connecting to %s\n", host );

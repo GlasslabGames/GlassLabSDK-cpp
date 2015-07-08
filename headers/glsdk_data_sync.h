@@ -50,6 +50,9 @@ either expressed or implied, of the FreeBSD Project.
 #define MSG_QUEUE_TABLE_NAME "MSG_QUEUE"
 #define SESSION_TABLE_NAME "SESSION"
 
+#include "glasslab_sdk.h"
+#include "glsdk_threading.h"
+
 namespace nsGlasslabSDK {
 
     class Core;
@@ -95,6 +98,16 @@ namespace nsGlasslabSDK {
         void migrateTable( string table, string newSchema );
         // Debug display
         void displayTable( string table );
+        
+        int executeDML(const char* query);
+
+#ifdef MULTITHREADED
+  #ifdef WINTHREAD_ENABLED
+        HANDLE m_dbMutex;
+  #elif defined(PTHREAD_ENABLED)
+        pthread_mutex_t m_dbMutex;
+  #endif
+#endif
 
         // Helper function for creating a new SESSION entry
         string createNewSessionEntry( string deviceId, string cookie, string gameSessionId );

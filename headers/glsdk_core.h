@@ -54,11 +54,7 @@ using namespace std;
 
 #include "glsdk_const.h"
 #include "glsdk_data_sync.h"
-
-#ifdef MULTITHREADED
-  #include <pthread.h>
-#endif
-
+#include "glsdk_threading.h"
 
 namespace nsGlasslabSDK {
 
@@ -317,10 +313,16 @@ namespace nsGlasslabSDK {
         
             // Async http GET request queue
 #ifdef MULTITHREADED
+#ifdef WINTHREAD_ENABLED
+            HANDLE m_jobQueueMutex;
+            HANDLE m_jobTriggerCondition;
+            static DWORD WINAPI Core::proc_asyncHTTPGetRequests(void* coreInstance);
+#elif PTHREAD_ENABLED
         pthread_mutex_t m_jobQueueMutex;
         pthread_cond_t m_jobTriggerCondition;
-        std::queue<HTTPThreadData*> m_httpGetJobs;
         static void* proc_asyncHTTPGetRequests(void*);
+#endif
+        std::queue<HTTPThreadData*> m_httpGetJobs;
         int mf_startAsyncHTTPRequestThread(); // Starts the async http GET request processor thread. Returns 0 on success.
         bool threadStarted;
 #endif

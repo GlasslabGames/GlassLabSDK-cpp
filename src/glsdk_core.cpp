@@ -56,8 +56,13 @@ namespace nsGlasslabSDK {
      */
     Core::Core( GlasslabSDK* sdk, const char* gameId, const char* deviceId, const char* dataPath, const char* uri )
 #ifdef MULTITHREADED
+#ifdef WINTHREAD_ENABLED
+      : m_jobQueueMutex(NULL),
+      m_jobTriggerCondition(NULL),
+#elif PTHREAD_ENABLED
       : m_jobQueueMutex(PTHREAD_MUTEX_INITIALIZER),
       m_jobTriggerCondition(PTHREAD_COND_INITIALIZER),
+#endif
       threadStarted(false)
 #endif
     {
@@ -1842,45 +1847,49 @@ namespace nsGlasslabSDK {
      * the thread for whatever reason, it performs a synchronous request.
      * If multithreaded processing is disabled, it simply performs a synchronous request.
      */
-    void Core::do_httpGetRequest( string path, string requestType, string coreCB, string postdata, const char* contentType, int rowId )
+    void Core::do_httpGetRequest(string path, string requestType, string coreCB, string postdata, const char* contentType, int rowId)
     {
 #ifdef MULTITHREADED
-        // Check if thread has been started.
-        if (!threadStarted)
+      // Check if thread has been started.
+      if (!threadStarted)
+      {
+        // Attempt thread start.
+        if (mf_startAsyncHTTPRequestThread() != 0)
         {
-            // Attempt thread start.
-            if (mf_startAsyncHTTPRequestThread() != 0)
-            {
-                // Async failed!
-                logMessage("Couldn't start http async get request thread, proceeding synchronously...");
-                
-                // Do synchronous request
-                mf_httpGetRequest(path, requestType, coreCB, postdata, contentType, rowId);
-                
-                // Exit
-                return;
-            }
+          // Async failed!
+          logMessage("Couldn't start http async get request thread, proceeding synchronously...");
+
+          // Do synchronous request
+          mf_httpGetRequest(path, requestType, coreCB, postdata, contentType, rowId);
+
+          // Exit
+          return;
         }
-        
-        // Create job
-        HTTPThreadData* jobData = new HTTPThreadData();
-        jobData->path = path;
-        jobData->requestType = requestType;
-        jobData->coreCB = coreCB;
-        jobData->postdata = postdata;
-        jobData->contentType = contentType;
-        jobData->rowId = rowId;
-        
-        // Lock job queue, add job to queue, then unlock
-        pthread_mutex_lock(&m_jobQueueMutex);
+      }
+
+      // Create job
+      HTTPThreadData* jobData = new HTTPThreadData();
+      jobData->path = path;
+      jobData->requestType = requestType;
+      jobData->coreCB = coreCB;
+      jobData->postdata = postdata;
+      jobData->contentType = contentType;
+      jobData->rowId = rowId;
+
+      // Lock
+      gl_lockMutex(m_jobQueueMutex);
+
+        // Add job to queue
         bool shouldTriggerRequestThread = m_httpGetJobs.size() == 0;
         m_httpGetJobs.push(jobData);
-        pthread_mutex_unlock(&m_jobQueueMutex);
+
+        // Unlock
+        gl_unlockMutex(m_jobQueueMutex);
         
         // If we had no jobs before, the processor thread needs to know. Broadcast it.
         if (shouldTriggerRequestThread)
         {
-            pthread_cond_broadcast(&m_jobTriggerCondition);
+          gl_broadcastEvent(m_jobTriggerCondition);
         }
 #else
         // Perform synchronous call
@@ -1894,6 +1903,8 @@ namespace nsGlasslabSDK {
      *  0 on success
      *  1 on failure due to thread already being started
      *  2 on failure due to inability to start thread
+     *  3 on failure to initiate job start event on win32
+     *  4 on failure to create mutex on win32
      */
 #ifdef MULTITHREADED
     int Core::mf_startAsyncHTTPRequestThread()
@@ -1910,20 +1921,60 @@ namespace nsGlasslabSDK {
         threadStarted = true;
         
         // Initialize thread variables
+#ifdef WINTHREAD_ENABLED
+        m_jobTriggerCondition = CreateEvent(
+          NULL,               // default security attributes
+          FALSE,               // manual-reset event
+          FALSE,              // initial state is nonsignaled
+          TEXT("jobQueuedEvent")  // object name
+          );
+
+        if (m_jobTriggerCondition == NULL)
+        {
+          printf("CreateEvent failed (%d)\n", GetLastError());
+          return 3;
+        }
+
+        HANDLE thread;
+        DWORD threadID;
+        m_jobQueueMutex = CreateMutex(NULL, FALSE, NULL);
+        if (m_jobQueueMutex == NULL)
+        {
+          printf("CreateMutex failed (%d)\n", GetLastError());
+          return 4;
+        }
+
+        thread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE) proc_asyncHTTPGetRequests,
+          (void*) this,
+          0, &threadID);
+
+        if (thread == NULL)
+#elif PTHREAD_ENABLED
         pthread_t thread;
         pthread_mutex_init(&m_jobQueueMutex, NULL);
         
         // Attempt thread creation
         int pthreadError;
         if ((pthreadError = pthread_create(&thread, NULL, proc_asyncHTTPGetRequests, (void*) this)) != 0)
+#endif
         {
             // If thread creation returned code that wasn't 0, it failed. Exit immediately!
             char errorStr[256];
             
-            sprintf(errorStr, "ERROR: Could not create pthread in startAsyncHTTPRequestThread - Error code: %i", pthreadError);
+            sprintf(errorStr, "ERROR: Could not create thread in startAsyncHTTPRequestThread - Error code: %i",
+#ifdef WINTHREAD_ENABLED
+              GetLastError()
+#elif PTHREAD_ENABLED
+              pthreadError
+#endif
+              );
             logMessage(errorStr);
-            
+
+#ifdef WINTHREAD_ENABLED
+            CloseHandle(m_jobQueueMutex);
+#elif PTHREAD_ENABLED
             pthread_mutex_destroy(&m_jobQueueMutex);
+#endif
             
             return 2;
         }
@@ -1940,49 +1991,51 @@ namespace nsGlasslabSDK {
      * to be broadcast before continuing.
      */
 #ifdef MULTITHREADED
+#ifdef WINTHREAD_ENABLED
+    DWORD WINAPI Core::proc_asyncHTTPGetRequests(void* coreInstance)
+#elif PTHREAD_ENABLED
     void* Core::proc_asyncHTTPGetRequests(void* coreInstance)
+#endif
     {
         Core* pCore = static_cast<Core*>(coreInstance);
-        
+
+        gl_lockMutex(pCore->m_jobQueueMutex);
+        if (pCore->m_httpGetJobs.size() == 0)
+        {
+          gl_waitEvent(pCore->m_jobTriggerCondition, pCore->m_jobQueueMutex);
+        }
+
         for (;;)
         {
-            // Lock the job queue
-            pthread_mutex_lock(&pCore->m_jobQueueMutex);
-            
-            // Wait if there are no jobs.
-            // NOTE: This is necessary or the m_jobQueueMutex is essentially perma-locked if we do nothing else.
-            if (pCore->m_httpGetJobs.size() == 0)
+            while (pCore->m_httpGetJobs.size() > 0)
             {
-                int waitReturnCode = pthread_cond_wait(&pCore->m_jobTriggerCondition, &pCore->m_jobQueueMutex);
-                if (waitReturnCode != 0)
-                {
-                    char errorStr[256];
-                    
-                    sprintf(errorStr, "proc_asyncHTTPGetRequests: Error occured when waiting on condition, return code received: %i", waitReturnCode);
-                    cout << errorStr << std::endl;
-                    
-                    // Something terrible happened. Exit the thread
-                    break;
-                }
-            }
-            
-            // Get the job at the front of the queue and remove it from the queue
-            HTTPThreadData* jobData = pCore->m_httpGetJobs.front();
-            pCore->m_httpGetJobs.pop();
-            
-            // Release our lock on the job queue
-            pthread_mutex_unlock(&pCore->m_jobQueueMutex);
-            
-            // Make synchronous request for the job
-            pCore->mf_httpGetRequest(jobData->path, jobData->requestType, jobData->coreCB, jobData->postdata, jobData->contentType, jobData->rowId);
-            
-            // Delete the job data
-            delete jobData;
+              // Get the job at the front of the queue and remove it from the queue
+              HTTPThreadData* jobData = pCore->m_httpGetJobs.front();
+              pCore->m_httpGetJobs.pop();
+
+              // Release our lock on the job queue
+              gl_unlockMutex(pCore->m_jobQueueMutex);
+
+              // Make asynchronous request for the job
+              pCore->mf_httpGetRequest(jobData->path, jobData->requestType, jobData->coreCB, jobData->postdata, jobData->contentType, jobData->rowId);
+
+              // Delete the job data
+              delete jobData;
+
+              // lock job queue again to check size
+              gl_lockMutex(pCore->m_jobQueueMutex);
+            } // End queue processing
+
+            // Waiting on event will unlock the mutex. It will lock again upon trigger.
+            gl_waitEvent(pCore->m_jobTriggerCondition, pCore->m_jobQueueMutex);
         }
         
         // Exit
         pCore->threadStarted = false;
+
+#ifdef PTHREAD_ENABLED
         pthread_exit(NULL);
+#endif
 
         return NULL;
     }
