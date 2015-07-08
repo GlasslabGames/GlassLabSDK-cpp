@@ -51,7 +51,7 @@ int main( int argc, const char * argv[] )
     // enroll requests
     char username[] = "andrew";
     char password[] = "glasslab";
-    char courseCode[] = "83RLM";
+    char courseCode[] = "YGKBH";
     
     // The device Id is a way to uniquely identify a user with sessions and
     // associated events. It is used to distinguish users using the same device.
@@ -61,7 +61,7 @@ int main( int argc, const char * argv[] )
     // delay -> 1 sec = 1000 * 1000
     int mainLoopDelay = 100;
     int telemEventLoopDelay = 100;
-    int numTelemEvents = 1;
+    int numTelemEvents = 10;
     
     //
     // Create an instance of the GlassLab SDK and begin testing the SDK functions.
@@ -79,18 +79,8 @@ int main( int argc, const char * argv[] )
     glsdk->setName( "SimCityEDU" );
     glsdk->setVersion( "1.2.4156" );
     glsdk->setGameLevel( "Parktown" );
-	glsdk->setPlayerHandle( "handle" );
-    
-	//glsdk->startSession();
-	glsdk->startSession();
-	for( int i = 0; i < 10; i++ ) {
-		glsdk->saveTelemEvent( "event" );
-		glsdk->sendTelemEvents();
-		//glsdk->deviceUpdate();
-	}
-	glsdk->endSession();
-	glsdk->sendTelemEvents();
-	glsdk->sendTelemEvents();
+	  glsdk->setPlayerHandle( "handle" );
+
     //
     // The remainder of this program will iterate through each of the SDK calls and
     // print out the results. Errors will be captured with the "Message_Error" response.
@@ -99,12 +89,11 @@ int main( int argc, const char * argv[] )
     int step = 0, resCode;
     string resString;
     while( true ) {
-        continue;
         // Get the next GlassLabSDK response object. This can be empty.
         // A response object contains the message, denoted by an enum, and
         // the response data as a JSON string.
         resCode   = glsdk->readTopMessageCode();
-		resString = glsdk->readTopMessageString() || "";
+		    resString = glsdk->readTopMessageString() || "";
         
         // Check the message type
         switch( resCode ) {

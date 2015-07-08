@@ -41,7 +41,7 @@ either expressed or implied, of the FreeBSD Project.
 //
 
 
-#define SDK_VERSION	"1.5.0"
+#define SDK_VERSION	"1.6.0"
 
 #define DB_MESSAGE_CAP 32000
 
@@ -73,4 +73,7 @@ either expressed or implied, of the FreeBSD Project.
 #define API_GET_PLAYERINFO			"/api/v2/data/game/:gameId/playInfo"
 #define API_POST_TOTAL_TIME_PLAYED	"/api/v2/data/game/:gameId/totalTimePlayed"
 #define API_POST_ACHIEVEMENT		"/api/v2/data/game/:gameId/achievement"
+#define API_POST_CREATE_MATCH		"/api/v2/data/game/:gameId/create"
+#define API_POST_SUBMIT_MATCH		"/api/v2/data/game/:gameId/submit"
+#define API_GET_POLL_MATCHES		"/api/v2/data/game/:gameId/matches"
 #define API_POST_EVENTS       		"/api/v2/data/events"

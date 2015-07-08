@@ -43,6 +43,10 @@ There are two ways to make a connection to the server:
 
 Note: if you are utilizing the C# wrapper, the instantiation and connect API calls are wrapped and exposed appropriately.
 
+###HTTPS
+
+Before we can consider the game for release on our production servers, the game must be fully tested over https://. This is a simple change for games that don't have webviews, as it just requires the connect URI to include the secure protocol, but games with webviews require additional work. You can find more information on that below.
+
 
 Dispatch and Response Messages
 ------------------------------
@@ -295,6 +299,77 @@ OR
 
 Afterwards you listen for the same success call. You may additionally wish to listen for action=FAILURE or action=CLOSE for failing to log back in, in which case you must log the user out and stop the game, or ignore and don't delete the save.
 
+<b>HTTPS: SSL Authentication</b>
+
+Most of these instructions were derived from this page: http://stackoverflow.com/questions/11573164/uiwebview-to-view-self-signed-websites-no-private-api-not-nsurlconnection-i
+
+This tutorial attempts to summarize.
+
+When you attempt to open a https web page in a UIWebView, you may receive an error saying something like "CFNetwork SSLHandshake failed (-9800)". This is because UIWebView fails to authenticate with the server before attempting to retrieve content.
+
+As a workaround we do the following steps:
+1. When UIWebView tries to make a connection, check if it already did SSL authentication
+2. If not, intercept the webview's request and launch a NSURLConnection, which can handle SSL authentication challenges.
+3. In the NSURLConnection delegates, handle any authentication challenges that may arise.
+4. Once NSURLConnection clears authentication, close the connection and resume the UIWebView request.
+
+Once the app as a whole has established SSL authentication, any further requests to the same server are all cleared, hence why the UIWebView is able to continue.
+
+Example code is in the link above, but here it is pasted again below.
+
+```
+#pragma mark - Webview delegate
+// Note: This method is particularly important. As the server is using a self signed certificate,
+// we cannot use just UIWebView - as it doesn't allow for using self-certs. Instead, we stop the
+// request in this method below, create an NSURLConnection (which can allow self-certs via the delegate methods
+// which UIWebView does not have), authenticate using NSURLConnection, then use another UIWebView to complete
+// the loading and viewing of the page. See connection:didReceiveAuthenticationChallenge to see how this works.
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
+{
+    NSLog(@"Did start loading: %@ auth:%d", [[request URL] absoluteString], _authenticated);
+    if (!_authenticated) {
+        _authenticated = NO;
+        _urlConnection = [[NSURLConnection alloc] initWithRequest:_request delegate:self];
+        [_urlConnection start];
+        return NO;
+    }
+    return YES;
+}
+ 
+#pragma mark - NURLConnection delegate
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+{
+    NSLog(@"WebController Got auth challange via NSURLConnection");
+    if ([challenge previousFailureCount] == 0)
+    {
+        _authenticated = YES;
+        NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+        [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+    } else
+    {
+        [[challenge sender] cancelAuthenticationChallenge:challenge];
+    }
+}
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
+{
+    NSLog(@"WebController received response via NSURLConnection");
+    // remake a webview call now that authentication has passed ok.
+    _authenticated = YES;
+    [_web loadRequest:_request];
+    // Cancel the URL connection otherwise we double up (webview + url connection, same url = no good!)
+    [_urlConnection cancel];
+}
+// We use this method is to accept an untrusted site which unfortunately we need to do, as our PVM servers are self signed.
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
+{
+    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+```
+
+Limitations of this solution:
+- This is primarily for a single address. The boolean the manager uses to check for authentication is flipped once, meaning authentication is handled for a single server and requests to other servers will not go through another round of authentication.
+- This also assumes that a single webview is open at a time, marked by the webview being stored in a variable to be retrieved later.
+
 
 ###Telemetry
 
@@ -348,6 +423,15 @@ You can also record and access game saves per user with two simple functions:
 - postSaveGame( const char* data )
 
 Note that you must be authenticated with the server in order to get and send save games.
+
+
+###Checking for Proper Connection
+
+The SDK requires a stable internet connection to send requests, otherwise it silently stores events and attempts to send at another time. You may want to inform the user of a poor connection, though, and encourage them to check that it is valid. This can be accomplished using the Connect() function of the SDK and just listening to the response. This is essentially a poll.
+
+To accomplish this, setup a script on the client that calls the Connect() function every 30 seconds. To ease up the number of requests your game is sending, keep it at this frequency. This function requires the same parameters as before: gameId and URL - so keep those consistent.
+
+The callback message will indicate whether the request was successful or not. If the response is an empty string or contains an "error" key in the JSON, then the connection is not valid. At this point, display a message to the user indicating the connection failure.
 
 
 Sample Projects and Wrapper

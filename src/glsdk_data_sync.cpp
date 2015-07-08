@@ -450,7 +450,7 @@ namespace nsGlasslabSDK {
             m_messageTableSize++;
             
             // Debug display
-            //displayTable( MSG_QUEUE_TABLE_NAME );
+            displayTable( MSG_QUEUE_TABLE_NAME );
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::addToMsgQ()", e.errorMessage() );
@@ -1095,7 +1095,6 @@ namespace nsGlasslabSDK {
         return "";
     }
 
-
     //--------------------------------------
     //--------------------------------------
     //--------------------------------------
@@ -1230,13 +1229,16 @@ namespace nsGlasslabSDK {
                                 //printf("update SQL: %s\n", s.c_str());
                                 int r = executeDML( s.c_str() );
                                 //printf("Updating result: %d\n", r);
-
+                                
                                 // Perform the get request using the message information
                                 m_core->do_httpGetRequest( apiPath, requestType, coreCB, postdata, contentType, rowId );
+                                
                                 requestsMade++;
                             }
                             else {
-                                m_core->displayWarning( "DataSync::flushMsgQ()", "The API path specified was invalid. Removing the entry from the queue." );
+                                ostringstream oss;
+                                oss << "The API path specified was invalid. Removing the entry from the queue. Got: " << apiPath;
+                                m_core->displayWarning( "DataSync::flushMsgQ()", oss.str() );
                                 removeFromMsgQ( rowId );
                             }
                         }
@@ -1647,8 +1649,14 @@ namespace nsGlasslabSDK {
     /**
      * Functions displays the contents of a given table.
      */
-    void DataSync::displayTable( string table ) {
-        /*try {
+    void DataSync::displayTable(string table) {
+        return;
+#ifdef MULTITHREADED
+        gl_lockMutex(m_dbMutex);
+#endif
+
+#ifdef VERBOSE
+        try {
             // display out
             std::cout << "------------------------------------" << std::endl;
             std::cout << "all rows in " << table << std::endl;
@@ -1678,7 +1686,12 @@ namespace nsGlasslabSDK {
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::displayTable()", e.errorMessage() );
             //std::cout << "Exception in displayTable() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
-        }*/
+        }
+#endif
+
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
     }
 
     int DataSync::executeDML(const char* query)

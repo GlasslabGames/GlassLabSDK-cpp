@@ -10,31 +10,31 @@
 	<string>GlasslabSDK</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>44E87CBF-1B29-42DE-BAE0-10B1B5FABCFC</key>
-		<string>https://github.com/bendapkiewicz/GlassLabSDK-cpp-1.git</string>
+		<key>8989F60CA6904E739F0DFE75DFCFCE99597C3C16</key>
+		<string>https://github.com/GlasslabGames/GlassLabSDK-cpp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>projects/osx/GlasslabSDK.xcodeproj/project.xcworkspace</string>
+	<string>projects/osx/GlasslabSDK.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>44E87CBF-1B29-42DE-BAE0-10B1B5FABCFC</key>
+		<key>8989F60CA6904E739F0DFE75DFCFCE99597C3C16</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/bendapkiewicz/GlassLabSDK-cpp-1.git</string>
+	<string>https://github.com/GlasslabGames/GlassLabSDK-cpp.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>44E87CBF-1B29-42DE-BAE0-10B1B5FABCFC</string>
+	<string>8989F60CA6904E739F0DFE75DFCFCE99597C3C16</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>44E87CBF-1B29-42DE-BAE0-10B1B5FABCFC</string>
+			<string>8989F60CA6904E739F0DFE75DFCFCE99597C3C16</string>
 			<key>IDESourceControlWCCName</key>
-			<string>GLSDK-cpp</string>
+			<string>GlassLabSDK-cpp</string>
 		</dict>
 	</array>
 </dict>

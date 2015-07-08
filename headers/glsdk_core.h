@@ -89,13 +89,16 @@ namespace nsGlasslabSDK {
         int                         msgQRowId;
     } p_glHttpRequest;
     
+    static int DEBUG_NUMBER = 0;
+    
     struct HTTPThreadData
     {
+        int id;
         string path;
         string requestType;
         string coreCB;
         string postdata;
-        const char* contentType;
+        string contentType;
         int rowId;
     };
 
@@ -139,12 +142,15 @@ namespace nsGlasslabSDK {
             void saveAchievement( const char* item, const char* group, const char* subGroup );
             void savePlayerInfo();
             void sendTotalTimePlayed();
+            void createMatch( int opponentId );
+            void updateMatch( int matchId, const char* data, int nextPlayerTurn );
+            void pollMatches();
             void sendTelemEvents();
             void forceFlushTelemEvents();
             void attemptMessageDispatch();
             void mf_httpGetRequest( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL, int rowId = -1 ); // Synchronous HTTP Get Request
         
-            void do_httpGetRequest( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL, int rowId = -1 ); // Selects whether to do async or not
+            void do_httpGetRequest( string path, string requestType, string coreCB, string postdata = "", string contentType = "", int rowId = -1 ); // Selects whether to do async or not
             // Allow the user to cancel a request from being sent to the server, or ignore the response
             void cancelRequest( const char* requestKey );
 
@@ -153,6 +159,10 @@ namespace nsGlasslabSDK {
             bool getCoreCallbackCancelState( string key );
             void setCoreCallbackCancelState( string key, bool state );
             const char* getCoreCallbackRequestType( string key );
+
+            // Match map functions
+            const char* getMatchForId( int matchId );
+            void setMatchForId( int id, const char* data );
 
             // SQLite message queue functions
             void mf_addMessageToDataQueue( string path, string requestType, string coreCB, string postdata = "", const char* contentType = NULL );
@@ -247,7 +257,6 @@ namespace nsGlasslabSDK {
             // Debug logging pop
             const char* popLogQueue();
 
-
         private:
             // SDK object
             GlasslabSDK* m_sdk;
@@ -310,6 +319,9 @@ namespace nsGlasslabSDK {
             void mf_setupCallbacks();
             // Callback function maps
             map<string, coreCallbackStructure> m_coreCallbackMap;
+
+            // Match maps
+            map<int, const char*> m_matchesMap;
         
             // Async http GET request queue
 #ifdef MULTITHREADED
@@ -322,9 +334,10 @@ namespace nsGlasslabSDK {
         pthread_cond_t m_jobTriggerCondition;
         static void* proc_asyncHTTPGetRequests(void*);
 #endif
+        unsigned int JOB_ID_COUNT = 0;
         std::queue<HTTPThreadData*> m_httpGetJobs;
         int mf_startAsyncHTTPRequestThread(); // Starts the async http GET request processor thread. Returns 0 on success.
-        bool threadStarted;
+        bool threadStarted = false;
 #endif
     };
 };

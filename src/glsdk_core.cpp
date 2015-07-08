@@ -1044,7 +1044,7 @@ namespace nsGlasslabSDK {
                     
                     // Decrease the reference count, this way Jansson can release "sessionId" resources
 #if !WIN32
-                    json_decref( root );
+                    //json_decref( root );
 #endif
                 }
                 // Invalid or non-existent playSessionId
@@ -1117,7 +1117,7 @@ namespace nsGlasslabSDK {
                     
                     // Decrease the reference count, this way Jansson can release "sessionId" resources
 #if !WIN32
-                    json_decref( root );
+                    //json_decref( root );
 #endif
                 }
                 // Invalid or non-existent gameSessionId
@@ -1569,6 +1569,184 @@ namespace nsGlasslabSDK {
     //--------------------------------------
     //--------------------------------------
     /**
+     * Callback function occurs when API_POST_CREATE_MATCH is successful.
+     *
+     * Indicates a match was created successfully.
+     */
+    void createMatch_Done( p_glSDKInfo sdkInfo ) {
+        const char* json = sdkInfo.data.c_str();
+        //sdkInfo.core->logMessage( "---------------------------" );
+        //sdkInfo.core->logMessage( "createMatch_Done", json );
+        //sdkInfo.core->logMessage( "---------------------------" );
+        printf( "\n---------------------------\n" );
+        printf( "createMatch_Done: %s", json );
+        printf( "\n---------------------------\n" );
+        
+        json_t* root;
+        json_error_t error;
+        
+        // Set the return message
+        Const::Message returnMessage = Const::Message_CreateMatch;
+        
+        // Parse the JSON data from the response
+        root = json_loads( json, 0, &error );
+        if( root && json_is_object( root ) ) {
+            // First, check for errors
+            if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "createMatch_Done()", "The callback response had an error!" );
+                returnMessage = Const::Message_Error;
+            }
+            // No errors
+            else {
+                // We receive back a match Id and data
+                json_t* matchId = json_object_get( root, "id" );
+                json_t* matchData = json_object_get( root, "data" );
+
+                // Both id and data must be valid
+                if( matchId && json_is_integer( matchId ) &&
+                    matchData && json_is_string( matchData ) ) {
+                    // Set the match
+                    sdkInfo.core->setMatchForId( json_integer_value( matchId ), json_string_value( matchData ) );
+                    
+                    // Decrease the reference count, this way Jansson can release "sessionId" resources
+#if !WIN32
+                    json_decref( root );
+#endif
+                }
+                // Invalid or non-existent id/data
+                else {
+                    sdkInfo.core->displayError( "createMatch_Done()", "The id or data fields were missing from the createMatch callback response!" );
+                    returnMessage = Const::Message_Error;
+                }
+            }
+        }
+        json_decref( root );
+        
+        // Push CreateMatch message
+        sdkInfo.core->pushMessageStack( returnMessage );
+    }
+
+    /**
+     * CreateMatch function attempts to establish a new match on the server.
+     */
+    void Core::createMatch( int opponentId ) {
+        // Append the opponent Id to the API
+        string apiPath = API_POST_CREATE_MATCH;
+        char t[100];
+        sprintf(t, "%d", opponentId);
+        apiPath += t;
+
+        // Append the parameter information to the postdata
+        string dataOut = "{\"invitedUsers\":";
+        dataOut += opponentId;
+        dataOut += "}";
+
+        // Make this request
+        do_httpGetRequest( API_POST_CREATE_MATCH, "POST", "createMatch_Done", dataOut, "application/json" );
+    }
+
+
+    /**
+     * Callback function occurs when API_POST_SUBMIT_MATCH is successful.
+     *
+     * Indicates a match was updated successfully.
+     */
+    void updateMatch_Done( p_glSDKInfo sdkInfo ) {
+        const char* json = sdkInfo.data.c_str();
+        //sdkInfo.core->logMessage( "---------------------------" );
+        //sdkInfo.core->logMessage( "updateMatch_Done", json );
+        //sdkInfo.core->logMessage( "---------------------------" );
+        printf( "\n---------------------------\n" );
+        printf( "updateMatch_Done: %s", json );
+        printf( "\n---------------------------\n" );
+        
+        json_t* root;
+        json_error_t error;
+        
+        // Set the return message
+        Const::Message returnMessage = Const::Message_UpdateMatch;
+        
+        // Parse the JSON data from the response
+        root = json_loads( json, 0, &error );
+        if( root && json_is_object( root ) ) {
+            // First, check for errors
+            if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "updateMatch_Done()", "The callback response had an error!" );
+                returnMessage = Const::Message_Error;
+            }
+        }
+        json_decref( root );
+        
+        // Push UpdateMatch message
+        sdkInfo.core->pushMessageStack( returnMessage );
+    }
+
+    /**
+     * UpdateMatch function attempts to update/append to existing match data.
+     */
+    void Core::updateMatch( int matchId, const char* data, int nextPlayerTurn ) {
+        // Append the parameter information to the postdata
+        string dataOut = "{\"matchId\":\"";
+        dataOut += matchId;
+        dataOut += "\",\"turnData\":\"";
+        dataOut += data;
+        dataOut += "\",\"nextPlayer\":\"";
+        dataOut += nextPlayerTurn;
+        dataOut += "\"}";
+        
+        // Make this request
+        do_httpGetRequest( API_POST_SUBMIT_MATCH, "POST", "updateMatch_Done", dataOut, "application/json" );
+    }
+
+
+    /**
+     * Callback function occurs when API_GET_POLL_MATCHES is successful.
+     *
+     * Indicates a match poll was successful.
+     */
+    void pollMatches_Done( p_glSDKInfo sdkInfo ) {
+        const char* json = sdkInfo.data.c_str();
+        //sdkInfo.core->logMessage( "---------------------------" );
+        //sdkInfo.core->logMessage( "pollMatches_Done", json );
+        //sdkInfo.core->logMessage( "---------------------------" );
+        printf( "\n---------------------------\n" );
+        printf( "pollMatches_Done: %s", json );
+        printf( "\n---------------------------\n" );
+        
+        json_t* root;
+        json_error_t error;
+        
+        // Set the return message
+        Const::Message returnMessage = Const::Message_PollMatches;
+        
+        // Parse the JSON data from the response
+        root = json_loads( json, 0, &error );
+        if( root && json_is_object( root ) ) {
+            // First, check for errors
+            if( sdkInfo.core->mf_checkForJSONErrors( root ) ) {
+                sdkInfo.core->displayError( "pollMatches_Done()", "The callback response had an error!" );
+                returnMessage = Const::Message_Error;
+            }
+        }
+        json_decref( root );
+        
+        // Push PollMatches message
+        sdkInfo.core->pushMessageStack( returnMessage );
+    }
+
+    /**
+     * PollMatches function attempts to retrieve match data from the server.
+     */
+    void Core::pollMatches() {
+        // Make this request
+        do_httpGetRequest( API_GET_POLL_MATCHES, "GET", "pollMatches_Done" );
+    }
+
+
+    //--------------------------------------
+    //--------------------------------------
+    //--------------------------------------
+    /**
      * Callback function occurs when API_POST_EVENTS is successful.
      *
      * Indicates successful telemetry event send.
@@ -1688,7 +1866,7 @@ namespace nsGlasslabSDK {
         
         // Only flush the queue if we are connected
         if( getConnectedState() ) {
-            m_dataSync->flushMsgQ();
+          m_dataSync->flushMsgQ();
         }
     }
 
@@ -1713,10 +1891,10 @@ namespace nsGlasslabSDK {
                 // In addition to flushing the message queue, do a POST on the totalTimePlayed
                 sendTotalTimePlayed();
 
-                printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
+                printf("Connected: %d, flushing %i events (%f seconds elapsed since last)\n", getConnectedState(), m_dataSync->getMessageTableSize(), secondsElapsed);
 
                 // Only flush the queue if we are connected
-                if( getConnectedState() ) {
+                if (getConnectedState()) {
                     m_dataSync->flushMsgQ();
                 }
             }
@@ -1847,7 +2025,7 @@ namespace nsGlasslabSDK {
      * the thread for whatever reason, it performs a synchronous request.
      * If multithreaded processing is disabled, it simply performs a synchronous request.
      */
-    void Core::do_httpGetRequest(string path, string requestType, string coreCB, string postdata, const char* contentType, int rowId)
+    void Core::do_httpGetRequest( string path, string requestType, string coreCB, string postdata, string contentType, int rowId )
     {
 #ifdef MULTITHREADED
       // Check if thread has been started.
@@ -1860,7 +2038,7 @@ namespace nsGlasslabSDK {
           logMessage("Couldn't start http async get request thread, proceeding synchronously...");
 
           // Do synchronous request
-          mf_httpGetRequest(path, requestType, coreCB, postdata, contentType, rowId);
+          mf_httpGetRequest(path, requestType, coreCB, postdata, contentType.c_str(), rowId);
 
           // Exit
           return;
@@ -1869,6 +2047,7 @@ namespace nsGlasslabSDK {
 
       // Create job
       HTTPThreadData* jobData = new HTTPThreadData();
+      jobData->id = ++JOB_ID_COUNT;
       jobData->path = path;
       jobData->requestType = requestType;
       jobData->coreCB = coreCB;
@@ -1881,6 +2060,9 @@ namespace nsGlasslabSDK {
 
         // Add job to queue
         bool shouldTriggerRequestThread = m_httpGetJobs.size() == 0;
+#ifdef VERBOSE
+        printf("QUEUE %i - %s - %s - %s - %s - %s\n", jobData->id, jobData->path.c_str(), jobData->requestType.c_str(), jobData->coreCB.c_str(), jobData->postdata.c_str(), jobData ->contentType.c_str());
+#endif
         m_httpGetJobs.push(jobData);
 
         // Unlock
@@ -1893,7 +2075,7 @@ namespace nsGlasslabSDK {
         }
 #else
         // Perform synchronous call
-        mf_httpGetRequest(path, requestType, coreCB, postdata, contentType, rowId);
+        mf_httpGetRequest(path, requestType, coreCB, postdata, contentType == "" ? NULL : contentType.c_str(), rowId);
 #endif
     }
     
@@ -2016,8 +2198,12 @@ namespace nsGlasslabSDK {
               // Release our lock on the job queue
               gl_unlockMutex(pCore->m_jobQueueMutex);
 
+#ifdef VERBOSE
+              printf("SEND %i - %s - %s - %s - %s - %s\n", jobData->id, jobData->path.c_str(), jobData->requestType.c_str(), jobData->coreCB.c_str(), jobData->postdata.c_str(), jobData->contentType.c_str());
+#endif
+
               // Make asynchronous request for the job
-              pCore->mf_httpGetRequest(jobData->path, jobData->requestType, jobData->coreCB, jobData->postdata, jobData->contentType, jobData->rowId);
+              pCore->mf_httpGetRequest(jobData->path, jobData->requestType, jobData->coreCB, jobData->postdata, jobData->contentType.c_str(), jobData->rowId);
 
               // Delete the job data
               delete jobData;
@@ -2192,14 +2378,18 @@ namespace nsGlasslabSDK {
             }
             
             // Print the results
-            //printf("Connection Request -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n\tpostdata: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str(), postdata.c_str());
+#ifdef VERBOSE
+            printf("Connection Request -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n\tpostdata: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str(), postdata.c_str());
+#endif
 
             // Dispatch the request
             evhttp_connection_set_timeout( httpRequest->conn, 10 );
             evhttp_make_request( httpRequest->conn, httpRequest->req, requestCmd, path.c_str() );
             event_base_dispatch( httpRequest->base );
             
-            //printf("Connection Complete -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
+#ifdef VERBOSE
+            printf("Connection Complete -\n\turl: %s\n\tmethod: %s\n\thost: %s\n\tport:%d\n\tpath: %s\n\tcookie: %s\n", url.c_str(), requestMethod.c_str(), host, port, path.c_str(), m_cookie.c_str());
+#endif
             
             // Free the connection
             evhttp_connection_free(httpRequest->conn);
@@ -2358,6 +2548,24 @@ namespace nsGlasslabSDK {
         sendTotalTimePlayed_Structure.requestType = "POST";
         m_coreCallbackMap[ "sendTotalTimePlayed_Done" ] = sendTotalTimePlayed_Structure;
 
+        coreCallbackStructure createMatch_Structure;
+        createMatch_Structure.coreCB = createMatch_Done;
+        createMatch_Structure.cancel = false;
+        createMatch_Structure.requestType = "POST";
+        m_coreCallbackMap[ "createMatch_Done" ] = createMatch_Structure;
+
+        coreCallbackStructure updateMatch_Structure;
+        updateMatch_Structure.coreCB = updateMatch_Done;
+        updateMatch_Structure.cancel = false;
+        updateMatch_Structure.requestType = "POST";
+        m_coreCallbackMap[ "updateMatch_Done" ] = updateMatch_Structure;
+
+        coreCallbackStructure pollMatches_Structure;
+        pollMatches_Structure.coreCB = pollMatches_Done;
+        pollMatches_Structure.cancel = false;
+        pollMatches_Structure.requestType = "GET";
+        m_coreCallbackMap[ "pollMatches_Done" ] = pollMatches_Structure;
+
         coreCallbackStructure sendTelemEvent_Structure;
         sendTelemEvent_Structure.coreCB = sendTelemEvent_Done;
         sendTelemEvent_Structure.cancel = false;
@@ -2412,6 +2620,24 @@ namespace nsGlasslabSDK {
         else {
             return m_coreCallbackMap[ key ].requestType.c_str();
         }
+    }
+
+    /**
+     * Function returns the match for the match Id.
+     */
+    const char* Core::getMatchForId( int matchId ) {
+        // Match does not exist
+        if( m_matchesMap.find( matchId ) == m_matchesMap.end() ) {
+            return "{ \"error\": \"match does not exist\" }";
+        }
+        // Callback function exists
+        else {
+            return m_matchesMap[ matchId ];
+        }
+    }
+
+    void Core::setMatchForId( int id, const char* data ) {
+        m_matchesMap[ id ] = data;
     }
 
 
