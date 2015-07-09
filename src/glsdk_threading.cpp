@@ -26,8 +26,12 @@ void gl_lockMutex(
     throw ERROR_UNHANDLED_EXCEPTION;
   }
 
-  #elif PTHREAD_ENABLED
-    pthread_mutex_lock(&mutex);
+  #elif defined(PTHREAD_ENABLED)
+    int result = pthread_mutex_trylock(&mutex);
+    if (result != 0 && result != EDEADLK)
+    {
+        result = pthread_mutex_lock(&mutex);
+    }
   #endif
 }
 
@@ -45,7 +49,7 @@ void gl_unlockMutex(
       std::cout << "Error occurred when releasing db mutex, Error code: " << GetLastError() << std::endl;
       throw ERROR_UNHANDLED_EXCEPTION;
     }
-  #elif PTHREAD_ENABLED
+  #elif defined(PTHREAD_ENABLED)
     pthread_mutex_unlock(&mutex);
   #endif
 }
@@ -64,7 +68,7 @@ void gl_broadcastEvent(
     std::cout << "SetEvent failed, Error code: " << GetLastError() << std::endl;
     throw ERROR_UNHANDLED_EXCEPTION;
   }
-#elif PTHREAD_ENABLED
+#elif defined(PTHREAD_ENABLED)
   pthread_cond_broadcast(&condition);
 #endif
 }
@@ -96,19 +100,19 @@ void gl_waitEvent(
     }
   }
   else
-#elif PTHREAD_ENABLED
-  int waitReturnCode = pthread_cond_wait(&pCore->m_jobTriggerCondition, &pCore->m_jobQueueMutex);
+#elif defined(PTHREAD_ENABLED)
+  int waitReturnCode = pthread_cond_wait(&condition, &mutex);
   if (waitReturnCode != 0)
 #endif
   {
     std::cout << "Error occurred when waiting on condition, return code received: %i" <<
 #ifdef WINTHREAD_ENABLED
       GetLastError()
-#elif PTHREAD_ENABLED
+#elif defined(PTHREAD_ENABLED)
       waitReturnCode
 #endif
     << std::endl;
 
-    throw ERROR_UNHANDLED_EXCEPTION;
+    throw;
   }
 }

@@ -188,7 +188,7 @@ namespace nsGlasslabSDK {
                 second = string::npos;
             }
 
-            int major, minor, revision = 0;
+            int major = 0, minor = 0, revision = 0;
             
             if( first != string::npos ) {
                 major = (int)atoi( currentVersion.substr( 0, first ).c_str() );
@@ -220,7 +220,7 @@ namespace nsGlasslabSDK {
                 second = string::npos;
             }
 
-            int major, minor, revision = 0;
+            int major = 0, minor = 0, revision = 0;
             
             if( first != string::npos ) {
                 major = (int)atoi( newVersion.substr( 0, first ).c_str() );
@@ -518,7 +518,8 @@ namespace nsGlasslabSDK {
                 s += "'";
                 
                 //printf("update SQL: %s\n", s.c_str());
-                int r = executeDML( s.c_str() );
+                //int r =
+                executeDML( s.c_str() );
                 //std::cout << "Updating result: " << r << std::endl;
             }
         }
@@ -766,7 +767,8 @@ namespace nsGlasslabSDK {
             s += deviceId;
             s += "';";
             //printf("delete SQL: %s\n", s.c_str());
-            int r = executeDML( s.c_str() );
+            //int r =
+            executeDML( s.c_str() );
             //printf("Deleting result: %d\n", r);
         }
         catch( CppSQLite3Exception e ) {
@@ -874,7 +876,8 @@ namespace nsGlasslabSDK {
                 s += "'";
 
                 //printf("SQL: %s\n", s.c_str());
-                int nRows = executeDML( s.c_str() );
+                //int nRows =
+                executeDML( s.c_str() );
                 //printf("%d rows inserted\n", nRows);
                 //printf("------------------------------------\n");
             }
@@ -1227,7 +1230,8 @@ namespace nsGlasslabSDK {
                                 s += t;
 
                                 //printf("update SQL: %s\n", s.c_str());
-                                int r = executeDML( s.c_str() );
+                                //int r =
+                                executeDML( s.c_str() );
                                 //printf("Updating result: %d\n", r);
                                 
                                 // Perform the get request using the message information
@@ -1650,12 +1654,11 @@ namespace nsGlasslabSDK {
      * Functions displays the contents of a given table.
      */
     void DataSync::displayTable(string table) {
-        return;
+#ifdef VERBOSE
 #ifdef MULTITHREADED
         gl_lockMutex(m_dbMutex);
 #endif
 
-#ifdef VERBOSE
         try {
             // display out
             std::cout << "------------------------------------" << std::endl;

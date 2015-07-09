@@ -329,7 +329,7 @@ namespace nsGlasslabSDK {
             HANDLE m_jobQueueMutex;
             HANDLE m_jobTriggerCondition;
             static DWORD WINAPI Core::proc_asyncHTTPGetRequests(void* coreInstance);
-#elif PTHREAD_ENABLED
+#elif defined(PTHREAD_ENABLED)
         pthread_mutex_t m_jobQueueMutex;
         pthread_cond_t m_jobTriggerCondition;
         static void* proc_asyncHTTPGetRequests(void*);

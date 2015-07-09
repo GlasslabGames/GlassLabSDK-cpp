@@ -59,7 +59,7 @@ namespace nsGlasslabSDK {
 #ifdef WINTHREAD_ENABLED
       : m_jobQueueMutex(NULL),
       m_jobTriggerCondition(NULL),
-#elif PTHREAD_ENABLED
+#elif defined(PTHREAD_ENABLED)
       : m_jobQueueMutex(PTHREAD_MUTEX_INITIALIZER),
       m_jobTriggerCondition(PTHREAD_COND_INITIALIZER),
 #endif
@@ -1606,7 +1606,7 @@ namespace nsGlasslabSDK {
                 if( matchId && json_is_integer( matchId ) &&
                     matchData && json_is_string( matchData ) ) {
                     // Set the match
-                    sdkInfo.core->setMatchForId( json_integer_value( matchId ), json_string_value( matchData ) );
+                    sdkInfo.core->setMatchForId( (int) json_integer_value( matchId ), json_string_value( matchData ) );
                     
                     // Decrease the reference count, this way Jansson can release "sessionId" resources
 #if !WIN32
@@ -2059,7 +2059,6 @@ namespace nsGlasslabSDK {
       gl_lockMutex(m_jobQueueMutex);
 
         // Add job to queue
-        bool shouldTriggerRequestThread = m_httpGetJobs.size() == 0;
 #ifdef VERBOSE
         printf("QUEUE %i - %s - %s - %s - %s - %s\n", jobData->id, jobData->path.c_str(), jobData->requestType.c_str(), jobData->coreCB.c_str(), jobData->postdata.c_str(), jobData ->contentType.c_str());
 #endif
@@ -2068,11 +2067,8 @@ namespace nsGlasslabSDK {
         // Unlock
         gl_unlockMutex(m_jobQueueMutex);
         
-        // If we had no jobs before, the processor thread needs to know. Broadcast it.
-        if (shouldTriggerRequestThread)
-        {
-          gl_broadcastEvent(m_jobTriggerCondition);
-        }
+        // The processor thread needs to know if jobs are waiting. Broadcast it.
+        gl_broadcastEvent(m_jobTriggerCondition);
 #else
         // Perform synchronous call
         mf_httpGetRequest(path, requestType, coreCB, postdata, contentType == "" ? NULL : contentType.c_str(), rowId);
@@ -2131,7 +2127,7 @@ namespace nsGlasslabSDK {
           0, &threadID);
 
         if (thread == NULL)
-#elif PTHREAD_ENABLED
+#elif defined(PTHREAD_ENABLED)
         pthread_t thread;
         pthread_mutex_init(&m_jobQueueMutex, NULL);
         
@@ -2145,8 +2141,8 @@ namespace nsGlasslabSDK {
             
             sprintf(errorStr, "ERROR: Could not create thread in startAsyncHTTPRequestThread - Error code: %i",
 #ifdef WINTHREAD_ENABLED
-              GetLastError()
-#elif PTHREAD_ENABLED
+            GetLastError()
+#elif defined(PTHREAD_ENABLED)
               pthreadError
 #endif
               );
@@ -2154,7 +2150,7 @@ namespace nsGlasslabSDK {
 
 #ifdef WINTHREAD_ENABLED
             CloseHandle(m_jobQueueMutex);
-#elif PTHREAD_ENABLED
+#elif defined(PTHREAD_ENABLED)
             pthread_mutex_destroy(&m_jobQueueMutex);
 #endif
             
@@ -2175,17 +2171,13 @@ namespace nsGlasslabSDK {
 #ifdef MULTITHREADED
 #ifdef WINTHREAD_ENABLED
     DWORD WINAPI Core::proc_asyncHTTPGetRequests(void* coreInstance)
-#elif PTHREAD_ENABLED
+#elif defined(PTHREAD_ENABLED)
     void* Core::proc_asyncHTTPGetRequests(void* coreInstance)
 #endif
     {
         Core* pCore = static_cast<Core*>(coreInstance);
 
         gl_lockMutex(pCore->m_jobQueueMutex);
-        if (pCore->m_httpGetJobs.size() == 0)
-        {
-          gl_waitEvent(pCore->m_jobTriggerCondition, pCore->m_jobQueueMutex);
-        }
 
         for (;;)
         {
@@ -2215,14 +2207,14 @@ namespace nsGlasslabSDK {
             // Waiting on event will unlock the mutex. It will lock again upon trigger.
             gl_waitEvent(pCore->m_jobTriggerCondition, pCore->m_jobQueueMutex);
         }
-        
+        /** Commented out because this is recognized as code that will never run.
         // Exit
         pCore->threadStarted = false;
 
 #ifdef PTHREAD_ENABLED
         pthread_exit(NULL);
 #endif
-
+        */
         return NULL;
     }
 #endif
