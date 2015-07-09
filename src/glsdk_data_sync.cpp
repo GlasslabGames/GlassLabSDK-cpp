@@ -1722,10 +1722,9 @@ namespace nsGlasslabSDK {
             m_core->displayError( "DataSync::displayTable()", e.errorMessage() );
             //std::cout << "Exception in displayTable() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
-#endif
-
 #ifdef MULTITHREADED
         gl_unlockMutex(m_dbMutex);
+#endif
 #endif
     }
 }; // end nsGlasslabSDK
