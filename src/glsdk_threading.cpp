@@ -1,6 +1,7 @@
 
 #include "glsdk_threading.h"
 #include <iostream>
+#include <errno.h>
 
 void gl_lockMutex(
   #ifdef WINTHREAD_ENABLED
