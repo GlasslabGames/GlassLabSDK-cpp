@@ -98,8 +98,6 @@ namespace nsGlasslabSDK {
         void migrateTable( string table, string newSchema );
         // Debug display
         void displayTable( string table );
-        
-        int executeDML(const char* query);
 
 #ifdef MULTITHREADED
   #ifdef WINTHREAD_ENABLED

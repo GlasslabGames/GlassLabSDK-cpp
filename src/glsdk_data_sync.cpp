@@ -156,7 +156,7 @@ namespace nsGlasslabSDK {
             */
             // page_size == 4096
             
-            //executeDML( "PRAGMA cache_size = 1024;" );
+            //m_db.execDML( "PRAGMA cache_size = 1024;" );
             
             /*
             CppSQLite3Query q = m_db.execQuery("PRAGMA cache_size;");
@@ -310,7 +310,7 @@ namespace nsGlasslabSDK {
                         s += "'";
                         printf("SQL: %s\n", s.c_str());
                         
-                        int nRows = executeDML(s.c_str());
+                        int nRows = m_db.execDML(s.c_str());
 
                         printf("%d rows updated in %s\n", nRows, CONFIG_TABLE_NAME);
 
@@ -439,13 +439,20 @@ namespace nsGlasslabSDK {
             }
             s += ", 'ready'";
             s += ");";
-        
+            
+#ifdef MULTITHREADED
+            gl_lockMutex(m_dbMutex);
+#endif
             // Execute the insertion
             //printf("SQL: %s\n", s.c_str());
-            nRows = executeDML(s.c_str());
+            nRows = m_db.execDML(s.c_str());
             //printf("%d rows inserted\n", nRows);
             //printf("------------------------------------\n");
-
+            
+#ifdef MULTITHREADED
+            gl_unlockMutex(m_dbMutex);
+#endif
+            
             // Set the message table size
             m_messageTableSize++;
             
@@ -476,9 +483,16 @@ namespace nsGlasslabSDK {
             s += " where id=";
             sprintf(t, "%d", rowId);
             s += t;
+            
+#ifdef MULTITHREADED
+            gl_lockMutex(m_dbMutex);
+#endif
             //std::cout << "delete SQL: " << m_sql << std::endl;
-            r = executeDML( s.c_str() );
+            r = m_db.execDML( s.c_str() );
             //printf("Deleting result: %d\n", r);
+#ifdef MULTITHREADED
+            gl_unlockMutex(m_dbMutex);
+#endif
 
             // Set the message table size
             m_messageTableSize--;
@@ -517,10 +531,16 @@ namespace nsGlasslabSDK {
                 s += t;
                 s += "'";
                 
+#ifdef MULTITHREADED
+                gl_lockMutex(m_dbMutex);
+#endif
                 //printf("update SQL: %s\n", s.c_str());
                 //int r =
-                executeDML( s.c_str() );
+                m_db.execDML( s.c_str() );
                 //std::cout << "Updating result: " << r << std::endl;
+#ifdef MULTITHREADED
+                gl_unlockMutex(m_dbMutex);
+#endif
             }
         }
         catch( CppSQLite3Exception e ) {
@@ -601,7 +621,7 @@ namespace nsGlasslabSDK {
             sessionQuery.finalize();
         
             printf("SQL: %s\n", s.c_str());
-            int nRows = executeDML( s.c_str() );
+            int nRows = m_db.execDML( s.c_str() );
             printf("%d rows inserted\n", nRows);
             printf("------------------------------------\n");
             
@@ -677,7 +697,7 @@ namespace nsGlasslabSDK {
             sessionQuery.finalize();
         
             printf("SQL: %s\n", s.c_str());
-            int nRows = executeDML( s.c_str() );
+            int nRows = m_db.execDML( s.c_str() );
             printf("%d rows inserted\n", nRows);
             printf("------------------------------------\n");
             
@@ -729,7 +749,7 @@ namespace nsGlasslabSDK {
 
                 // Perform the operation
                 printf("SQL: %s\n", s.c_str());
-                int nRows = executeDML( s.c_str() );
+                int nRows = m_db.execDML( s.c_str() );
                 printf("%d rows inserted\n", nRows);
                 printf("------------------------------------\n");
             }
@@ -766,10 +786,16 @@ namespace nsGlasslabSDK {
             s += " where deviceId='";
             s += deviceId;
             s += "';";
+#ifdef MULTITHREADED
+            gl_lockMutex(m_dbMutex);
+#endif
             //printf("delete SQL: %s\n", s.c_str());
             //int r =
-            executeDML( s.c_str() );
+            m_db.execDML( s.c_str() );
             //printf("Deleting result: %d\n", r);
+#ifdef MULTITHREADED
+            gl_unlockMutex(m_dbMutex);
+#endif
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::removeSessionWithDeviceId()", e.errorMessage() );
@@ -877,7 +903,7 @@ namespace nsGlasslabSDK {
 
                 //printf("SQL: %s\n", s.c_str());
                 //int nRows =
-                executeDML( s.c_str() );
+                m_db.execDML( s.c_str() );
                 //printf("%d rows inserted\n", nRows);
                 //printf("------------------------------------\n");
             }
@@ -967,7 +993,13 @@ namespace nsGlasslabSDK {
             s += "';";
 
             printf("update SQL: %s\n", s.c_str());
-            int r = executeDML( s.c_str() );
+#ifdef MULTITHREADED
+            gl_lockMutex(m_dbMutex);
+#endif
+            int r = m_db.execDML( s.c_str() );
+#ifdef MULTITHREADED
+            gl_unlockMutex(m_dbMutex);
+#endif
             printf("Updating gameSessionEventOrder result: %d\n", r);
         }
         catch( CppSQLite3Exception e ) {
@@ -1231,7 +1263,7 @@ namespace nsGlasslabSDK {
 
                                 //printf("update SQL: %s\n", s.c_str());
                                 //int r =
-                                executeDML( s.c_str() );
+                                m_db.execDML( s.c_str() );
                                 //printf("Updating result: %d\n", r);
                                 
                                 // Perform the get request using the message information
@@ -1332,7 +1364,7 @@ namespace nsGlasslabSDK {
                 s += " (version char(256));";
 
                 printf("SQL: %s\n", s.c_str());
-                r = executeDML( s.c_str() );
+                r = m_db.execDML( s.c_str() );
                 
                 printf("Creating table: %d\n", r);
                 
@@ -1345,7 +1377,7 @@ namespace nsGlasslabSDK {
                 s += "');";
                 
                 printf("insert version SQL: %s\n", s.c_str());
-                int nRows = executeDML( s.c_str() );
+                int nRows = m_db.execDML( s.c_str() );
                 printf("%d rows inserted\n", nRows);
                 printf("------------------------------------\n");
             }
@@ -1369,7 +1401,7 @@ namespace nsGlasslabSDK {
                 s += ");";
                 
                 printf("SQL: %s\n", s.c_str());
-                r = executeDML( s.c_str() );
+                r = m_db.execDML( s.c_str() );
                 printf("Created table: %d", r);
                 printf("------------------------------------\n");
 
@@ -1402,7 +1434,7 @@ namespace nsGlasslabSDK {
 
                 printf("SQL: %s\n", s.c_str());
 
-                r = executeDML( s.c_str() );
+                r = m_db.execDML( s.c_str() );
 
                 printf("Created table: %d", r);
                 printf("------------------------------------\n");
@@ -1445,7 +1477,7 @@ namespace nsGlasslabSDK {
                 
                 printf("SQL: %s\n", s.c_str());
 
-                r = executeDML( s.c_str() );
+                r = m_db.execDML( s.c_str() );
 
                 printf("Dropped table: %d", r);
                 printf("------------------------------------\n");
@@ -1459,7 +1491,7 @@ namespace nsGlasslabSDK {
                 
                 printf("SQL: %s\n", s.c_str());
 
-                r = executeDML( s.c_str() );
+                r = m_db.execDML( s.c_str() );
 
                 printf("Dropped table: %d", r);
                 printf("------------------------------------\n");
@@ -1473,7 +1505,7 @@ namespace nsGlasslabSDK {
                 
                 printf("SQL: %s\n", s.c_str());
 
-                r = executeDML( s.c_str() );
+                r = m_db.execDML( s.c_str() );
 
                 
                 printf("Dropped table: %d", r);
@@ -1565,7 +1597,7 @@ namespace nsGlasslabSDK {
                 std::cout << "SQL: " << m_sql << std::endl;
                 string t2 = m_sql;
 
-                r = executeDML( t2.c_str() );
+                r = m_db.execDML( t2.c_str() );
 
                 printf( "result: %i\n", r );
 
@@ -1616,7 +1648,7 @@ namespace nsGlasslabSDK {
                 // Execute.
                 std::cout << "SQL: " << m_sql << std::endl;
                 t2 = m_sql;
-                r = executeDML( t2.c_str() );
+                r = m_db.execDML( t2.c_str() );
                 printf( "result: %i\n", r );
 
                 // Drop the current table
@@ -1624,7 +1656,7 @@ namespace nsGlasslabSDK {
                 // Execute.
                 std::cout << "SQL: " << m_sql << std::endl;
                 t2 = m_sql;
-                r = executeDML( t2.c_str() );
+                r = m_db.execDML( t2.c_str() );
                 printf( "result: %i\n", r );
 
                 // Alter the backup table to rename it as current
@@ -1633,7 +1665,7 @@ namespace nsGlasslabSDK {
                 // Execute.
                 std::cout << "SQL: " << m_sql << std::endl;
                 t2 = m_sql;
-                r = executeDML( t2.c_str() );
+                r = m_db.execDML( t2.c_str() );
                 printf( "result: %i\n", r );
 
                 // Print final results
@@ -1696,22 +1728,4 @@ namespace nsGlasslabSDK {
         gl_unlockMutex(m_dbMutex);
 #endif
     }
-
-    int DataSync::executeDML(const char* query)
-    {
-      int r;
-
-#ifdef MULTITHREADED
-      gl_lockMutex(m_dbMutex);
-#endif
-
-      r = m_db.execDML(query);
-
-#ifdef MULTITHREADED
-      gl_unlockMutex(m_dbMutex);
-#endif
-
-      return r;
-    }
-    
 }; // end nsGlasslabSDK
