@@ -327,11 +327,15 @@ namespace nsGlasslabSDK {
 #ifdef MULTITHREADED
 #ifdef WINTHREAD_ENABLED
             HANDLE m_jobQueueMutex;
+            public:
             HANDLE m_jobTriggerCondition;
+            private:
             static DWORD WINAPI Core::proc_asyncHTTPGetRequests(void* coreInstance);
 #elif defined(PTHREAD_ENABLED)
-        pthread_mutex_t m_jobQueueMutex;
+            pthread_mutex_t m_jobQueueMutex;
+            public:
         pthread_cond_t m_jobTriggerCondition;
+            private:
         static void* proc_asyncHTTPGetRequests(void*);
 #endif
         unsigned int JOB_ID_COUNT = 0;

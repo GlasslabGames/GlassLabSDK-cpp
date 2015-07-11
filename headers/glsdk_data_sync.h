@@ -81,6 +81,10 @@ namespace nsGlasslabSDK {
 
         // Function flushes MSG_QUEUE, converting all stored API events into HTTP requests on Core
         void flushMsgQ();
+        void doFlushMsgQ();
+#ifdef MULTITHREADED
+        bool queueFlushRequested = false;
+#endif
 
         // Function forces a database reset
         void resetDatabase();

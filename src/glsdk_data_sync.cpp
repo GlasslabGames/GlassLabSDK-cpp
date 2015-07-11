@@ -69,8 +69,11 @@ namespace nsGlasslabSDK {
         
         m_dbName = "";
         if( dbPath ) {
-            m_dbName += dbPath;
-            m_dbName += "/glasslabsdk.db";
+            m_dbName = dbPath;
+            if (dbPath != ":memory:")
+            {
+                m_dbName += "/glasslabsdk.db";
+            }
         } else {
 			char cwd[1024];
 #if __APPLE__
@@ -1008,6 +1011,17 @@ namespace nsGlasslabSDK {
         }
     }
 
+    void DataSync::doFlushMsgQ()
+    {
+#ifdef MULTITHREADED
+        queueFlushRequested = true;
+        gl_broadcastEvent(m_core->m_jobTriggerCondition);
+#else
+        flushMsgQ();
+#endif
+
+    }
+
     /**
      * SESSION operation.
      *
@@ -1267,7 +1281,8 @@ namespace nsGlasslabSDK {
                                 //printf("Updating result: %d\n", r);
                                 
                                 // Perform the get request using the message information
-                                m_core->do_httpGetRequest( apiPath, requestType, coreCB, postdata, contentType, rowId );
+                                //m_core->do_httpGetRequest( apiPath, requestType, coreCB, postdata, contentType, rowId );
+                                m_core->mf_httpGetRequest(apiPath, requestType, coreCB, postdata, contentType, rowId);
                                 
                                 requestsMade++;
                             }
@@ -1314,7 +1329,8 @@ namespace nsGlasslabSDK {
 #ifdef MULTITHREADED
         gl_unlockMutex(m_dbMutex);
 #endif
-        
+        queueFlushRequested = false;
+
         // End display out
         //std::cout << "reached the end of MSG_QUEUE" << std::endl;
         //std::cout << "-----------------------------------\n\n\n" << std::endl;

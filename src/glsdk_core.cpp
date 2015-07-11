@@ -1856,7 +1856,7 @@ namespace nsGlasslabSDK {
     }
     
     /**
-     * This function will force a call to flushMsgQ to ensure all requests are made to the server.
+     * This function will force a call to doFlushMsgQ to ensure all requests are made to the server.
      * This is a useful function for games that store the database in memory, making it a temporary
      * entity. Just before closing the application, it would be useful to flush the remaining events
      * stored.
@@ -1866,7 +1866,7 @@ namespace nsGlasslabSDK {
         
         // Only flush the queue if we are connected
         if( getConnectedState() ) {
-          m_dataSync->flushMsgQ();
+          m_dataSync->doFlushMsgQ();
         }
     }
 
@@ -1895,7 +1895,7 @@ namespace nsGlasslabSDK {
 
                 // Only flush the queue if we are connected
                 if (getConnectedState()) {
-                    m_dataSync->flushMsgQ();
+                    m_dataSync->doFlushMsgQ();
                 }
             }
             m_telemetryLastTime = currentTime;
@@ -1904,7 +1904,7 @@ namespace nsGlasslabSDK {
         /*else if( m_dataSync->getMessageTableSize() > config.eventsMaxSize ) {
             printf( "reached max number of events: %i with %f elapsed with %i\n", m_dataSync->getMessageTableSize(), secondsElapsed, config.eventsPeriodSecs );
             m_telemetryLastTime = currentTime;
-            m_dataSync->flushMsgQ();
+            m_dataSync->doFlushMsgQ();
 
             // In addition to flushing the message queue, do a POST on the player info
             savePlayerInfo();
@@ -2181,6 +2181,13 @@ namespace nsGlasslabSDK {
 
         for (;;)
         {
+            if (pCore->m_dataSync->queueFlushRequested)
+            {
+                gl_unlockMutex(pCore->m_jobQueueMutex);
+                pCore->m_dataSync->flushMsgQ();
+                gl_lockMutex(pCore->m_jobQueueMutex);
+            }
+
             while (pCore->m_httpGetJobs.size() > 0)
             {
               // Get the job at the front of the queue and remove it from the queue
@@ -2199,6 +2206,15 @@ namespace nsGlasslabSDK {
 
               // Delete the job data
               delete jobData;
+
+              // NOTE: Check is needed because some returns will trigger a data flush
+              // that must be dealt with synchronously with the request thread.
+              if (pCore->m_dataSync->queueFlushRequested)
+              {
+                  gl_unlockMutex(pCore->m_jobQueueMutex);
+                  pCore->m_dataSync->flushMsgQ();
+                  gl_lockMutex(pCore->m_jobQueueMutex);
+              }
 
               // lock job queue again to check size
               gl_lockMutex(pCore->m_jobQueueMutex);
