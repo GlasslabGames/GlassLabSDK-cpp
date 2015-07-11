@@ -27,7 +27,7 @@
 #include "glasslab_sdk.h"
 
 // Change this line to change the location of the DB. NULL defaults to your home folder or documents folder.
-#define DB_LOCATION NULL
+#define DB_LOCATION ":memory:"
 
 // A reference to the GlassLabSDK object, of which we'll create an instance
 GlasslabSDK *glsdk;

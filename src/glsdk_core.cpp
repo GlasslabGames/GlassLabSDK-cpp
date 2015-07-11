@@ -45,7 +45,9 @@ either expressed or implied, of the FreeBSD Project.
 #include "glsdk_config.h"
 
 #ifdef MULTITHREADED
+#ifdef PTHREAD_ENABLED
 #include <pthread.h>
+#endif
 #endif
 
 
