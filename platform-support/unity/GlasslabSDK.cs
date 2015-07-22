@@ -87,6 +87,7 @@ public class GlasslabSDK {
 	private ArrayList m_GetGameSave_CBList;
 	private ArrayList m_DeleteGameSave_CBList;
 	private ArrayList m_GetUserInfo_CBList;
+	private string DeviceID;
 
 	private char[]    mMsgChars;
 	private string    mMsgString;
@@ -117,9 +118,6 @@ public class GlasslabSDK {
 		SavePlayerInfo,
 		GetPlayerInfo,
 		SendTotalTimePlayed,
-		CreateMatch,
-        UpdateMatch,
-        PollMatches,
 		Event,
 		Error
 	};
@@ -169,9 +167,8 @@ public class GlasslabSDK {
 		m_GetGameSave_CBList = new ArrayList();
 		m_DeleteGameSave_CBList = new ArrayList();
 		m_GetUserInfo_CBList = new ArrayList();
-		m_CreateMatch_CBList = new ArrayList();
-		m_UpdateMatch_CBList = new ArrayList();
 		mInstSet = false;
+		DeviceID = SystemInfo.deviceUniqueIdentifier;
 		
 		mMsgCode   = 0;
 		mMsgChars  = new char[1024];
@@ -205,8 +202,6 @@ public class GlasslabSDK {
 	 * Optionally, you can specify a function to be called when the request is successful.
 	 */
 	public void Connect( string dataPath, string clientId, string uri = "", ResponseCallback cb = null ) {
-		string deviceUUID = SystemInfo.deviceUniqueIdentifier;
-		
 		if (cb != null) {
 			mConnect_CBList.Add (cb);
 		} else {
@@ -218,7 +213,7 @@ public class GlasslabSDK {
 			GlasslabSDK_Connect( mInst, clientId, uri );
 		}
 		else {
-			mInst = GlasslabSDK_CreateInstance (clientId, deviceUUID, dataPath, uri);
+			mInst = GlasslabSDK_CreateInstance (clientId, DeviceID, dataPath, uri);
 			mInstSet = true;
 
 #if UNITY_IPHONE
@@ -237,165 +232,152 @@ public class GlasslabSDK {
 		while(true) {
 			
 			// Get the message and response information
-			mMsgCode = GlasslabSDK_ReadTopMessageCode (mInst);
-			IntPtr responsePtr = GlasslabSDK_ReadTopMessageString (mInst);
-			#if UNITY_IPHONE
-			mMsgString = System.Runtime.InteropServices.Marshal.PtrToStringAuto( responsePtr );
-			#endif
-			#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-			mMsgString = System.Runtime.InteropServices.Marshal.PtrToStringAnsi( responsePtr );
-			#endif
+			if (mInstSet)	// Must call connect to initialize mInst and for this loop to do anything.
+			{
+				mMsgCode = GlasslabSDK_ReadTopMessageCode (mInst);
+				IntPtr responsePtr = GlasslabSDK_ReadTopMessageString (mInst);
+				#if UNITY_IPHONE
+				mMsgString = System.Runtime.InteropServices.Marshal.PtrToStringAuto( responsePtr );
+				#endif
+				#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+				mMsgString = System.Runtime.InteropServices.Marshal.PtrToStringAnsi( responsePtr );
+				#endif
 
-			// Intercept the responses and fire the desired callback functions.
-			switch(mMsgCode){
-			case (int)GlasslabSDK.Message.Connect: {
-				if(mConnect_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)mConnect_CBList[0];
-					mConnect_CBList.RemoveAt (0);
-					cb( mMsgString );
+				// Intercept the responses and fire the desired callback functions.
+				switch(mMsgCode){
+				case (int)GlasslabSDK.Message.Connect: {
+					if(mConnect_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)mConnect_CBList[0];
+						mConnect_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.DeviceUpdate: {
+					if(mDeviceUpdate_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)mDeviceUpdate_CBList[0];
+						mDeviceUpdate_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.AuthStatus: {
+					if(mAuthStatus_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)mAuthStatus_CBList[0];
+						mAuthStatus_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.Register: {
+					if(mRegister_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)mRegister_CBList[0];
+						mRegister_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.Login: {
+					if(mLogin_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)mLogin_CBList[0];
+						mLogin_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.Logout: {
+					if(mLogout_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)mLogout_CBList[0];
+						mLogout_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.Enroll: {
+					if(mEnroll_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)mEnroll_CBList[0];
+						mEnroll_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.Unenroll: {
+					if(mUnenroll_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)mUnenroll_CBList[0];
+						mUnenroll_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.GetCourses: {
+					if(mGetCourses_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)mGetCourses_CBList[0];
+						mGetCourses_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.StartSession: {
+					if(mStartSession_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)mStartSession_CBList[0];
+						mStartSession_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.EndSession: {
+					if(mEndSession_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)mEndSession_CBList[0];
+						mEndSession_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.GameSave: {
+					if(m_GameSave_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)m_GameSave_CBList[0];
+						m_GameSave_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.GetGameSave: {
+					if(m_GetGameSave_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)m_GetGameSave_CBList[0];
+						m_GetGameSave_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.DeleteGameSave: {
+					if(m_DeleteGameSave_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)m_DeleteGameSave_CBList[0];
+						m_DeleteGameSave_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				case (int)GlasslabSDK.Message.GetUserInfo: {
+					if(m_GetUserInfo_CBList.Count > 0){
+						ResponseCallback cb = (ResponseCallback)m_GetUserInfo_CBList[0];
+						m_GetUserInfo_CBList.RemoveAt (0);
+						cb( mMsgString );
+					}
+				} break;
+					
+				// do nothing
+				default: break;
 				}
-			} break;
 				
-			case (int)GlasslabSDK.Message.DeviceUpdate: {
-				if(mDeviceUpdate_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)mDeviceUpdate_CBList[0];
-					mDeviceUpdate_CBList.RemoveAt (0);
-					cb();
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.AuthStatus: {
-				if(mAuthStatus_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)mAuthStatus_CBList[0];
-					mAuthStatus_CBList.RemoveAt (0);
-					cb( mMsgString );
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.Register: {
-				if(mRegister_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)mRegister_CBList[0];
-					mRegister_CBList.RemoveAt (0);
-					cb();
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.Login: {
-				if(mLogin_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)mLogin_CBList[0];
-					mLogin_CBList.RemoveAt (0);
-					cb( mMsgString );
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.Logout: {
-				if(mLogout_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)mLogout_CBList[0];
-					mLogout_CBList.RemoveAt (0);
-					cb();
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.Enroll: {
-				if(mEnroll_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)mEnroll_CBList[0];
-					mEnroll_CBList.RemoveAt (0);
-					cb( mMsgString );
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.Unenroll: {
-				if(mUnenroll_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)mUnenroll_CBList[0];
-					mUnenroll_CBList.RemoveAt (0);
-					cb();
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.GetCourses: {
-				if(mGetCourses_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)mGetCourses_CBList[0];
-					mGetCourses_CBList.RemoveAt (0);
-					cb( mMsgString );
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.StartSession: {
-				if(mStartSession_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)mStartSession_CBList[0];
-					mStartSession_CBList.RemoveAt (0);
-					cb();
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.EndSession: {
-				if(mEndSession_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)mEndSession_CBList[0];
-					mEndSession_CBList.RemoveAt (0);
-					cb();
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.GameSave: {
-				if(m_GameSave_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)m_GameSave_CBList[0];
-					m_GameSave_CBList.RemoveAt (0);
-					cb();
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.GetGameSave: {
-				if(m_GetGameSave_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)m_GetGameSave_CBList[0];
-					m_GetGameSave_CBList.RemoveAt (0);
-					cb( mMsgString );
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.DeleteGameSave: {
-				if(m_DeleteGameSave_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)m_DeleteGameSave_CBList[0];
-					m_DeleteGameSave_CBList.RemoveAt (0);
-					cb( mMsgString );
-				}
-			} break;
-				
-			case (int)GlasslabSDK.Message.GetUserInfo: {
-				if(m_GetUserInfo_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)m_GetUserInfo_CBList[0];
-					m_GetUserInfo_CBList.RemoveAt (0);
-					cb( mMsgString );
-				}
-			} break;
+				// Always pop the message stack because we're done with this message.
+				GlasslabSDK_PopMessageStack (mInst);
 
-			case (int)GlasslabSDK.Message.CreateMatch: {
-				if(m_CreateMatch_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)m_CreateMatch_CBList[0];
-					m_CreateMatch_CBList.RemoveAt (0);
-					cb( mMsgString );
-				}
-			} break;
-
-			case (int)GlasslabSDK.Message.UpdateMatch: {
-				if(m_UpdateMatch_CBList.Count > 0){
-					ResponseCallback cb = (ResponseCallback)m_UpdateMatch_CBList[0];
-					m_UpdateMatch_CBList.RemoveAt (0);
-					cb( mMsgString );
-				}
-			} break;
-				
-			// do nothing
-			default: break;
+				// This can happen at a certain interval but we always attempt to send our
+				// telemetry to the server each loop. The SDK has throttling parameters that
+				// control when that information is sent, including min event count, max event
+				// count, and interval.
+				GlasslabSDK_SendTelemEvents( mInst );
 			}
-			
-			// Always pop the message stack because we're done with this message.
-			GlasslabSDK_PopMessageStack (mInst);
-
-			// This can happen at a certain interval but we always attempt to send our
-			// telemetry to the server each loop. The SDK has throttling parameters that
-			// control when that information is sent, including min event count, max event
-			// count, and interval.
-			GlasslabSDK_SendTelemEvents( mInst );
 			
 			// Sleep the thread for a short duration before firing again.
 			Thread.Sleep( 100 );
@@ -580,28 +562,6 @@ public class GlasslabSDK {
 		
 		GlasslabSDK_GetUserInfo( mInst );
 	}
-
-	public void CreateMatch(int opponentId, ResponseCallback cb = null) {
-		if (cb != null) {
-			m_CreateMatch_CBList.Add (cb);
-		} else {
-			ResponseCallback tempCB = ResponseCallback_Stub;
-			m_CreateMatch_CBList.Add (tempCB);
-		}
-		
-		GlasslabSDK_CreateMatch( mInst, opponentId );
-	}
-
-	public void UpdateMatch(int matchId, string data, int nextPlayerTurn, ResponseCallback cb = null) {
-		if (cb != null) {
-			m_UpdateMatch_CBList.Add (cb);
-		} else {
-			ResponseCallback tempCB = ResponseCallback_Stub;
-			m_UpdateMatch_CBList.Add (tempCB);
-		}
-		
-		GlasslabSDK_UpdateMatch( mInst, matchId, data, nextPlayerTurn );
-	}
 	
 	// ----------------------------
 	/**
@@ -748,21 +708,6 @@ public class GlasslabSDK {
 		
 		// Returned the parsed cookie
 		return parsedCookie;
-	}
-
-	public string GetMatchForId( int matchId ) {
-		// Get the match data
-		IntPtr matchPtr = GlasslabSDK_GetMatchForId( mInst, matchId );
-		string matchData = System.Runtime.InteropServices.Marshal.PtrToStringAuto( matchPtr );
-		
-		// Return the match data from SDK if it exists
-		if( matchData != null ) {
-			return matchData;
-		}
-		// Otherwise and empty string
-		else {
-			return "";
-		}
 	}
 	
 	// ----------------------------
@@ -1044,16 +989,6 @@ public class GlasslabSDK {
 	#endif
 
 	/**
-	 * Additional request functions used for multiplayer.
-	 */
-	[DllImport ("__Internal")]
-	private static extern void GlasslabSDK_CreateMatch(System.IntPtr inst, int opponentId);
-
-	[DllImport ("__Internal")]
-	private static extern void GlasslabSDK_UpdateMatch(System.IntPtr inst, int matchId, string data, int nextPlayerTurn);
-
-
-	/**
 	 * These functions allow for control over the game timer which is necessary for throttling
 	 * telemetry to the server.
 	 */
@@ -1096,9 +1031,6 @@ public class GlasslabSDK {
 	[DllImport ("GlassLabSDK")]
 	private static extern IntPtr GlasslabSDK_GetCookie(System.IntPtr inst);
 	#endif
-
-	[DllImport ("__Internal")]
-	private static extern IntPtr GlasslabSDK_GetMatchForId(System.IntPtr inst, int matchId);
 
 	/**
 	 * Variable and state setter functions.
