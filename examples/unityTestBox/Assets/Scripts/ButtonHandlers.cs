@@ -134,6 +134,7 @@ public class ButtonHandlers : MonoBehaviour
 		SDK = GlasslabSDK.Instance;
 	}
 
+	/** Handle threaded chages to NextText if necessary. */
 	void Update()
 	{
 		if (NextText != "")
@@ -146,9 +147,11 @@ public class ButtonHandlers : MonoBehaviour
 	/** Callback with the response string for all SDK commands. */
 	void CommandDone(string response = "")
 	{
+		// Since CommandDone() may be called in a thread, we set the new value here, and update the text box in Update()
 		NextText = Output.text + " " + response;
 	}
 
+	/** The next text to display in the output buffer. */
 	private string NextText = "";
 
 	/** The SDK instance. */
