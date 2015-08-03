@@ -65,7 +65,8 @@ namespace nsGlasslabSDK {
       : m_jobQueueMutex(PTHREAD_MUTEX_INITIALIZER),
       m_jobTriggerCondition(PTHREAD_COND_INITIALIZER),
 #endif
-      threadStarted(false)
+      threadStarted(false),
+      JOB_ID_COUNT(0)
 #endif
     {
         logMessage( "Initializing the SDK" );
@@ -2213,9 +2214,7 @@ namespace nsGlasslabSDK {
               // that must be dealt with synchronously with the request thread.
               if (pCore->m_dataSync->queueFlushRequested)
               {
-                  gl_unlockMutex(pCore->m_jobQueueMutex);
                   pCore->m_dataSync->flushMsgQ();
-                  gl_lockMutex(pCore->m_jobQueueMutex);
               }
 
               // lock job queue again to check size

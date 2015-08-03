@@ -109,7 +109,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>MULTITHREADED;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MULTITHREADED;WIN32;NDEBUG;_LIB;DLL_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -122,7 +122,7 @@
       <Command>xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.dll" "$(SolutionDir)\..\..\..\lib\win32\dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.exp" "$(SolutionDir)\..\..\..\lib\win32\dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)\..\..\..\lib\win32\dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.dll" "$(SolutionDir)\..\..\..\examples\win32\GlassLabSDK Example\Release_dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.dll" "$(SolutionDir)\..\..\..\examples\unity\Assets\Plugins"</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>SQLite_Static_Library.lib;jansson.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>jansson.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;Ws2_32.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\deps\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -130,7 +130,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;MULTITHREADED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>

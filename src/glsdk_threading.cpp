@@ -47,8 +47,15 @@ void gl_unlockMutex(
   #ifdef WINTHREAD_ENABLED
     if (!ReleaseMutex(mutex))
     {
-      std::cout << "Error occurred when releasing db mutex, Error code: " << GetLastError() << std::endl;
-      throw ERROR_UNHANDLED_EXCEPTION;
+        if (GetLastError() == 288)
+        {
+            std::cout << "WARNING: Attempted to release mutex that wasn't owned!" << std::endl;
+        }
+        else
+        {
+            std::cout << "Error occurred when releasing db mutex, Error code: " << GetLastError() << std::endl;
+            throw ERROR_UNHANDLED_EXCEPTION;
+        }
     }
   #elif defined(PTHREAD_ENABLED)
     pthread_mutex_unlock(&mutex);

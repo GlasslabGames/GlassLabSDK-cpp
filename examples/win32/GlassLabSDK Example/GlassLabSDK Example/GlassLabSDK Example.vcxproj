@@ -142,7 +142,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)/../../../deps/lib/win32;$(SolutionDir)/../../../lib/win32/dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SQLite_Static_Library.lib;GlassLabSDK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sqlite3.lib;GlassLabSDK.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)\..\..\..\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll" "$(SolutionDir)$(Configuration)"</Command>

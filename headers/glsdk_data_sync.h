@@ -83,7 +83,7 @@ namespace nsGlasslabSDK {
         void flushMsgQ();
         void doFlushMsgQ();
 #ifdef MULTITHREADED
-        bool queueFlushRequested = false;
+        bool queueFlushRequested;
 #endif
 
         // Function forces a database reset

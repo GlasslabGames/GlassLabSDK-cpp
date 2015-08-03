@@ -338,10 +338,10 @@ namespace nsGlasslabSDK {
             private:
         static void* proc_asyncHTTPGetRequests(void*);
 #endif
-        unsigned int JOB_ID_COUNT = 0;
+        unsigned int JOB_ID_COUNT;
         std::queue<HTTPThreadData*> m_httpGetJobs;
         int mf_startAsyncHTTPRequestThread(); // Starts the async http GET request processor thread. Returns 0 on success.
-        bool threadStarted = false;
+        bool threadStarted;
 #endif
     };
 };

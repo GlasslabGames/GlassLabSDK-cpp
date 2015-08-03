@@ -50,7 +50,11 @@ namespace nsGlasslabSDK {
     /**
      * DataSync constructor creates the SQLite database.
      */
-    DataSync::DataSync( Core* core, const char* dbPath ) {
+    DataSync::DataSync( Core* core, const char* dbPath )
+#ifdef MULTITHREADED
+      : queueFlushRequested(false)
+#endif
+    {
         // Set the Core SDK object
         m_core = core;
 
@@ -70,7 +74,7 @@ namespace nsGlasslabSDK {
         m_dbName = "";
         if( dbPath ) {
             m_dbName = dbPath;
-            if (dbPath != ":memory:")
+            if (strcmp(dbPath,":memory:") != 0)
             {
                 m_dbName += "/glasslabsdk.db";
             }
@@ -1328,8 +1332,8 @@ namespace nsGlasslabSDK {
 
 #ifdef MULTITHREADED
         gl_unlockMutex(m_dbMutex);
-#endif
         queueFlushRequested = false;
+#endif
 
         // End display out
         //std::cout << "reached the end of MSG_QUEUE" << std::endl;

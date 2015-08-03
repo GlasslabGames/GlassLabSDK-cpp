@@ -119,7 +119,9 @@ class GlasslabSDK {
     public:
 		/* TODO: figure out how to resolve this behavior... */
 		/* APIIMPORT required when compiling the DLL and running in DLL example */
-		/* APIIMPORT should be removed when running the lib example */
+#ifdef DLL_EXPORT
+        APIIMPORT
+#endif
         GlasslabSDK( const char* clientId, const char* deviceId, const char* dataPath = NULL, const char* uri = NULL );
 
         // Message stack functions
