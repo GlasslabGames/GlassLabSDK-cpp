@@ -62,8 +62,8 @@ namespace nsGlasslabSDK {
       : m_jobQueueMutex(NULL),
       m_jobTriggerCondition(NULL),
 #elif defined(PTHREAD_ENABLED)
-      : m_jobQueueMutex(PTHREAD_MUTEX_INITIALIZER),
-      m_jobTriggerCondition(PTHREAD_COND_INITIALIZER),
+      : m_jobQueueMutex((pthread_mutex_t) PTHREAD_MUTEX_INITIALIZER),
+      m_jobTriggerCondition((pthread_cond_t) PTHREAD_COND_INITIALIZER),
 #endif
       threadStarted(false),
       JOB_ID_COUNT(0)
