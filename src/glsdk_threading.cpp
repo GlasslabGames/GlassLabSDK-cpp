@@ -7,7 +7,7 @@ void gl_lockMutex(
   #ifdef WINTHREAD_ENABLED
     HANDLE &mutex
   #elif defined(PTHREAD_ENABLED)
-    pthread_mutex_t &mutex
+    GLMutex &mutex
   #endif
   )
 {
@@ -28,10 +28,10 @@ void gl_lockMutex(
   }
 
   #elif defined(PTHREAD_ENABLED)
-    int result = pthread_mutex_trylock(&mutex);
-    if (result != 0 && result != EDEADLK)
+    if (mutex.owner != pthread_self())
     {
-        result = pthread_mutex_lock(&mutex);
+        pthread_mutex_lock(&mutex.mutex);
+        mutex.owner = pthread_self();
     }
   #endif
 }
@@ -40,7 +40,7 @@ void gl_unlockMutex(
   #ifdef WINTHREAD_ENABLED
     HANDLE &mutex
   #elif defined(PTHREAD_ENABLED)
-    pthread_mutex_t &mutex
+    GLMutex &mutex
   #endif
   )
 {
@@ -58,7 +58,8 @@ void gl_unlockMutex(
         }
     }
   #elif defined(PTHREAD_ENABLED)
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(&mutex.mutex);
+    mutex.owner = NULL;
   #endif
 }
 
@@ -87,7 +88,7 @@ void gl_waitEvent(
   #ifdef WINTHREAD_ENABLED
     HANDLE &condition, HANDLE &mutex
   #elif defined(PTHREAD_ENABLED)
-    pthread_cond_t &condition, pthread_mutex_t &mutex
+    pthread_cond_t &condition, GLMutex &mutex
   #endif
 )
 {
@@ -109,7 +110,7 @@ void gl_waitEvent(
   }
   else
 #elif defined(PTHREAD_ENABLED)
-  int waitReturnCode = pthread_cond_wait(&condition, &mutex);
+  int waitReturnCode = pthread_cond_wait(&condition, &mutex.mutex);
   if (waitReturnCode != 0)
 #endif
   {
@@ -124,3 +125,18 @@ void gl_waitEvent(
     throw;
   }
 }
+
+
+#ifdef PTHREAD_ENABLED
+GLMutex::GLMutex() :
+mutex((pthread_mutex_t) PTHREAD_MUTEX_INITIALIZER),
+owner(NULL)
+{
+    pthread_mutex_init(&mutex, NULL);
+}
+
+GLMutex::~GLMutex()
+{
+    pthread_mutex_destroy(&mutex);
+}
+#endif

@@ -67,7 +67,7 @@ namespace nsGlasslabSDK {
           printf("CreateMutex m_dbMutex failed (%d)\n", GetLastError());
         }
 #elif defined(PTHREAD_ENABLED)
-        pthread_mutex_init(&m_dbMutex, NULL);
+        //pthread_mutex_init(&m_dbMutex, NULL);
 #endif
 #endif
         
@@ -101,7 +101,6 @@ namespace nsGlasslabSDK {
         if( !dbPath ) {
             m_dbName += "/glasslabsdk.db";
         }
-        printf( "database name: %s\n", m_dbName.c_str() );
         
         m_core->logMessage( "Database file:", m_dbName.c_str() );
         //std::cout << "Database file: " << result << std::endl;
@@ -1387,6 +1386,16 @@ namespace nsGlasslabSDK {
                 r = m_db.execDML( s.c_str() );
                 
                 printf("Creating table: %d\n", r);
+                
+                // Insert the SDK version
+                s = "SELECT * FROM sqlite_master WHERE type='table';";
+                CppSQLite3Query sessionQuery = m_db.execQuery( s.c_str() );
+                
+                printf("FOUND:\n");
+                for( int fld = 0; fld < sessionQuery.numFields(); fld++ ) {
+                    printf("%s | ", sessionQuery.fieldValue( fld ));
+                }
+                printf("\n");
                 
                 // Insert the SDK version
                 s = "";

@@ -11,11 +11,6 @@
 		977FDD071899A84C0058F3C9 /* GlasslabSDK_x86_64.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 977FDCE518974C760058F3C9 /* GlasslabSDK_x86_64.dylib */; };
 		978B0040189C978200012868 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978B003F189C978200012868 /* Foundation.framework */; };
 		978B006A189C998700012868 /* libGlasslabSDK.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 978B003D189C978200012868 /* libGlasslabSDK.a */; };
-		97C1049018B6F5D300438A58 /* CppSQLite3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C1048E18B6F5D300438A58 /* CppSQLite3.cpp */; };
-		97C1049118B6F5D300438A58 /* CppSQLite3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C1048E18B6F5D300438A58 /* CppSQLite3.cpp */; };
-		97C1049218B6F5D300438A58 /* CppSQLite3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C1048E18B6F5D300438A58 /* CppSQLite3.cpp */; };
-		97C1049318B6F5D300438A58 /* CppSQLite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C1048F18B6F5D300438A58 /* CppSQLite3.h */; };
-		97C1049418B6F5D300438A58 /* CppSQLite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C1048F18B6F5D300438A58 /* CppSQLite3.h */; };
 		97C104BD18B7D26C00438A58 /* glsdk_const.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C104BA18B7D26C00438A58 /* glsdk_const.h */; };
 		97C104BE18B7D26C00438A58 /* glsdk_const.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C104BA18B7D26C00438A58 /* glsdk_const.h */; };
 		97C104BF18B7D26C00438A58 /* glsdk_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 97C104BB18B7D26C00438A58 /* glsdk_core.h */; };
@@ -49,11 +44,19 @@
 		9EB604CF19D23A2F00AB25F6 /* glsdk_core.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC08519B772110002134A /* glsdk_core.cpp */; };
 		9EB604D019D23A2F00AB25F6 /* glsdk_data_sync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAFC08619B772110002134A /* glsdk_data_sync.cpp */; };
 		9ED082B818D2387B0089FD97 /* glsdk_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 9ED082B718D2387B0089FD97 /* glsdk_config.h */; };
+		C4982B981B8FCEBA004BB5D6 /* libevent_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC06F19B771CE0002134A /* libevent_core.a */; };
+		C4982B991B8FCEBA004BB5D6 /* libevent_extra.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07019B771CE0002134A /* libevent_extra.a */; };
+		C4982B9A1B8FCEBA004BB5D6 /* libevent_pthreads.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07119B771CE0002134A /* libevent_pthreads.a */; };
+		C4982B9B1B8FCEBA004BB5D6 /* libevent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07219B771CE0002134A /* libevent.a */; };
+		C4982B9C1B8FCEBA004BB5D6 /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07319B771CE0002134A /* libjansson.a */; };
+		C4982B9D1B8FCEBA004BB5D6 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EAFC07419B771CE0002134A /* libsqlite3.a */; };
+		C4982B9E1B8FCFA0004BB5D6 /* CppSQLite3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4982B961B8FCDA1004BB5D6 /* CppSQLite3.cpp */; };
 		C4B44EC11B4DE6F000B28545 /* glsdk_threading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4B44EC01B4DE6F000B28545 /* glsdk_threading.cpp */; };
 		C4B44EC21B4DE6F000B28545 /* glsdk_threading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4B44EC01B4DE6F000B28545 /* glsdk_threading.cpp */; };
 		C4B44EC31B4DE6F000B28545 /* glsdk_threading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4B44EC01B4DE6F000B28545 /* glsdk_threading.cpp */; };
 		C4B44EC51B4DE6FD00B28545 /* glsdk_threading.h in Headers */ = {isa = PBXBuildFile; fileRef = C4B44EC41B4DE6FD00B28545 /* glsdk_threading.h */; };
 		C4B44EC61B4DE6FD00B28545 /* glsdk_threading.h in Headers */ = {isa = PBXBuildFile; fileRef = C4B44EC41B4DE6FD00B28545 /* glsdk_threading.h */; };
+		C4F08A291B90FCB2002C2631 /* CppSQLite3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4982B961B8FCDA1004BB5D6 /* CppSQLite3.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -100,8 +103,6 @@
 		978B0043189C978300012868 /* GlasslabSDK armv7 (iOS Device)-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GlasslabSDK armv7 (iOS Device)-Prefix.pch"; sourceTree = "<group>"; };
 		978B004D189C978300012868 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		978B0050189C978300012868 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		97C1048E18B6F5D300438A58 /* CppSQLite3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CppSQLite3.cpp; path = "../../../deps/src/CppSQLite-master/src/CppSQLite3.cpp"; sourceTree = "<group>"; };
-		97C1048F18B6F5D300438A58 /* CppSQLite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CppSQLite3.h; path = "../../../deps/src/CppSQLite-master/src/CppSQLite3.h"; sourceTree = "<group>"; };
 		97C104BA18B7D26C00438A58 /* glsdk_const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glsdk_const.h; path = ../../../headers/glsdk_const.h; sourceTree = "<group>"; };
 		97C104BB18B7D26C00438A58 /* glsdk_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glsdk_core.h; path = ../../../headers/glsdk_core.h; sourceTree = "<group>"; };
 		97C104BC18B7D26C00438A58 /* glsdk_data_sync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glsdk_data_sync.h; path = ../../../headers/glsdk_data_sync.h; sourceTree = "<group>"; };
@@ -118,6 +119,8 @@
 		9EAFC08519B772110002134A /* glsdk_core.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glsdk_core.cpp; path = ../../../src/glsdk_core.cpp; sourceTree = "<group>"; };
 		9EAFC08619B772110002134A /* glsdk_data_sync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glsdk_data_sync.cpp; path = ../../../src/glsdk_data_sync.cpp; sourceTree = "<group>"; };
 		9ED082B718D2387B0089FD97 /* glsdk_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glsdk_config.h; path = ../../../headers/glsdk_config.h; sourceTree = "<group>"; };
+		C4982B961B8FCDA1004BB5D6 /* CppSQLite3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CppSQLite3.cpp; sourceTree = "<group>"; };
+		C4982B971B8FCDA1004BB5D6 /* CppSQLite3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CppSQLite3.h; sourceTree = "<group>"; };
 		C4B44EC01B4DE6F000B28545 /* glsdk_threading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glsdk_threading.cpp; path = ../../../src/glsdk_threading.cpp; sourceTree = "<group>"; };
 		C4B44EC41B4DE6FD00B28545 /* glsdk_threading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glsdk_threading.h; path = ../../../headers/glsdk_threading.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +130,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4982B981B8FCEBA004BB5D6 /* libevent_core.a in Frameworks */,
+				C4982B991B8FCEBA004BB5D6 /* libevent_extra.a in Frameworks */,
+				C4982B9A1B8FCEBA004BB5D6 /* libevent_pthreads.a in Frameworks */,
+				C4982B9B1B8FCEBA004BB5D6 /* libevent.a in Frameworks */,
+				C4982B9C1B8FCEBA004BB5D6 /* libjansson.a in Frameworks */,
+				C4982B9D1B8FCEBA004BB5D6 /* libsqlite3.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,14 +187,14 @@
 		976518E0189ACECA00459DA6 /* Dependant Libs */ = {
 			isa = PBXGroup;
 			children = (
+				C4982B961B8FCDA1004BB5D6 /* CppSQLite3.cpp */,
+				C4982B971B8FCDA1004BB5D6 /* CppSQLite3.h */,
 				9EAFC06F19B771CE0002134A /* libevent_core.a */,
 				9EAFC07019B771CE0002134A /* libevent_extra.a */,
 				9EAFC07119B771CE0002134A /* libevent_pthreads.a */,
 				9EAFC07219B771CE0002134A /* libevent.a */,
 				9EAFC07319B771CE0002134A /* libjansson.a */,
 				9EAFC07419B771CE0002134A /* libsqlite3.a */,
-				97C1048E18B6F5D300438A58 /* CppSQLite3.cpp */,
-				97C1048F18B6F5D300438A58 /* CppSQLite3.h */,
 			);
 			name = "Dependant Libs";
 			sourceTree = "<group>";
@@ -280,7 +289,6 @@
 				C4B44EC61B4DE6FD00B28545 /* glsdk_threading.h in Headers */,
 				97C104BE18B7D26C00438A58 /* glsdk_const.h in Headers */,
 				97C104C218B7D26C00438A58 /* glsdk_data_sync.h in Headers */,
-				97C1049418B6F5D300438A58 /* CppSQLite3.h in Headers */,
 				97C104C018B7D26C00438A58 /* glsdk_core.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,7 +301,6 @@
 				97C104BD18B7D26C00438A58 /* glsdk_const.h in Headers */,
 				C4B44EC51B4DE6FD00B28545 /* glsdk_threading.h in Headers */,
 				97C104C118B7D26C00438A58 /* glsdk_data_sync.h in Headers */,
-				97C1049318B6F5D300438A58 /* CppSQLite3.h in Headers */,
 				9ED082B818D2387B0089FD97 /* glsdk_config.h in Headers */,
 				97C104BF18B7D26C00438A58 /* glsdk_core.h in Headers */,
 			);
@@ -361,7 +368,7 @@
 		977FDCDD18974C760058F3C9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Glasslab;
 			};
 			buildConfigurationList = 977FDCE018974C760058F3C9 /* Build configuration list for PBXProject "GlasslabSDK" */;
@@ -388,12 +395,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4982B9E1B8FCFA0004BB5D6 /* CppSQLite3.cpp in Sources */,
 				C4B44EC21B4DE6F000B28545 /* glsdk_threading.cpp in Sources */,
 				9EB604CF19D23A2F00AB25F6 /* glsdk_core.cpp in Sources */,
 				9EB604D019D23A2F00AB25F6 /* glsdk_data_sync.cpp in Sources */,
 				9EAFC08119B771F30002134A /* glasslab_sdk_lib_export.cpp in Sources */,
 				9EAFC08219B771F30002134A /* glasslab_sdk.cpp in Sources */,
-				97C1049118B6F5D300438A58 /* CppSQLite3.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,12 +408,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4F08A291B90FCB2002C2631 /* CppSQLite3.cpp in Sources */,
 				C4B44EC11B4DE6F000B28545 /* glsdk_threading.cpp in Sources */,
 				9EAFC08819B772110002134A /* glsdk_data_sync.cpp in Sources */,
 				9EAFC08719B772110002134A /* glsdk_core.cpp in Sources */,
 				9EAFC06E19B771BE0002134A /* glasslab_sdk.cpp in Sources */,
 				9EAFC06D19B771BE0002134A /* glasslab_sdk_lib_export.cpp in Sources */,
-				97C1049018B6F5D300438A58 /* CppSQLite3.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,7 +426,6 @@
 				9EB604CD19D23A2000AB25F6 /* glsdk_core.cpp in Sources */,
 				9EAFC08319B772050002134A /* glasslab_sdk_lib_export.cpp in Sources */,
 				9EAFC08419B772050002134A /* glasslab_sdk.cpp in Sources */,
-				97C1049218B6F5D300438A58 /* CppSQLite3.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,24 +437,27 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				HEADER_SEARCH_PATHS = (
 					"../../deps/include/libevent/ios-osx",
 					../../deps/include/libsqlite,
 					../../deps/include/libjansson,
 					/usr/include,
+					"../../deps/src/CppSQLite-master/src",
+					"/Users/Jerry/GlassLabSDK-cpp/deps/src/CppSQLite-master/src",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"../../deps/lib/ios-osx",
+					"/Users/Jerry/GlassLabSDK-cpp/deps/lib/ios-osx",
 				);
-				MACH_O_TYPE = staticlib;
+				MACH_O_TYPE = mh_dylib;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = GlasslabSDK_i386;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
-				VALID_ARCHS = "i386 x86_64";
+				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
@@ -457,24 +466,27 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				HEADER_SEARCH_PATHS = (
 					"../../deps/include/libevent/ios-osx",
 					../../deps/include/libsqlite,
 					../../deps/include/libjansson,
 					/usr/include,
+					"../../deps/src/CppSQLite-master/src",
+					"/Users/Jerry/GlassLabSDK-cpp/deps/src/CppSQLite-master/src",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"../../deps/lib/ios-osx",
+					"/Users/Jerry/GlassLabSDK-cpp/deps/lib/ios-osx",
 				);
-				MACH_O_TYPE = staticlib;
+				MACH_O_TYPE = mh_dylib;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = GlasslabSDK_i386;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
-				VALID_ARCHS = "i386 x86_64";
+				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};
@@ -483,7 +495,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -498,7 +510,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					MULTITHREADED,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -507,7 +518,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
 				VALID_ARCHS = "i386 x86_64";
@@ -519,7 +530,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -530,14 +541,14 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = MULTITHREADED;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = macosx;
 				VALID_ARCHS = "i386 x86_64";
@@ -559,8 +570,8 @@
 					"$(inherited)",
 					"../../deps/lib/ios-osx",
 				);
-				MACH_O_TYPE = staticlib;
-				ONLY_ACTIVE_ARCH = YES;
+				MACH_O_TYPE = mh_dylib;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-L/usr/lib/sqlite3";
 				PRODUCT_NAME = GlasslabSDK_x86_64;
 				SDKROOT = macosx;
@@ -584,8 +595,8 @@
 					"$(inherited)",
 					"../../deps/lib/ios-osx",
 				);
-				MACH_O_TYPE = staticlib;
-				ONLY_ACTIVE_ARCH = YES;
+				MACH_O_TYPE = mh_dylib;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-L/usr/lib/sqlite3";
 				PRODUCT_NAME = GlasslabSDK_x86_64;
 				SDKROOT = macosx;
@@ -597,15 +608,8 @@
 		978B005D189C978300012868 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					arm64,
-					armv7s,
-					armv7,
-					x86_64,
-					i386,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -647,15 +651,8 @@
 		978B005E189C978300012868 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					arm64,
-					armv7s,
-					armv7,
-					x86_64,
-					i386,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;

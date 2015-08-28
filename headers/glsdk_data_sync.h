@@ -52,6 +52,7 @@ either expressed or implied, of the FreeBSD Project.
 
 #include "glasslab_sdk.h"
 #include "glsdk_threading.h"
+#include "CppSQLite3.h"
 
 namespace nsGlasslabSDK {
 
@@ -107,7 +108,7 @@ namespace nsGlasslabSDK {
   #ifdef WINTHREAD_ENABLED
         HANDLE m_dbMutex;
   #elif defined(PTHREAD_ENABLED)
-        pthread_mutex_t m_dbMutex;
+        GLMutex m_dbMutex;
   #endif
 #endif
 
