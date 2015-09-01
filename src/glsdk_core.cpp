@@ -62,7 +62,7 @@ namespace nsGlasslabSDK {
       : m_jobQueueMutex(NULL),
       m_jobTriggerCondition(NULL),
 #elif defined(PTHREAD_ENABLED)
-      : m_jobQueueMutex((pthread_mutex_t) PTHREAD_MUTEX_INITIALIZER),
+      : m_jobQueueMutex(),
       m_jobTriggerCondition((pthread_cond_t) PTHREAD_COND_INITIALIZER),
 #endif
       threadStarted(false),
@@ -2132,7 +2132,7 @@ namespace nsGlasslabSDK {
         if (thread == NULL)
 #elif defined(PTHREAD_ENABLED)
         pthread_t thread;
-        pthread_mutex_init(&m_jobQueueMutex, NULL);
+        //pthread_mutex_init(&m_jobQueueMutex, NULL);
         
         // Attempt thread creation
         int pthreadError;
@@ -2153,8 +2153,6 @@ namespace nsGlasslabSDK {
 
 #ifdef WINTHREAD_ENABLED
             CloseHandle(m_jobQueueMutex);
-#elif defined(PTHREAD_ENABLED)
-            pthread_mutex_destroy(&m_jobQueueMutex);
 #endif
             
             return 2;

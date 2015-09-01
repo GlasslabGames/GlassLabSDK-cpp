@@ -50,8 +50,7 @@ either expressed or implied, of the FreeBSD Project.
 // The classes below are not exported
 #pragma GCC visibility push(hidden)
 
-using namespace std;
-
+#include <string>
 #include "glsdk_const.h"
 #include "glsdk_data_sync.h"
 #include "glsdk_threading.h"
@@ -332,11 +331,11 @@ namespace nsGlasslabSDK {
             private:
             static DWORD WINAPI Core::proc_asyncHTTPGetRequests(void* coreInstance);
 #elif defined(PTHREAD_ENABLED)
-            pthread_mutex_t m_jobQueueMutex;
+            GLMutex m_jobQueueMutex;
             public:
-        pthread_cond_t m_jobTriggerCondition;
+            pthread_cond_t m_jobTriggerCondition;
             private:
-        static void* proc_asyncHTTPGetRequests(void*);
+            static void* proc_asyncHTTPGetRequests(void*);
 #endif
         unsigned int JOB_ID_COUNT;
         std::queue<HTTPThreadData*> m_httpGetJobs;
