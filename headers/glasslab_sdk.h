@@ -94,7 +94,7 @@ typedef unsigned __int64 uint64_t;
 #include <jansson.h>
 // http://www.sqlite.org/
 #include <sqlite3.h>
-#include <CppSQLite3.h>
+#include "CppSQLite3.h"
 
 // The classes below are exported
 #pragma GCC visibility push(default)
