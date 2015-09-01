@@ -1,8 +1,11 @@
 examples/unity/Library/*
 examples/unity/Build/*
-projects/osx/GlasslabSDK.xcodeproj/xcuserdata/Jerry.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
-projects/osx/GlasslabSDK.xcodeproj/xcuserdata/Jerry.xcuserdatad/xcschemes/GlasslabSDK armv7 (iOS Device).xcscheme
-projects/osx/GlasslabSDK.xcodeproj/xcuserdata/Jerry.xcuserdatad/xcschemes/GlasslabSDK i386.xcscheme
-projects/osx/GlasslabSDK.xcodeproj/xcuserdata/Jerry.xcuserdatad/xcschemes/GlasslabSDK.xcscheme
-projects/osx/GlasslabSDK.xcodeproj/xcuserdata/Jerry.xcuserdatad/xcschemes/xcschememanagement.plist
-GlasslabSDK.xccheckout
+*.obj
+*.tlog
+*.sdf
+*.opensdf
+*.exp
+*.unsuccessfulbuild
+*.lastbuildstate
+*.user
+*.idb

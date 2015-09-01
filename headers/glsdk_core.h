@@ -50,11 +50,10 @@ either expressed or implied, of the FreeBSD Project.
 // The classes below are not exported
 #pragma GCC visibility push(hidden)
 
-using namespace std;
-
+#include <string>
 #include "glsdk_const.h"
 #include "glsdk_data_sync.h"
-
+#include "glsdk_threading.h"
 
 namespace nsGlasslabSDK {
 
@@ -257,8 +256,6 @@ namespace nsGlasslabSDK {
             // Debug logging pop
             const char* popLogQueue();
 
-        
-            pthread_cond_t m_jobTriggerCondition = PTHREAD_COND_INITIALIZER;
         private:
             // SDK object
             GlasslabSDK* m_sdk;
@@ -326,12 +323,25 @@ namespace nsGlasslabSDK {
             map<int, const char*> m_matchesMap;
         
             // Async http GET request queue
-            pthread_mutex_t m_jobQueueMutex = PTHREAD_MUTEX_INITIALIZER;
-            pthread_cond_t m_jobTriggerCondition = PTHREAD_COND_INITIALIZER;
-            std::queue<HTTPThreadData*> m_httpGetJobs;
+#ifdef MULTITHREADED
+#ifdef WINTHREAD_ENABLED
+            HANDLE m_jobQueueMutex;
+            public:
+            HANDLE m_jobTriggerCondition;
+            private:
+            static DWORD WINAPI Core::proc_asyncHTTPGetRequests(void* coreInstance);
+#elif defined(PTHREAD_ENABLED)
+            GLMutex m_jobQueueMutex;
+            public:
+            pthread_cond_t m_jobTriggerCondition;
+            private:
             static void* proc_asyncHTTPGetRequests(void*);
-            int mf_startAsyncHTTPRequestThread(); // Starts the async http GET request processor thread. Returns 0 on success.
-            bool threadStarted = false;
+#endif
+        unsigned int JOB_ID_COUNT;
+        std::queue<HTTPThreadData*> m_httpGetJobs;
+        int mf_startAsyncHTTPRequestThread(); // Starts the async http GET request processor thread. Returns 0 on success.
+        bool threadStarted;
+#endif
     };
 };
 #pragma GCC visibility pop

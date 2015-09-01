@@ -36,7 +36,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v90</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <PlatformToolset>v90</PlatformToolset>
@@ -66,10 +66,10 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_dll|Win32'">$(Configuration)\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_lib|Win32'">$(Configuration)\</IntDir>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/lib/win32;$(LibraryPath)</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libevent/win32;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/include/pthread;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libevent/win32;$(IncludePath)</IncludePath>
     <SourcePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(SourcePath)</SourcePath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release_dll|Win32'">$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libevent/win32;$(IncludePath)</IncludePath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release_lib|Win32'">$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libevent/win32;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release_lib|Win32'">$(SolutionDir)/../../../deps/include/pthread;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libevent/win32;$(IncludePath)</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release_dll|Win32'">$(SolutionDir)/../../../deps/lib/win32;$(LibraryPath)</LibraryPath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release_lib|Win32'">$(SolutionDir)/../../../deps/lib/win32;$(LibraryPath)</LibraryPath>
     <SourcePath Condition="'$(Configuration)|$(Platform)'=='Release_dll|Win32'">C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\src;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(SourcePath)</SourcePath>
@@ -85,7 +85,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include/libevent/win32;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;MULTITHREADED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -95,14 +95,21 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <PostBuildEvent>
-      <Command>"C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/bin/lib.exe" /OUT:$(SolutionDir)/../../../lib/win32/GlassLabSDK.lib $(SolutionDir)$(Configuration)\GlassLabSDKLib.lib $(SolutionDir)/../../../deps/lib/jansson.lib $(SolutionDir)/../../../deps/lib/libevent.lib $(SolutionDir)/../../../deps/lib/libevent_core.lib $(SolutionDir)/../../../deps/lib/libevent_extras.lib $(SolutionDir)/../../../deps/lib/SQLite_Static_Library.lib</Command>
+      <Command>"$(VCInstallDir)bin/lib.exe" /OUT:"$(SolutionDir)../../../lib/win32/lib/GlassLabSDK.lib" "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)../../../deps/lib/$(Platform)/jansson.lib" "$(SolutionDir)../../../deps/lib/$(Platform)/libevent.lib" "$(SolutionDir)../../../deps/lib/$(Platform)/libevent_core.lib" "$(SolutionDir)../../../deps/lib/$(Platform)/libevent_extras.lib" "$(SolutionDir)../../../deps/lib/$(Platform)/SQLite_Static_Library.lib"</Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+    </Lib>
+    <Link>
+      <AdditionalDependencies>jansson.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;pthreadVC2.lib;SQLite_Static_Library.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_dll|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MULTITHREADED;WIN32;NDEBUG;_LIB;DLL_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -115,7 +122,7 @@
       <Command>xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.dll" "$(SolutionDir)\..\..\..\lib\win32\dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.exp" "$(SolutionDir)\..\..\..\lib\win32\dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)\..\..\..\lib\win32\dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.dll" "$(SolutionDir)\..\..\..\examples\win32\GlassLabSDK Example\Release_dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.dll" "$(SolutionDir)\..\..\..\examples\unity\Assets\Plugins"</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>SQLite_Static_Library.lib;jansson.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>jansson.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;Ws2_32.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\deps\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -123,7 +130,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;MULTITHREADED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -133,7 +140,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include/libevent/win32;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
-      <Command>"C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/bin/lib.exe" /OUT:"$(SolutionDir)\..\..\..\lib\win32\lib\GlassLabSDK.lib" "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\jansson.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent_core.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent_extras.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\SQLite_Static_Library.lib"</Command>
+      <Command>"$(VCInstallDir)bin/lib.exe" /OUT:"$(SolutionDir)\..\..\..\lib\win32\lib\GlassLabSDK.lib" "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\jansson.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent_core.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent_extras.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\SQLite_Static_Library.lib"</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>SQLite_Static_Library.lib;jansson.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -157,6 +164,7 @@
     <ClInclude Include="..\..\..\..\headers\glsdk_const.h" />
     <ClInclude Include="..\..\..\..\headers\glsdk_core.h" />
     <ClInclude Include="..\..\..\..\headers\glsdk_data_sync.h" />
+    <ClInclude Include="..\..\..\..\headers\glsdk_threading.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -167,6 +175,7 @@
     <ClCompile Include="..\..\..\..\src\glasslab_sdk_lib_export.cpp" />
     <ClCompile Include="..\..\..\..\src\glsdk_core.cpp" />
     <ClCompile Include="..\..\..\..\src\glsdk_data_sync.cpp" />
+    <ClCompile Include="..\..\..\..\src\glsdk_threading.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

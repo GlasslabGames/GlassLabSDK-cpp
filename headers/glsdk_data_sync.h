@@ -50,6 +50,10 @@ either expressed or implied, of the FreeBSD Project.
 #define MSG_QUEUE_TABLE_NAME "MSG_QUEUE"
 #define SESSION_TABLE_NAME "SESSION"
 
+#include "glasslab_sdk.h"
+#include "glsdk_threading.h"
+#include "CppSQLite3.h"
+
 namespace nsGlasslabSDK {
 
     class Core;
@@ -77,11 +81,11 @@ namespace nsGlasslabSDK {
         int getGameSessionEventOrderFromDeviceId( string deviceId );
 
         // Function flushes MSG_QUEUE, converting all stored API events into HTTP requests on Core
+        void flushMsgQ();
         void doFlushMsgQ();
 #ifdef MULTITHREADED
-        bool queueFlushRequested = false;
+        bool queueFlushRequested;
 #endif
-        void flushMsgQ();
 
         // Function forces a database reset
         void resetDatabase();
@@ -99,6 +103,14 @@ namespace nsGlasslabSDK {
         void migrateTable( string table, string newSchema );
         // Debug display
         void displayTable( string table );
+
+#ifdef MULTITHREADED
+  #ifdef WINTHREAD_ENABLED
+        HANDLE m_dbMutex;
+  #elif defined(PTHREAD_ENABLED)
+        GLMutex m_dbMutex;
+  #endif
+#endif
 
         // Helper function for creating a new SESSION entry
         string createNewSessionEntry( string deviceId, string cookie, string gameSessionId );

@@ -50,14 +50,34 @@ namespace nsGlasslabSDK {
     /**
      * DataSync constructor creates the SQLite database.
      */
-    DataSync::DataSync( Core* core, const char* dbPath ) {
+    DataSync::DataSync( Core* core, const char* dbPath )
+#ifdef MULTITHREADED
+      : queueFlushRequested(false)
+#endif
+    {
         // Set the Core SDK object
         m_core = core;
+
+        // Init mutexes, if necessary
+#ifdef MULTITHREADED
+#ifdef WINTHREAD_ENABLED
+        m_dbMutex = CreateMutex(NULL, FALSE, NULL);
+        if (m_dbMutex == NULL)
+        {
+          printf("CreateMutex m_dbMutex failed (%d)\n", GetLastError());
+        }
+#elif defined(PTHREAD_ENABLED)
+        //pthread_mutex_init(&m_dbMutex, NULL);
+#endif
+#endif
         
         m_dbName = "";
         if( dbPath ) {
-            m_dbName += dbPath;
-            m_dbName += "/glasslabsdk.db";
+            m_dbName = dbPath;
+            if (strcmp(dbPath,":memory:") != 0)
+            {
+                m_dbName += "/glasslabsdk.db";
+            }
         } else {
 			char cwd[1024];
 #if __APPLE__
@@ -81,10 +101,9 @@ namespace nsGlasslabSDK {
         if( !dbPath ) {
             m_dbName += "/glasslabsdk.db";
         }
-        printf( "database name: %s\n", m_dbName.c_str() );
         
         m_core->logMessage( "Database file:", m_dbName.c_str() );
-        //cout << "Database file: " << result << endl;
+        //std::cout << "Database file: " << result << std::endl;
 
         // Open the database
         initDB();
@@ -100,14 +119,20 @@ namespace nsGlasslabSDK {
      * DataSync deconstructor closes the SQLite database
      */
     DataSync::~DataSync() {
-        cout << endl << endl << "Destructor has been called" << endl << endl;
+      std::cout << std::endl << std::endl << "Destructor has been called" << std::endl << std::endl;
+#ifdef MULTITHREADED
+      gl_lockMutex(m_dbMutex);
+#endif
         try {
             m_db.close();
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::~DataSync()", e.errorMessage() );
-            //cout << "Exception in ~DataSync() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in ~DataSync() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
     }
 
     
@@ -118,9 +143,12 @@ namespace nsGlasslabSDK {
      * Function opens the SQLite database.
      */
     void DataSync::initDB() {
+#ifdef MULTITHREADED
+      gl_lockMutex(m_dbMutex);
+#endif
         try {
-            cout << "SQLite Version...: " << m_db.SQLiteVersion() << endl;
-            cout << "------------------------------------" << endl;
+            std::cout << "SQLite Version...: " << m_db.SQLiteVersion() << std::endl;
+            std::cout << "------------------------------------" << std::endl;
 
             // Open the database
             m_db.open( m_dbName.c_str() );
@@ -145,10 +173,13 @@ namespace nsGlasslabSDK {
             */
         }
         catch( CppSQLite3Exception e ) {
-            cout << "error opening the database: " << e.errorMessage() << endl;
+            std::cout << "error opening the database: " << e.errorMessage() << std::endl;
             m_core->displayError( "DataSync::initDB()", e.errorMessage() );
-            //cout << "Exception in initDB() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in initDB() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+          gl_unlockMutex(m_dbMutex);
+#endif
     }
 
     bool isVersionOutOfDate( string currentVersion, string newVersion ) {
@@ -163,7 +194,7 @@ namespace nsGlasslabSDK {
                 second = string::npos;
             }
 
-            int major, minor, revision = 0;
+            int major = 0, minor = 0, revision = 0;
             
             if( first != string::npos ) {
                 major = (int)atoi( currentVersion.substr( 0, first ).c_str() );
@@ -195,7 +226,7 @@ namespace nsGlasslabSDK {
                 second = string::npos;
             }
 
-            int major, minor, revision = 0;
+            int major = 0, minor = 0, revision = 0;
             
             if( first != string::npos ) {
                 major = (int)atoi( newVersion.substr( 0, first ).c_str() );
@@ -239,6 +270,9 @@ namespace nsGlasslabSDK {
      * If there is a version mismatch, the database is reset.
      */
     void DataSync::validateSDKVersion() {
+#ifdef MULTITHREADED
+      gl_lockMutex(m_dbMutex);
+#endif
         try {
             printf("SDK_VERSION: %s\n", SDK_VERSION);
 
@@ -281,7 +315,9 @@ namespace nsGlasslabSDK {
                         s += SDK_VERSION;
                         s += "'";
                         printf("SQL: %s\n", s.c_str());
-                        int nRows = m_db.execDML( s.c_str() );
+                        
+                        int nRows = m_db.execDML(s.c_str());
+
                         printf("%d rows updated in %s\n", nRows, CONFIG_TABLE_NAME);
 
                         // Indicate that a table migration is required
@@ -298,19 +334,22 @@ namespace nsGlasslabSDK {
 
             // Reset the tables if we need to
             if( resetTables ) {
-                cout << "Need to reset all tables." << endl;
+                std::cout << "Need to reset all tables." << std::endl;
                 dropTables();
             }
             // Or migrate the contents if we need to
             else if( performMigration ) {
-                cout << "We need to perform a data migration, schemas may have changed." << endl;
+                std::cout << "We need to perform a data migration, schemas may have changed." << std::endl;
                 migrateTables();
             }
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::validateSDKVersion()", e.errorMessage() );
-            //cout << "Exception in validateSDKVersion() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in validateSDKVersion() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
     }
 
 
@@ -324,9 +363,9 @@ namespace nsGlasslabSDK {
      */
     void DataSync::addToMsgQ( string deviceId, string path, string requestType, string coreCB, string postdata, const char* contentType ) {
         if( m_messageTableSize > DB_MESSAGE_CAP ) {
-            cout << "------------------------------------" << endl;
-            cout << "Database has reached a message cap! No longer inserting events!" << endl;
-            cout << "------------------------------------" << endl;
+            std::cout << "------------------------------------" << std::endl;
+            std::cout << "Database has reached a message cap! No longer inserting events!" << std::endl;
+            std::cout << "------------------------------------" << std::endl;
             return;
         }
 
@@ -335,7 +374,7 @@ namespace nsGlasslabSDK {
         string s = "";
         
         try {
-            cout << "------------------------------------" << endl;
+            //std::cout << "------------------------------------" << std::endl;
             s += "INSERT INTO ";
             s += MSG_QUEUE_TABLE_NAME;
             s += " (deviceId, path, requestType, coreCB, postdata, contentType, status) VALUES ('";
@@ -406,13 +445,20 @@ namespace nsGlasslabSDK {
             }
             s += ", 'ready'";
             s += ");";
-        
+            
+#ifdef MULTITHREADED
+            gl_lockMutex(m_dbMutex);
+#endif
             // Execute the insertion
-            printf("SQL: %s\n", s.c_str());
-            nRows = m_db.execDML( s.c_str() );
-            printf("%d rows inserted\n", nRows);
-            printf("------------------------------------\n");
-
+            //printf("SQL: %s\n", s.c_str());
+            nRows = m_db.execDML(s.c_str());
+            //printf("%d rows inserted\n", nRows);
+            //printf("------------------------------------\n");
+            
+#ifdef MULTITHREADED
+            gl_unlockMutex(m_dbMutex);
+#endif
+            
             // Set the message table size
             m_messageTableSize++;
             
@@ -421,7 +467,7 @@ namespace nsGlasslabSDK {
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::addToMsgQ()", e.errorMessage() );
-            cout << "Exception in addToMsgQ() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in addToMsgQ() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
     }
 
@@ -443,9 +489,16 @@ namespace nsGlasslabSDK {
             s += " where id=";
             sprintf(t, "%d", rowId);
             s += t;
-            //cout << "delete SQL: " << m_sql << endl;
+            
+#ifdef MULTITHREADED
+            gl_lockMutex(m_dbMutex);
+#endif
+            //std::cout << "delete SQL: " << m_sql << std::endl;
             r = m_db.execDML( s.c_str() );
             //printf("Deleting result: %d\n", r);
+#ifdef MULTITHREADED
+            gl_unlockMutex(m_dbMutex);
+#endif
 
             // Set the message table size
             m_messageTableSize--;
@@ -465,7 +518,7 @@ namespace nsGlasslabSDK {
         try {
             // If the status is success, remove the entry from the db
             if( status == "success" ) {
-                //cout << "Successful request, removing entry from database." << endl;
+                //std::cout << "Successful request, removing entry from database." << std::endl;
                 removeFromMsgQ( rowId );
             }
             // Else, update the entry's status field
@@ -484,14 +537,21 @@ namespace nsGlasslabSDK {
                 s += t;
                 s += "'";
                 
+#ifdef MULTITHREADED
+                gl_lockMutex(m_dbMutex);
+#endif
                 //printf("update SQL: %s\n", s.c_str());
-                int r = m_db.execDML( s.c_str() );
-                //cout << "Updating result: " << r << endl;
+                //int r =
+                m_db.execDML( s.c_str() );
+                //std::cout << "Updating result: " << r << std::endl;
+#ifdef MULTITHREADED
+                gl_unlockMutex(m_dbMutex);
+#endif
             }
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::updateMessageStatus()", e.errorMessage() );
-            //cout << "Exception in updateMessageStatus() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in updateMessageStatus() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
     }
 
@@ -514,7 +574,10 @@ namespace nsGlasslabSDK {
      * Updates an existing session with a valid cookie, or inserts a new entry with
      * the cookie and deviceId.
      */
-    void DataSync::updateSessionTableWithCookie( string deviceId, string cookie ) {
+    void DataSync::updateSessionTableWithCookie(string deviceId, string cookie) {
+#ifdef MULTITHREADED
+      gl_lockMutex(m_dbMutex);
+#endif
         // string stream
         string s = "";
         
@@ -573,8 +636,11 @@ namespace nsGlasslabSDK {
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::updateSessionTableWithCookie()", e.errorMessage() );
-            //cout << "Exception in updateSessionTableWithCookie() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in updateSessionTableWithCookie() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
     }
 
     /**
@@ -583,7 +649,10 @@ namespace nsGlasslabSDK {
      * Updates an existing session with a valid gameSessionId, or inserts a new entry with
      * the gameSessionId and deviceId.
      */
-    void DataSync::updateSessionTableWithGameSessionId( string deviceId, string gameSessionId ) {
+    void DataSync::updateSessionTableWithGameSessionId(string deviceId, string gameSessionId) {
+#ifdef MULTITHREADED
+      gl_lockMutex(m_dbMutex);
+#endif
         // string stream
         string s;
         
@@ -604,18 +673,18 @@ namespace nsGlasslabSDK {
 
             // If the count is 0, insert a new entry
             if( sessionQuery.eof() ) {
-                cout << "EMPTY: need to insert\n";
+                std::cout << "EMPTY: need to insert\n";
 
                 // Create a new session entry
                 s = createNewSessionEntry( deviceId, "", gameSessionId );
             }
             // Otherwise, update an existing entry
             else {
-                cout << "FOUND:\n";
+                std::cout << "FOUND:\n";
                 for ( int fld = 0; fld < sessionQuery.numFields(); fld++ ) {
-                    cout << sessionQuery.fieldValue( fld ) << " | ";
+                    std::cout << sessionQuery.fieldValue( fld ) << " | ";
                 }
-                cout << endl;
+                std::cout << std::endl;
 
                 // Update
                 printf("UPDATING %s with gameSessionId: %s\n", SESSION_TABLE_NAME, gameSessionId.c_str());
@@ -643,8 +712,11 @@ namespace nsGlasslabSDK {
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::updateSessionTableWithGameSessionId()", e.errorMessage() );
-            //cout << "Exception in updateSessionTableWithGameSessionId() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in updateSessionTableWithGameSessionId() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
     }
 
     /**
@@ -653,7 +725,10 @@ namespace nsGlasslabSDK {
      * Updates an existing session with a replacement deviceId, or inserts a new entry with
      * the deviceId. The new deviceId will include a player handle, in the form of "handle_deviceId".
      */
-    void DataSync::updateSessionTableWithPlayerHandle( string deviceIdWithHandle ) {
+    void DataSync::updateSessionTableWithPlayerHandle(string deviceIdWithHandle) {
+#ifdef MULTITHREADED
+      gl_lockMutex(m_dbMutex);
+#endif
         // string stream
         string s = "";
         
@@ -696,8 +771,11 @@ namespace nsGlasslabSDK {
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::updateSessionTableWithPlayerHandle()", e.errorMessage() );
-            //cout << "Exception in updateSessionTableWithPlayerHandle() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in updateSessionTableWithPlayerHandle() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
     }
 
     /**
@@ -714,13 +792,20 @@ namespace nsGlasslabSDK {
             s += " where deviceId='";
             s += deviceId;
             s += "';";
+#ifdef MULTITHREADED
+            gl_lockMutex(m_dbMutex);
+#endif
             //printf("delete SQL: %s\n", s.c_str());
-            int r = m_db.execDML( s.c_str() );
+            //int r =
+            m_db.execDML( s.c_str() );
             //printf("Deleting result: %d\n", r);
+#ifdef MULTITHREADED
+            gl_unlockMutex(m_dbMutex);
+#endif
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::removeSessionWithDeviceId()", e.errorMessage() );
-            //cout << "Exception in removeSessionWithDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in removeSessionWithDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
     }
 
@@ -729,7 +814,10 @@ namespace nsGlasslabSDK {
      *
      * Gets a cookie stored in the SESSION table using the deviceId.
      */
-    const char* DataSync::getCookieFromDeviceId( string deviceId ) {
+    const char* DataSync::getCookieFromDeviceId(string deviceId) {
+#ifdef MULTITHREADED
+      gl_lockMutex(m_dbMutex);
+#endif
         // string stream
         string s = "";
         string cookie = "";
@@ -749,23 +837,30 @@ namespace nsGlasslabSDK {
             // If the count is 0, no entry exists with deviceId, return an empty string
             // The empty string will tell the next get request that we need one to store
             if( sessionQuery.eof() ) {
-                cout << "no cookie exists for " << deviceId.c_str() << endl;
+                std::cout << "no cookie exists for " << deviceId.c_str() << std::endl;
             }
             // An entry does exist, grab the cookie and return it
             else {
                 cookie = sessionQuery.fieldValue( 0 );
-                cout << "cookie exists for " << deviceId.c_str() << ": " << cookie.c_str() << endl;
+                std::cout << "cookie exists for " << deviceId.c_str() << ": " << cookie.c_str() << std::endl;
             }
             
             // Finalize the query
             sessionQuery.finalize();
-            
+
+#ifdef MULTITHREADED
+            gl_unlockMutex(m_dbMutex);
+#endif
+
             return cookie.c_str();
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::getCookieFromDeviceId()", e.errorMessage() );
-            //cout << "Exception in getCookieFromDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in getCookieFromDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
 
         // Return empty string by default
         return "";
@@ -776,7 +871,10 @@ namespace nsGlasslabSDK {
      *
      * Updates an existing session with player info, including total time played and the current game session event order.
      */
-    void DataSync::updatePlayerInfoFromDeviceId( string deviceId, float totalTimePlayed, int gameSessionEventOrder ) {
+    void DataSync::updatePlayerInfoFromDeviceId(string deviceId, float totalTimePlayed, int gameSessionEventOrder) {
+#ifdef MULTITHREADED
+      gl_lockMutex(m_dbMutex);
+#endif
         // string stream
         string s;
         char t[255];
@@ -790,7 +888,7 @@ namespace nsGlasslabSDK {
             s += " where deviceId='";
             s += deviceId;
             s += "';";
-            //cout << "session SQL: " << m_sql << endl;
+            //std::cout << "session SQL: " << m_sql << std::endl;
             CppSQLite3Query sessionQuery = m_db.execQuery( s.c_str() );
 
             // Only continue if an entry exists
@@ -810,7 +908,8 @@ namespace nsGlasslabSDK {
                 s += "'";
 
                 //printf("SQL: %s\n", s.c_str());
-                int nRows = m_db.execDML( s.c_str() );
+                //int nRows =
+                m_db.execDML( s.c_str() );
                 //printf("%d rows inserted\n", nRows);
                 //printf("------------------------------------\n");
             }
@@ -820,8 +919,11 @@ namespace nsGlasslabSDK {
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::updatePlayerInfoFromDeviceId()", e.errorMessage() );
-            //cout << "Exception in updatePlayerInfoFromDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in updatePlayerInfoFromDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
     }
 
     /**
@@ -829,9 +931,12 @@ namespace nsGlasslabSDK {
      *
      * Get the totalTimePlayed stored in the SESSION table using the deviceId.
      */
-    float DataSync::getTotalTimePlayedFromDeviceId( string deviceId ) {
-        try {
-            float totalTimePlayed = 0;
+    float DataSync::getTotalTimePlayedFromDeviceId(string deviceId) {
+#ifdef MULTITHREADED
+      gl_lockMutex(m_dbMutex);
+#endif
+      try {
+            float totalTimePlayed = 0.0;
             string s = "";
             // Look for an existing entry with the device Id
             s += "select * from ";
@@ -843,23 +948,30 @@ namespace nsGlasslabSDK {
 
             // If the count is 0, no entry exists with deviceId, return a default value of 0.0
             if( sessionQuery.eof() ) {
-                cout << "totalTimePlayed does not exist for " << deviceId.c_str() << endl;
+                std::cout << "totalTimePlayed does not exist for " << deviceId.c_str() << std::endl;
             }
             // An entry does exist, grab the totalTimePlayed and return it
             else if( sessionQuery.fieldValue( 4 ) != NULL ) {
                 totalTimePlayed = atof( sessionQuery.fieldValue( 4 ) );
-                cout << "totalTimePlayed exists for " << deviceId.c_str() << ": " << totalTimePlayed << endl;
+                std::cout << "totalTimePlayed exists for " << deviceId.c_str() << ": " << totalTimePlayed << std::endl;
             }
             
             // Finalize the query
             sessionQuery.finalize();
 
+#ifdef MULTITHREADED
+            gl_unlockMutex(m_dbMutex);
+#endif
+
             return totalTimePlayed;
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::getTotalTimePlayedFromDeviceId()", e.errorMessage() );
-            //cout << "Exception in getTotalTimePlayedFromDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in getTotalTimePlayedFromDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
 
         // Return 0.0 by default
         return 0.0;
@@ -887,13 +999,30 @@ namespace nsGlasslabSDK {
             s += "';";
 
             printf("update SQL: %s\n", s.c_str());
+#ifdef MULTITHREADED
+            gl_lockMutex(m_dbMutex);
+#endif
             int r = m_db.execDML( s.c_str() );
+#ifdef MULTITHREADED
+            gl_unlockMutex(m_dbMutex);
+#endif
             printf("Updating gameSessionEventOrder result: %d\n", r);
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::updateGameSessionEventOrderWithDeviceId()", e.errorMessage() );
-            //cout << "Exception in updateGameSessionEventOrderWithDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in updateGameSessionEventOrderWithDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+    }
+
+    void DataSync::doFlushMsgQ()
+    {
+#ifdef MULTITHREADED
+        queueFlushRequested = true;
+        gl_broadcastEvent(m_core->m_jobTriggerCondition);
+#else
+        flushMsgQ();
+#endif
+
     }
 
     /**
@@ -901,7 +1030,10 @@ namespace nsGlasslabSDK {
      *
      * Get the gameSessionEventOrder stored in the SESSION table using the deviceId.
      */
-    int DataSync::getGameSessionEventOrderFromDeviceId( string deviceId ) {
+    int DataSync::getGameSessionEventOrderFromDeviceId(string deviceId) {
+#ifdef MULTITHREADED
+      gl_lockMutex(m_dbMutex);
+#endif
         try {
             int gameSessionEventOrder = 1;
             string s = "";
@@ -915,23 +1047,30 @@ namespace nsGlasslabSDK {
 
             // If the count is 0, no entry exists with deviceId, return a default value of 1
             if( sessionQuery.eof() ) {
-                //cout << "gameSessionEventOrder does not exist for " << deviceId.c_str() << endl;
+                //std::cout << "gameSessionEventOrder does not exist for " << deviceId.c_str() << std::endl;
             }
             // An entry does exist, grab the gameSessionEventOrder and return it
             else if( sessionQuery.fieldValue( 3 ) != NULL ) {
                 gameSessionEventOrder = atoi( sessionQuery.fieldValue( 3 ) );
-                //cout << "gameSessionEventOrder exists for " << deviceId.c_str() << ": " << gameSessionEventOrder << endl;
+                //std::cout << "gameSessionEventOrder exists for " << deviceId.c_str() << ": " << gameSessionEventOrder << std::endl;
             }
             
             // Finalize the query
             sessionQuery.finalize();
-            
+
+#ifdef MULTITHREADED
+            gl_unlockMutex(m_dbMutex);
+#endif
+
             return gameSessionEventOrder;
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::getGameSessionEventOrderFromDeviceId()", e.errorMessage() );
-            //cout << "Exception in getGameSessionEventOrderFromDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in getGameSessionEventOrderFromDeviceId() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
 
         // Return 1 by default
         return 1;
@@ -1002,21 +1141,10 @@ namespace nsGlasslabSDK {
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::createNewSessionEntry()", e.errorMessage() );
-            //cout << "Exception in createNewSessionEntry() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in createNewSessionEntry() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
         
         return "";
-    }
-
-    void DataSync::doFlushMsgQ()
-    {
-#ifdef MULTITHREADED
-        queueFlushRequested = true;
-        pthread_cond_broadcast(&m_core->m_jobTriggerCondition);
-#else
-        flushMsgQ();
-#endif
-        
     }
 
     //--------------------------------------
@@ -1028,11 +1156,14 @@ namespace nsGlasslabSDK {
      * it remains in the queue or is removed.
      */
     void DataSync::flushMsgQ() {
+#ifdef MULTITHREADED
+      gl_lockMutex(m_dbMutex);
+#endif
         try {
             char t[255];
             string s;
             // Begin display out
-            //cout << "\n\n\n-----------------------------------" << endl;
+            //std::cout << "\n\n\n-----------------------------------" << std::endl;
             //printf("\tflushing MSG_QUEUE: %d\n", m_messageTableSize);
             //m_core->logMessage( "flushing MSG_QUEUE" );
 
@@ -1094,7 +1225,7 @@ namespace nsGlasslabSDK {
 
                         // Only continue if the cookie exists
                         if( cookie.c_str() != NULL ) {
-                            //cout << "cookie is: " << cookie << endl;
+                            //std::cout << "cookie is: " << cookie << std::endl;
                             
                             // Get the path from MSG_QUEUE
                             string apiPath = msgQuery.fieldValue( 2 );
@@ -1103,7 +1234,7 @@ namespace nsGlasslabSDK {
                                 requestType = msgQuery.fieldValue( 3 );
                             }
                             string coreCB = msgQuery.fieldValue( 4 );
-                            //cout << "coreCB is: " << coreCB << endl;
+                            //std::cout << "coreCB is: " << coreCB << std::endl;
 
                             // We only care about startsession, endsession, and sendtelemetry
                             // Anything else should be ignored (and not present in the queue)
@@ -1114,7 +1245,7 @@ namespace nsGlasslabSDK {
                             // Finalize the query
                             sessionQuery.finalize();
                             
-                            //cout << "game session Id is: " << gameSessionId << endl;
+                            //std::cout << "game session Id is: " << gameSessionId << std::endl;
                             if( strstr( apiPath.c_str(), API_POST_SESSION_START ) ||
                                 strstr( apiPath.c_str(), API_POST_SAVEGAME ) ||
                                 strstr( apiPath.c_str(), API_POST_PLAYERINFO ) ||
@@ -1148,11 +1279,13 @@ namespace nsGlasslabSDK {
                                 s += t;
 
                                 //printf("update SQL: %s\n", s.c_str());
-                                int r = m_db.execDML( s.c_str() );
+                                //int r =
+                                m_db.execDML( s.c_str() );
                                 //printf("Updating result: %d\n", r);
                                 
                                 // Perform the get request using the message information
-                                m_core->mf_httpGetRequest( apiPath, requestType, coreCB, postdata, contentType, rowId );
+                                //m_core->do_httpGetRequest( apiPath, requestType, coreCB, postdata, contentType, rowId );
+                                m_core->mf_httpGetRequest(apiPath, requestType, coreCB, postdata, contentType, rowId);
                                 
                                 requestsMade++;
                             }
@@ -1164,11 +1297,11 @@ namespace nsGlasslabSDK {
                             }
                         }
                         else {
-                            cout << "cookie for device Id: " << deviceId << " is NULL" << endl;
+                            std::cout << "cookie for device Id: " << deviceId << " is NULL" << std::endl;
                         }
                     }
                     else {
-                        cout << "no entry from SESSION was found for: " << deviceId << "..." << endl;
+                        std::cout << "no entry from SESSION was found for: " << deviceId << "..." << std::endl;
                     }
                 }
                 else {
@@ -1179,12 +1312,12 @@ namespace nsGlasslabSDK {
                 // If we've exceeded the max number of requests we can make per flush, exit
                 // The next batch of events will be picked up during the next flush
                 if( requestsMade >= m_core->config.eventsMaxSize ) {
-                    cout << "Exceeded max number of requests we can make, exit." << endl;
+                    std::cout << "Exceeded max number of requests we can make, exit." << std::endl;
                     break;
                 }
 
                 // Get the next row in MSG_QUEUE
-                //cout << "--- get the next entry in MSG_QUEUE ---" << endl;
+                //std::cout << "--- get the next entry in MSG_QUEUE ---" << std::endl;
                 msgQuery.nextRow();
             }
             
@@ -1193,13 +1326,17 @@ namespace nsGlasslabSDK {
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::flushMsgQ()", e.errorMessage() );
-            //cout << "Exception in flushMsgQ() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in flushMsgQ() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
-        
+
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
         queueFlushRequested = false;
+#endif
+
         // End display out
-        //cout << "reached the end of MSG_QUEUE" << endl;
-        //cout << "-----------------------------------\n\n\n" << endl;
+        //std::cout << "reached the end of MSG_QUEUE" << std::endl;
+        //std::cout << "-----------------------------------\n\n\n" << std::endl;
         //m_core->logMessage( "reached the end of MSG_QUEUE" );
         //displayTable( MSG_QUEUE_TABLE_NAME );
         //displayTable( SESSION_TABLE_NAME );
@@ -1228,9 +1365,16 @@ namespace nsGlasslabSDK {
         int r;
         string s;
 
+#ifdef MULTITHREADED
+        gl_lockMutex(m_dbMutex);
+#endif
         try {
             // Create the CONFIG table
-            if( !m_db.tableExists( CONFIG_TABLE_NAME ) ){
+
+            bool configExists = m_db.tableExists(CONFIG_TABLE_NAME);
+            bool queueExists = m_db.tableExists(MSG_QUEUE_TABLE_NAME);
+            bool sessionExists = m_db.tableExists(SESSION_TABLE_NAME);
+            if (!configExists){
                 printf("\nCreating %s table\n", CONFIG_TABLE_NAME);
    
                 s = "";
@@ -1242,6 +1386,16 @@ namespace nsGlasslabSDK {
                 r = m_db.execDML( s.c_str() );
                 
                 printf("Creating table: %d\n", r);
+                
+                // Insert the SDK version
+                s = "SELECT * FROM sqlite_master WHERE type='table';";
+                CppSQLite3Query sessionQuery = m_db.execQuery( s.c_str() );
+                
+                printf("FOUND:\n");
+                for( int fld = 0; fld < sessionQuery.numFields(); fld++ ) {
+                    printf("%s | ", sessionQuery.fieldValue( fld ));
+                }
+                printf("\n");
                 
                 // Insert the SDK version
                 s = "";
@@ -1258,7 +1412,7 @@ namespace nsGlasslabSDK {
             }
 
             // Create the MSG_QUEUE table
-            if( !m_db.tableExists( MSG_QUEUE_TABLE_NAME ) ) {
+            if (!queueExists) {
                 printf("\nCreating %s table\n", MSG_QUEUE_TABLE_NAME);
                 
                 s = "";
@@ -1293,7 +1447,7 @@ namespace nsGlasslabSDK {
             }
             
             // Create the SESSION table
-            if( !m_db.tableExists( SESSION_TABLE_NAME ) ) {
+            if( !sessionExists ) {
                 printf("\nCreating %s table\n", SESSION_TABLE_NAME);
                 
                 s = "";
@@ -1308,7 +1462,9 @@ namespace nsGlasslabSDK {
                 s += ");";
 
                 printf("SQL: %s\n", s.c_str());
+
                 r = m_db.execDML( s.c_str() );
+
                 printf("Created table: %d", r);
                 printf("------------------------------------\n");
             }
@@ -1320,8 +1476,11 @@ namespace nsGlasslabSDK {
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::createTables()", e.errorMessage() );
-            //cout << "Exception in createTables() " << e.errorMessage() << " (" << e.errorCode() << ") " << CppSQLite3Exception::errorCodeAsString( e.errorCode() ) << endl;
+            //std::cout << "Exception in createTables() " << e.errorMessage() << " (" << e.errorCode() << ") " << CppSQLite3Exception::errorCodeAsString( e.errorCode() ) << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
     }
 
     /**
@@ -1330,40 +1489,53 @@ namespace nsGlasslabSDK {
     void DataSync::dropTables() {
         int r;
         string s;
-        
+
+#ifdef MULTITHREADED
+        gl_lockMutex(m_dbMutex);
+#endif
         try {
+          bool configExists = m_db.tableExists(CONFIG_TABLE_NAME);
+          bool queueExists = m_db.tableExists(MSG_QUEUE_TABLE_NAME);
+          bool sessionExists = m_db.tableExists(SESSION_TABLE_NAME);
+
             // Drop the CONFIG table
-            if( m_db.tableExists( CONFIG_TABLE_NAME ) ) {
+          if (configExists) {
                 printf("\nDropping %s table\n", CONFIG_TABLE_NAME);
                 
                 s = "drop table " CONFIG_TABLE_NAME ";";
                 
                 printf("SQL: %s\n", s.c_str());
+
                 r = m_db.execDML( s.c_str() );
+
                 printf("Dropped table: %d", r);
                 printf("------------------------------------\n");
             }
             
             // Drop the MSG_QUEUE table
-            if( m_db.tableExists( MSG_QUEUE_TABLE_NAME ) ) {
+          if (queueExists) {
                 printf("\nDropping %s table\n", MSG_QUEUE_TABLE_NAME);
                 
                 s = "drop table " MSG_QUEUE_TABLE_NAME ";";
                 
                 printf("SQL: %s\n", s.c_str());
+
                 r = m_db.execDML( s.c_str() );
+
                 printf("Dropped table: %d", r);
                 printf("------------------------------------\n");
             }
             
             // Drop the SESSION table
-            if( m_db.tableExists( SESSION_TABLE_NAME ) ) {
+          if (sessionExists) {
                 printf("\nDropping %s table\n", SESSION_TABLE_NAME);
                 
                 s = "drop table " SESSION_TABLE_NAME ";";
                 
                 printf("SQL: %s\n", s.c_str());
+
                 r = m_db.execDML( s.c_str() );
+
                 
                 printf("Dropped table: %d", r);
                 printf("------------------------------------\n");
@@ -1371,8 +1543,11 @@ namespace nsGlasslabSDK {
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::dropTables()", e.errorMessage() );
-            //cout << "Exception in dropTables() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in dropTables() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
     }
 
     /**
@@ -1416,7 +1591,7 @@ namespace nsGlasslabSDK {
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::migrateTables()", e.errorMessage() );
-            //cout << "Exception in migrateTables() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in migrateTables() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
     }
 
@@ -1435,24 +1610,31 @@ namespace nsGlasslabSDK {
     void DataSync::migrateTable( string table, string newSchema ) {
         int r;
         string m_sql;
-        
+
+#ifdef MULTITHREADED
+        gl_lockMutex(m_dbMutex);
+#endif
         try {
             // Migrate the contents of the parameter table if it exists
-            if( m_db.tableExists( table.c_str() ) ) {
-                cout << endl << "Migrating " << table << " table" << endl;
+            bool tableExists = m_db.tableExists(table.c_str());
+            if( tableExists ) {
+                std::cout << std::endl << "Migrating " << table << " table" << std::endl;
 
                 // Create the backup table with the desired schema
                 m_sql = newSchema;
                 // Execute.
-                cout << "SQL: " << m_sql << endl;
+                std::cout << "SQL: " << m_sql << std::endl;
                 string t2 = m_sql;
+
                 r = m_db.execDML( t2.c_str() );
+
                 printf( "result: %i\n", r );
 
 
                 // Get the schema for both the backup and current tables
                 m_sql = "select * from " + table + "_backup;";
                 CppSQLite3Query backup_q = m_db.execQuery( m_sql.c_str() );
+
                 m_sql = "select * from " + table + ";";
                 CppSQLite3Query current_q = m_db.execQuery( m_sql.c_str() );
 
@@ -1493,7 +1675,7 @@ namespace nsGlasslabSDK {
                 m_sql = "insert into " + table + "_backup "
                     "select " + insertString + " from " + table + ";";
                 // Execute.
-                cout << "SQL: " << m_sql << endl;
+                std::cout << "SQL: " << m_sql << std::endl;
                 t2 = m_sql;
                 r = m_db.execDML( t2.c_str() );
                 printf( "result: %i\n", r );
@@ -1501,7 +1683,7 @@ namespace nsGlasslabSDK {
                 // Drop the current table
                 m_sql = "drop table " + table + ";";
                 // Execute.
-                cout << "SQL: " << m_sql << endl;
+                std::cout << "SQL: " << m_sql << std::endl;
                 t2 = m_sql;
                 r = m_db.execDML( t2.c_str() );
                 printf( "result: %i\n", r );
@@ -1510,59 +1692,68 @@ namespace nsGlasslabSDK {
                 m_sql = "alter table " + table + "_backup "
                     "rename to " + table + ";";
                 // Execute.
-                cout << "SQL: " << m_sql << endl;
+                std::cout << "SQL: " << m_sql << std::endl;
                 t2 = m_sql;
                 r = m_db.execDML( t2.c_str() );
                 printf( "result: %i\n", r );
 
                 // Print final results
-                cout << "Migration results:" << r << endl;
-                cout << "------------------------------------" << endl;
+                std::cout << "Migration results:" << r << std::endl;
+                std::cout << "------------------------------------" << std::endl;
             }
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::migrateTable()", e.errorMessage() );
-            //cout << "Exception in migrateTable() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in migrateTable() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
     }
 
     /**
      * Functions displays the contents of a given table.
      */
-    void DataSync::displayTable( string table ) {
+    void DataSync::displayTable(string table) {
 #ifdef VERBOSE
+#ifdef MULTITHREADED
+        gl_lockMutex(m_dbMutex);
+#endif
+
         try {
             // display out
-            cout << "------------------------------------" << endl;
-            cout << "all rows in " << table << endl;
+            std::cout << "------------------------------------" << std::endl;
+            std::cout << "all rows in " << table << std::endl;
             int fld;
             
             string s = "select * from " + table + ";";
-            //cout << "SQL: " << m_sql << endl;
+            //std::cout << "SQL: " << m_sql << std::endl;
             CppSQLite3Query q = m_db.execQuery( s.c_str() );
             
             for( fld = 0; fld < q.numFields(); fld++ )
             {
-                cout << q.fieldName( fld ) << "(" << q.fieldDataType( fld ) << ")|";
+                std::cout << q.fieldName( fld ) << "(" << q.fieldDataType( fld ) << ")|";
             }
-            cout << endl;
+            std::cout << std::endl;
             
             while( !q.eof() )
             {
                 for( int i = 0; i < q.numFields(); i++ ) {
-                    cout << q.fieldValue( i ) << " | ";
+                    std::cout << q.fieldValue( i ) << " | ";
                 }
-                cout << "END" << endl;
+                std::cout << "END" << std::endl;
                 q.nextRow();
             }
             q.finalize();
-            cout << "------------------------------------" << endl;
+            std::cout << "------------------------------------" << std::endl;
         }
         catch( CppSQLite3Exception e ) {
             m_core->displayError( "DataSync::displayTable()", e.errorMessage() );
-            //cout << "Exception in displayTable() " << e.errorMessage() << " (" << e.errorCode() << ")" << endl;
+            //std::cout << "Exception in displayTable() " << e.errorMessage() << " (" << e.errorCode() << ")" << std::endl;
         }
+#ifdef MULTITHREADED
+        gl_unlockMutex(m_dbMutex);
+#endif
 #endif
     }
-    
 }; // end nsGlasslabSDK

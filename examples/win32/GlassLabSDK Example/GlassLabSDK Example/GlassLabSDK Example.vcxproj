@@ -25,7 +25,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v90</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_lib|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -65,12 +65,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include;$(SolutionDir)/../../../deps/include/libevent;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)/../../../lib/win32;$(SolutionDir)/../../../deps/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include;$(SolutionDir)/../../../deps/include/libevent/win32;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)/../../../lib/win32/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_lib|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include/libevent/win32;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)/../../../deps/include/pthread;$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include/libevent/win32;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)/../../../lib/win32/lib;$(SolutionDir)/../../../deps/lib/win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_dll|Win32'">
@@ -142,7 +142,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)/../../../deps/lib/win32;$(SolutionDir)/../../../lib/win32/dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SQLite_Static_Library.lib;GlassLabSDK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sqlite3.lib;GlassLabSDK.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)\..\..\..\projects\win32\GlassLabSDK\Release_dll\GlassLabSDK.dll" "$(SolutionDir)$(Configuration)"</Command>
