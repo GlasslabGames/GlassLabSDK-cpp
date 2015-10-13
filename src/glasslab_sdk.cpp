@@ -48,6 +48,11 @@ GlasslabSDK::GlasslabSDK( const char* clientId, const char* deviceId, const char
     m_core = new nsGlasslabSDK::Core( this, clientId, deviceId, dataPath, uri );
 }
 
+/** Alternative constructor where the derived class builds the core. */
+GlasslabSDK::GlasslabSDK(nsGlasslabSDK::Core* core)
+{
+	m_core = core;
+}
 
 nsGlasslabSDK::Const::Status GlasslabSDK::getLastStatus() {
     if( m_core != NULL ) return m_core->getLastStatus();

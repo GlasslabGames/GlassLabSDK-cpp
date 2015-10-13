@@ -224,6 +224,7 @@ namespace nsGlasslabSDK {
             void setPlaySessionId( const char* sessionId );
             void setSessionId( const char* sessionId );
             void setAutoSessionManagement( bool state );
+            void setLogging( bool on );
         
             // Getters
             const char* getConnectUri();
@@ -246,9 +247,9 @@ namespace nsGlasslabSDK {
             glUserInfo userInfo;
 
             // Helper function for displaying warnings and errors
-            void displayWarning( string location, string warning );
-            void displayError( string location, string error );
-            void logMessage( const char* message, const char* data = NULL );
+            virtual void displayWarning( string location, string warning );
+            virtual void displayError( string location, string error );
+            virtual void logMessage( const char* message, const char* data = NULL );
             bool mf_checkForJSONErrors( json_t* root );
 
             // Debug logging pop
@@ -312,6 +313,9 @@ namespace nsGlasslabSDK {
 
             // Debug logging queue
             std::queue<std::string> m_logQueue;
+
+            // Whether to allow logging or not.
+            bool m_allowLogging;
 
             // Helper function for callback setup
             void mf_setupCallbacks();

@@ -51,6 +51,9 @@ either expressed or implied, of the FreeBSD Project.
 
 namespace nsGlasslabSDK {
 
+/** The maximum number of messages to keep in the log queue. */
+static const size_t MAX_LOG_QUEUE = 50;
+
     /**
      * Core constructor to setup the SDK and perform an initial connection to the server.
      */
@@ -85,6 +88,7 @@ namespace nsGlasslabSDK {
         m_userInfo      = NULL;
         m_playerInfo    = json_object();
         m_autoSessionManagement = true;
+        m_allowLogging = true;
         
         // Set JSON telemetry objects
         m_telemEvents       = json_array();
@@ -1344,9 +1348,9 @@ namespace nsGlasslabSDK {
         //sdkInfo.core->logMessage( "---------------------------" );
         //sdkInfo.core->logMessage( "deleteSaveGame_Done", json );
         //sdkInfo.core->logMessage( "---------------------------" );
-        printf( "\n---------------------------\n" );
-        printf( "deleteSaveGame_Done: %s", json );
-        printf( "\n---------------------------\n" );
+        //printf( "\n---------------------------\n" );
+        //printf( "deleteSaveGame_Done: %s", json );
+        //printf( "\n---------------------------\n" );
         
         json_t* root;
         json_error_t error;
@@ -1389,9 +1393,9 @@ namespace nsGlasslabSDK {
         //sdkInfo.core->logMessage( "---------------------------" );
         //sdkInfo.core->logMessage( "saveAchievement_Done", json );
         //sdkInfo.core->logMessage( "---------------------------" );
-        printf( "\n---------------------------\n" );
-        printf( "saveAchievement_Done: %s", json );
-        printf( "\n---------------------------\n" );
+        //printf( "\n---------------------------\n" );
+        //printf( "saveAchievement_Done: %s", json );
+        //printf( "\n---------------------------\n" );
         
         json_t* root;
         json_error_t error;
@@ -1567,9 +1571,9 @@ namespace nsGlasslabSDK {
         //sdkInfo.core->logMessage( "---------------------------" );
         //sdkInfo.core->logMessage( "createMatch_Done", json );
         //sdkInfo.core->logMessage( "---------------------------" );
-        printf( "\n---------------------------\n" );
-        printf( "createMatch_Done: %s", json );
-        printf( "\n---------------------------\n" );
+        //printf( "\n---------------------------\n" );
+        //printf( "createMatch_Done: %s", json );
+        //printf( "\n---------------------------\n" );
         
         json_t* root;
         json_error_t error;
@@ -1645,9 +1649,9 @@ namespace nsGlasslabSDK {
         //sdkInfo.core->logMessage( "---------------------------" );
         //sdkInfo.core->logMessage( "updateMatch_Done", json );
         //sdkInfo.core->logMessage( "---------------------------" );
-        printf( "\n---------------------------\n" );
-        printf( "updateMatch_Done: %s", json );
-        printf( "\n---------------------------\n" );
+        //printf( "\n---------------------------\n" );
+        //printf( "updateMatch_Done: %s", json );
+        //printf( "\n---------------------------\n" );
         
         json_t* root;
         json_error_t error;
@@ -1698,9 +1702,9 @@ namespace nsGlasslabSDK {
         //sdkInfo.core->logMessage( "---------------------------" );
         //sdkInfo.core->logMessage( "pollMatches_Done", json );
         //sdkInfo.core->logMessage( "---------------------------" );
-        printf( "\n---------------------------\n" );
-        printf( "pollMatches_Done: %s", json );
-        printf( "\n---------------------------\n" );
+        //printf( "\n---------------------------\n" );
+        //printf( "pollMatches_Done: %s", json );
+        //printf( "\n---------------------------\n" );
         
         json_t* root;
         json_error_t error;
@@ -1810,10 +1814,10 @@ namespace nsGlasslabSDK {
             jsonOut = rootJSON;
             free( rootJSON );
          
-            printf( "\n---------------------------\n" );
-            printf( "sendTelemEvents Num of Events being sent: %lu\n", json_array_size(m_telemEvents) );
-            printf( "sendTelemEvents: %s\n", jsonOut.c_str() );
-            printf( "\n---------------------------\n" );
+            //printf( "\n---------------------------\n" );
+            //printf( "sendTelemEvents Num of Events being sent: %lu\n", json_array_size(m_telemEvents) );
+            //printf( "sendTelemEvents: %s\n", jsonOut.c_str() );
+            //printf( "\n---------------------------\n" );
          
             // Add this message to the queue
             mf_addMessageToDataQueue( API_POST_EVENTS, "POST", "sendTelemEvent_Done", jsonOut.c_str(), "application/json" );
@@ -1842,6 +1846,10 @@ namespace nsGlasslabSDK {
 
         // Attempt to dispatch the message queue
         attemptMessageDispatch();
+
+        // Clear out excess log messages stored in the queue.
+        while (m_logQueue.size() > MAX_LOG_QUEUE)
+        	m_logQueue.pop();
     }
     
     /**
@@ -1880,7 +1888,7 @@ namespace nsGlasslabSDK {
                 // In addition to flushing the message queue, do a POST on the totalTimePlayed
                 sendTotalTimePlayed();
 
-                printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
+                //printf( "Connected: %d, Seconds elapsed for flush %f with %i events\n", getConnectedState(), secondsElapsed, m_dataSync->getMessageTableSize() );
 
                 // Only flush the queue if we are connected
                 if( getConnectedState() ) {
@@ -1914,7 +1922,7 @@ namespace nsGlasslabSDK {
         // Cast the argument to a request info object
         p_glHttpRequest *request = (p_glHttpRequest *)arg;
         
-        printf( "httpGetRequest_Done\n");
+        //printf( "httpGetRequest_Done\n");
         // If the request object exists, parse the response
         if( req ) {
             // There should be request info, including callbacks and statuses
@@ -1956,7 +1964,7 @@ namespace nsGlasslabSDK {
             }
             // Request info was likely corrupt
             else {
-                printf( "The HTTP request object was NULL, is there a possible corruption?" );
+                //printf( "The HTTP request object was NULL, is there a possible corruption?" );
             }
 
             if(request) {
@@ -2892,7 +2900,7 @@ namespace nsGlasslabSDK {
     }
 
     void Core::setPlayerHandle( const char* handle ) {
-        printf( "player handle to set: %s\n" , handle );
+        //printf( "player handle to set: %s\n" , handle );
 
         m_playerHandle = handle;
 
@@ -2904,7 +2912,7 @@ namespace nsGlasslabSDK {
 
         // Update the database with this information
         if( m_dataSync != NULL ) {
-            printf( "setting new device Id using player handle: %s", newDeviceId );
+            //printf( "setting new device Id using player handle: %s", newDeviceId );
             m_dataSync->updateSessionTableWithPlayerHandle( newDeviceId );
 
             // Get the cookie stored for this device Id
@@ -2972,6 +2980,12 @@ namespace nsGlasslabSDK {
     void Core::setAutoSessionManagement( bool state ) {
         m_autoSessionManagement = state;
     }
+
+    void setLogging( bool on )
+    {
+    	allowLoggi
+    }
+
 
 
     //--------------------------------------
@@ -3066,11 +3080,13 @@ namespace nsGlasslabSDK {
     void Core::logMessage( const char* message, const char* data ) {
         string concat;
         if( data == NULL ) {
-            printf("%s\n", message);
+        	if (m_allowLogging)
+            	printf("%s\n", message);
             concat = string(message);
         }
         else {
-            printf("%s %s\n", message, data);
+        	if (m_allowLogging)
+	            printf("%s %s\n", message, data);
             concat = string(message) + string(data);
         }
         

@@ -211,8 +211,7 @@ class GlasslabSDK {
 
         // Debug logging pop
         const char APIIMPORT *popLogQueue();
-
-    
+   
     private:
         // Core SDK
         nsGlasslabSDK::Core* m_core;

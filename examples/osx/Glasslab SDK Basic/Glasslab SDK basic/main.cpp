@@ -11,7 +11,7 @@ GlasslabSDK *glsdk;
 //
 // Declare configuration variables
 //
-char host[]         =   "http://developer.playfully.org";
+char host[]         =   "https://developer.playfully.org";
 
 char gameId[]       =   "TEST";
 char gameName[]     =   "Test Game";

@@ -50,7 +50,7 @@ public class ButtonHandlers : MonoBehaviour
 	{
 		Output.text = "Connect: ";
 
-		SDK.Connect(Application.persistentDataPath, "TEST", "http://developer.playfully.org", CommandDone);
+		SDK.Connect(Application.persistentDataPath, "TEST", "https://stage.playfully.org", CommandDone);
 		SDK.SetName("My Awesome Game");
 		SDK.SetVersion("1.0");
 	}
