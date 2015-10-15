@@ -2981,12 +2981,10 @@ static const size_t MAX_LOG_QUEUE = 50;
         m_autoSessionManagement = state;
     }
 
-    void setLogging( bool on )
+	void Core::setLogging( bool on )
     {
-    	allowLoggi
+    	m_allowLogging = on;
     }
-
-
 
     //--------------------------------------
     //--------------------------------------
