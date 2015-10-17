@@ -271,6 +271,7 @@ namespace nsGlasslabSDK {
 
             // General members
             string m_connectUri;
+            bool   m_connectUriLocked;
             string m_cookie;
             string m_gameId;
             string m_gameSecret;
@@ -336,6 +337,7 @@ namespace nsGlasslabSDK {
 };
 #pragma GCC visibility pop
 
+extern map<string, string> GetLaunchParameters();
 
 /* ---------------------------- */
 #endif /* defined(GLASSLABSDK_CORE) */

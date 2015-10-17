@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		97583E2E189B3140001E1A5D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97583E2D189B3140001E1A5D /* main.cpp */; };
 		9E1BB0E8192C0460000AF282 /* GlasslabSDK_x86_64.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1BB0E7192C0460000AF282 /* GlasslabSDK_x86_64.dylib */; };
+		EC0BB8101BD061EA0060D733 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0BB80F1BD061EA0060D733 /* Foundation.framework */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,7 +27,8 @@
 /* Begin PBXFileReference section */
 		97260E69188F3CA10000ABCF /* Glasslab SDK Basic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Glasslab SDK Basic"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97583E2D189B3140001E1A5D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "Glasslab SDK basic/main.cpp"; sourceTree = SOURCE_ROOT; };
-		9E1BB0E7192C0460000AF282 /* GlasslabSDK_x86_64.dylib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GlasslabSDK_x86_64.dylib; path = ../../../../lib/osx/GlasslabSDK_x86_64.dylib; sourceTree = "<group>"; };
+		9E1BB0E7192C0460000AF282 /* GlasslabSDK_x86_64.dylib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GlasslabSDK_x86_64.dylib; path = ../../../lib/osx/GlasslabSDK_x86_64.dylib; sourceTree = "<group>"; };
+		EC0BB80F1BD061EA0060D733 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +37,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E1BB0E8192C0460000AF282 /* GlasslabSDK_x86_64.dylib in Frameworks */,
+				EC0BB8101BD061EA0060D733 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +48,7 @@
 			isa = PBXGroup;
 			children = (
 				97260E6B188F3CA10000ABCF /* Glasslab SDK Hello World */,
+				EC0BB80E1BD061AF0060D733 /* Frameworks */,
 				97260E6A188F3CA10000ABCF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,10 +64,18 @@
 		97260E6B188F3CA10000ABCF /* Glasslab SDK Hello World */ = {
 			isa = PBXGroup;
 			children = (
-				9E1BB0E7192C0460000AF282 /* GlasslabSDK_x86_64.dylib */,
 				97583E2D189B3140001E1A5D /* main.cpp */,
 			);
 			path = "Glasslab SDK Hello World";
+			sourceTree = "<group>";
+		};
+		EC0BB80E1BD061AF0060D733 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9E1BB0E7192C0460000AF282 /* GlasslabSDK_x86_64.dylib */,
+				EC0BB80F1BD061EA0060D733 /* Foundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

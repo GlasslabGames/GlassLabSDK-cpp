@@ -1,0 +1,542 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC0BB8661BD163F50060D733 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC0BB8651BD163F50060D733 /* AppDelegate.mm */; };
+		EC0BB8691BD163F50060D733 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BB8681BD163F50060D733 /* main.m */; };
+		EC0BB86B1BD163F50060D733 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0BB86A1BD163F50060D733 /* Assets.xcassets */; };
+		EC0BB86E1BD163F50060D733 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC0BB86C1BD163F50060D733 /* MainMenu.xib */; };
+		EC0BB8791BD163F50060D733 /* GlasslabSDKTestBedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BB8781BD163F50060D733 /* GlasslabSDKTestBedTests.m */; };
+		EC0BB8841BD163F50060D733 /* GlasslabSDKTestBedUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC0BB8831BD163F50060D733 /* GlasslabSDKTestBedUITests.m */; };
+		EC0BB8A01BD178F30060D733 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0BB89F1BD178F30060D733 /* Foundation.framework */; };
+		EC0BB8A21BD1790D0060D733 /* GlasslabSDK_x86_64.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EC0BB8A11BD1790D0060D733 /* GlasslabSDK_x86_64.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EC0BB8751BD163F50060D733 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC0BB8591BD163F50060D733 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC0BB8601BD163F50060D733;
+			remoteInfo = GlasslabSDKTestBed;
+		};
+		EC0BB8801BD163F50060D733 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC0BB8591BD163F50060D733 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC0BB8601BD163F50060D733;
+			remoteInfo = GlasslabSDKTestBed;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EC0BB8611BD163F50060D733 /* GlasslabSDKTestBed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlasslabSDKTestBed.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC0BB8641BD163F50060D733 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EC0BB8651BD163F50060D733 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		EC0BB8681BD163F50060D733 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EC0BB86A1BD163F50060D733 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC0BB86D1BD163F50060D733 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		EC0BB86F1BD163F50060D733 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC0BB8741BD163F50060D733 /* GlasslabSDKTestBedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlasslabSDKTestBedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC0BB8781BD163F50060D733 /* GlasslabSDKTestBedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlasslabSDKTestBedTests.m; sourceTree = "<group>"; };
+		EC0BB87A1BD163F50060D733 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC0BB87F1BD163F50060D733 /* GlasslabSDKTestBedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlasslabSDKTestBedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC0BB8831BD163F50060D733 /* GlasslabSDKTestBedUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlasslabSDKTestBedUITests.m; sourceTree = "<group>"; };
+		EC0BB8851BD163F50060D733 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC0BB89F1BD178F30060D733 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EC0BB8A11BD1790D0060D733 /* GlasslabSDK_x86_64.dylib */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GlasslabSDK_x86_64.dylib; path = ../../../lib/osx/GlasslabSDK_x86_64.dylib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC0BB85E1BD163F50060D733 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC0BB8A21BD1790D0060D733 /* GlasslabSDK_x86_64.dylib in Frameworks */,
+				EC0BB8A01BD178F30060D733 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC0BB8711BD163F50060D733 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC0BB87C1BD163F50060D733 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC0BB8581BD163F50060D733 = {
+			isa = PBXGroup;
+			children = (
+				EC0BB8631BD163F50060D733 /* GlasslabSDKTestBed */,
+				EC0BB8941BD172680060D733 /* Frameworks */,
+				EC0BB8771BD163F50060D733 /* GlasslabSDKTestBedTests */,
+				EC0BB8821BD163F50060D733 /* GlasslabSDKTestBedUITests */,
+				EC0BB8621BD163F50060D733 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EC0BB8621BD163F50060D733 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC0BB8611BD163F50060D733 /* GlasslabSDKTestBed.app */,
+				EC0BB8741BD163F50060D733 /* GlasslabSDKTestBedTests.xctest */,
+				EC0BB87F1BD163F50060D733 /* GlasslabSDKTestBedUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC0BB8631BD163F50060D733 /* GlasslabSDKTestBed */ = {
+			isa = PBXGroup;
+			children = (
+				EC0BB8641BD163F50060D733 /* AppDelegate.h */,
+				EC0BB8651BD163F50060D733 /* AppDelegate.mm */,
+				EC0BB86A1BD163F50060D733 /* Assets.xcassets */,
+				EC0BB86C1BD163F50060D733 /* MainMenu.xib */,
+				EC0BB86F1BD163F50060D733 /* Info.plist */,
+				EC0BB8671BD163F50060D733 /* Supporting Files */,
+			);
+			path = GlasslabSDKTestBed;
+			sourceTree = "<group>";
+		};
+		EC0BB8671BD163F50060D733 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC0BB8681BD163F50060D733 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EC0BB8771BD163F50060D733 /* GlasslabSDKTestBedTests */ = {
+			isa = PBXGroup;
+			children = (
+				EC0BB8781BD163F50060D733 /* GlasslabSDKTestBedTests.m */,
+				EC0BB87A1BD163F50060D733 /* Info.plist */,
+			);
+			path = GlasslabSDKTestBedTests;
+			sourceTree = "<group>";
+		};
+		EC0BB8821BD163F50060D733 /* GlasslabSDKTestBedUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EC0BB8831BD163F50060D733 /* GlasslabSDKTestBedUITests.m */,
+				EC0BB8851BD163F50060D733 /* Info.plist */,
+			);
+			path = GlasslabSDKTestBedUITests;
+			sourceTree = "<group>";
+		};
+		EC0BB8941BD172680060D733 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC0BB8A11BD1790D0060D733 /* GlasslabSDK_x86_64.dylib */,
+				EC0BB89F1BD178F30060D733 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC0BB8601BD163F50060D733 /* GlasslabSDKTestBed */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC0BB8881BD163F50060D733 /* Build configuration list for PBXNativeTarget "GlasslabSDKTestBed" */;
+			buildPhases = (
+				EC0BB85D1BD163F50060D733 /* Sources */,
+				EC0BB85E1BD163F50060D733 /* Frameworks */,
+				EC0BB85F1BD163F50060D733 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GlasslabSDKTestBed;
+			productName = GlasslabSDKTestBed;
+			productReference = EC0BB8611BD163F50060D733 /* GlasslabSDKTestBed.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EC0BB8731BD163F50060D733 /* GlasslabSDKTestBedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC0BB88B1BD163F50060D733 /* Build configuration list for PBXNativeTarget "GlasslabSDKTestBedTests" */;
+			buildPhases = (
+				EC0BB8701BD163F50060D733 /* Sources */,
+				EC0BB8711BD163F50060D733 /* Frameworks */,
+				EC0BB8721BD163F50060D733 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC0BB8761BD163F50060D733 /* PBXTargetDependency */,
+			);
+			name = GlasslabSDKTestBedTests;
+			productName = GlasslabSDKTestBedTests;
+			productReference = EC0BB8741BD163F50060D733 /* GlasslabSDKTestBedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EC0BB87E1BD163F50060D733 /* GlasslabSDKTestBedUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC0BB88E1BD163F50060D733 /* Build configuration list for PBXNativeTarget "GlasslabSDKTestBedUITests" */;
+			buildPhases = (
+				EC0BB87B1BD163F50060D733 /* Sources */,
+				EC0BB87C1BD163F50060D733 /* Frameworks */,
+				EC0BB87D1BD163F50060D733 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC0BB8811BD163F50060D733 /* PBXTargetDependency */,
+			);
+			name = GlasslabSDKTestBedUITests;
+			productName = GlasslabSDKTestBedUITests;
+			productReference = EC0BB87F1BD163F50060D733 /* GlasslabSDKTestBedUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC0BB8591BD163F50060D733 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Glasslab Games";
+				TargetAttributes = {
+					EC0BB8601BD163F50060D733 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					EC0BB8731BD163F50060D733 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = EC0BB8601BD163F50060D733;
+					};
+					EC0BB87E1BD163F50060D733 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = EC0BB8601BD163F50060D733;
+					};
+				};
+			};
+			buildConfigurationList = EC0BB85C1BD163F50060D733 /* Build configuration list for PBXProject "GlasslabSDKTestBed" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EC0BB8581BD163F50060D733;
+			productRefGroup = EC0BB8621BD163F50060D733 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC0BB8601BD163F50060D733 /* GlasslabSDKTestBed */,
+				EC0BB8731BD163F50060D733 /* GlasslabSDKTestBedTests */,
+				EC0BB87E1BD163F50060D733 /* GlasslabSDKTestBedUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC0BB85F1BD163F50060D733 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC0BB86B1BD163F50060D733 /* Assets.xcassets in Resources */,
+				EC0BB86E1BD163F50060D733 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC0BB8721BD163F50060D733 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC0BB87D1BD163F50060D733 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC0BB85D1BD163F50060D733 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC0BB8691BD163F50060D733 /* main.m in Sources */,
+				EC0BB8661BD163F50060D733 /* AppDelegate.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC0BB8701BD163F50060D733 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC0BB8791BD163F50060D733 /* GlasslabSDKTestBedTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC0BB87B1BD163F50060D733 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC0BB8841BD163F50060D733 /* GlasslabSDKTestBedUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EC0BB8761BD163F50060D733 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC0BB8601BD163F50060D733 /* GlasslabSDKTestBed */;
+			targetProxy = EC0BB8751BD163F50060D733 /* PBXContainerItemProxy */;
+		};
+		EC0BB8811BD163F50060D733 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC0BB8601BD163F50060D733 /* GlasslabSDKTestBed */;
+			targetProxy = EC0BB8801BD163F50060D733 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EC0BB86C1BD163F50060D733 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC0BB86D1BD163F50060D733 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC0BB8861BD163F50060D733 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		EC0BB8871BD163F50060D733 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		EC0BB8891BD163F50060D733 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_INPUT_FILETYPE = automatic;
+				HEADER_SEARCH_PATHS = (
+					"../../../deps/include/**",
+					../../../headers,
+					/usr/include,
+					"../../../deps/src/**",
+				);
+				INFOPLIST_FILE = GlasslabSDKTestBed/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = org.glasslabgames.GlasslabSDKTestBed;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EC0BB88A1BD163F50060D733 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_INPUT_FILETYPE = automatic;
+				HEADER_SEARCH_PATHS = (
+					"../../../deps/include/**",
+					../../../headers,
+					/usr/include,
+					"../../../deps/src/**",
+				);
+				INFOPLIST_FILE = GlasslabSDKTestBed/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = org.glasslabgames.GlasslabSDKTestBed;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		EC0BB88C1BD163F50060D733 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GlasslabSDKTestBedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.glasslabgames.GlasslabSDKTestBedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GlasslabSDKTestBed.app/Contents/MacOS/GlasslabSDKTestBed";
+			};
+			name = Debug;
+		};
+		EC0BB88D1BD163F50060D733 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GlasslabSDKTestBedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.glasslabgames.GlasslabSDKTestBedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GlasslabSDKTestBed.app/Contents/MacOS/GlasslabSDKTestBed";
+			};
+			name = Release;
+		};
+		EC0BB88F1BD163F50060D733 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GlasslabSDKTestBedUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.glasslabgames.GlasslabSDKTestBedUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = GlasslabSDKTestBed;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		EC0BB8901BD163F50060D733 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GlasslabSDKTestBedUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.glasslabgames.GlasslabSDKTestBedUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = GlasslabSDKTestBed;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC0BB85C1BD163F50060D733 /* Build configuration list for PBXProject "GlasslabSDKTestBed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC0BB8861BD163F50060D733 /* Debug */,
+				EC0BB8871BD163F50060D733 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC0BB8881BD163F50060D733 /* Build configuration list for PBXNativeTarget "GlasslabSDKTestBed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC0BB8891BD163F50060D733 /* Debug */,
+				EC0BB88A1BD163F50060D733 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EC0BB88B1BD163F50060D733 /* Build configuration list for PBXNativeTarget "GlasslabSDKTestBedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC0BB88C1BD163F50060D733 /* Debug */,
+				EC0BB88D1BD163F50060D733 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EC0BB88E1BD163F50060D733 /* Build configuration list for PBXNativeTarget "GlasslabSDKTestBedUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC0BB88F1BD163F50060D733 /* Debug */,
+				EC0BB8901BD163F50060D733 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC0BB8591BD163F50060D733 /* Project object */;
+}

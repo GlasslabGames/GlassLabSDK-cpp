@@ -121,7 +121,13 @@ class GlasslabSDK {
 		/* APIIMPORT required when compiling the DLL and running in DLL example */
 		/* APIIMPORT should be removed when running the lib example */
         GlasslabSDK( const char* clientId, const char* deviceId, const char* dataPath = NULL, const char* uri = NULL );
-
+        GlasslabSDK(nsGlasslabSDK::Core* core);
+    
+        // Some platforms require this to be called, usually very early in program execution.
+        // For Mac and iOS, needs ot be called in the NSApplicationDelegate's
+        // applicationWillFinishLaunching: method.
+        static void initSDK();
+    
         // Message stack functions
         nsGlasslabSDK::Const::Status APIIMPORT getLastStatus();
         void APIIMPORT popMessageStack();
@@ -135,6 +141,7 @@ class GlasslabSDK {
         void APIIMPORT registerStudent( const char* username, const char* password, const char* firstName, const char* lastInitial );
         void APIIMPORT registerInstructor( const char* name, const char* email, const char* password, bool newsletter = true );
         void APIIMPORT getUserInfo();
+        void APIIMPORT getPlayerInfo();
         void APIIMPORT login( const char* username, const char* password, const char* type = NULL );
         void APIIMPORT login( const char* username, const char* password );
         void APIIMPORT enroll( const char* courseCode );

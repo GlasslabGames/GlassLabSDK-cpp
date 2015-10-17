@@ -76,6 +76,7 @@ static const size_t MAX_LOG_QUEUE = 50;
 
         // Set the default information
         m_connectUri    = "http://127.0.0.1:8000";
+        m_connectUriLocked = false;
         m_gameSecret    = "";
         m_clientName    = "";
         m_clientVersion = "";
@@ -126,15 +127,22 @@ static const size_t MAX_LOG_QUEUE = 50;
         m_gameSessionEventOrder = m_dataSync->getGameSessionEventOrderFromDeviceId( m_deviceId );
         m_playSessionEventOrder = 1;
 
+        // process possible parameters from calling we page
+        map<string, string> params = GetLaunchParameters();
+        map<string, string>::iterator iter = params.find("sdkURI");
+        if (iter != params.end()) {
+            m_connectUri = iter->second;
+            m_connectUriLocked = true;
+            logMessage( "connectUri set by param and locked:", m_connectUri.c_str() );
+        }
+        
         // Stop the timers, initially
         stopGameTimer();
         stopSessionTimer();
 
-
         // Set the initial player handle and cookie
         setPlayerHandle( "" );
         setCookie( "" );
-
 
         // Attempt a connection now that the SDK is created
         m_connected = false;
@@ -240,8 +248,12 @@ static const size_t MAX_LOG_QUEUE = 50;
     int Core::connect( const char* gameId, const char* uri ) {
         // If the URI was set properly, record it
         if( ( uri != NULL ) && strcmp( uri, "" ) != 0 ) {
-            m_connectUri = uri;
-            logMessage( "connectUri set:", m_connectUri.c_str() );
+            if (m_connectUriLocked) {
+                logMessage( "connectUri locked, remains:", m_connectUri.c_str() );
+            } else {
+                m_connectUri = uri;
+                logMessage( "connectUri set:", m_connectUri.c_str() );
+            }
         }
         // URI was not set properly
         else {
@@ -347,8 +359,12 @@ static const size_t MAX_LOG_QUEUE = 50;
     void Core::getConfig( const char* uri ) {
         // If the URI was set properly, record it
         if( ( uri != NULL ) && strcmp( uri, "" ) != 0 ) {
-            m_connectUri = uri;
-            logMessage( "connectUri set from CONFIG:", m_connectUri.c_str() );
+            if (m_connectUriLocked) {
+                logMessage( "connectUri locked, remains:", m_connectUri.c_str() );
+            } else {
+                m_connectUri = uri;
+                logMessage( "connectUri set from CONFIG:", m_connectUri.c_str() );
+            }
         }
         // URI was not set properly
         else {
@@ -2868,7 +2884,8 @@ static const size_t MAX_LOG_QUEUE = 50;
      * Setters.
      */
     void Core::setConnectUri( const char* uri ) {
-        m_connectUri = uri;
+        if (!m_connectUriLocked)
+            m_connectUri = uri;
     }
 
     void Core::setGameSecret( const char* gameSecret ) {
@@ -2981,10 +2998,13 @@ static const size_t MAX_LOG_QUEUE = 50;
         m_autoSessionManagement = state;
     }
 
-	void Core::setLogging( bool on )
+    /*
+    void setLogging( bool on )
     {
-    	m_allowLogging = on;
+    	allowLoggi
     }
+    */
+
 
     //--------------------------------------
     //--------------------------------------
@@ -3118,3 +3138,17 @@ static const size_t MAX_LOG_QUEUE = 50;
     }
 
 }; // end nsGlasslabSDK
+
+// Windows version of utility function
+
+#if WIN32
+map<string, string> GetLaunchParameters()
+{
+    map<string, string> params;
+    
+    // TODO - return empty map for now
+    // LPCSTR *line = GetCommandLine();
+    
+    return params;
+}
+#endif

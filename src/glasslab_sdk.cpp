@@ -43,6 +43,9 @@ either expressed or implied, of the FreeBSD Project.
 
 #include "glasslab_sdk.h"
 
+#if !WIN32
+extern "C" void Init_Mac_GLSDK();
+#endif
 
 GlasslabSDK::GlasslabSDK( const char* clientId, const char* deviceId, const char* dataPath, const char* uri ) {
     m_core = new nsGlasslabSDK::Core( this, clientId, deviceId, dataPath, uri );
@@ -52,6 +55,12 @@ GlasslabSDK::GlasslabSDK( const char* clientId, const char* deviceId, const char
 GlasslabSDK::GlasslabSDK(nsGlasslabSDK::Core* core)
 {
 	m_core = core;
+}
+
+void GlasslabSDK::initSDK() {
+#if !WIN32
+    Init_Mac_GLSDK();
+#endif
 }
 
 nsGlasslabSDK::Const::Status GlasslabSDK::getLastStatus() {
@@ -100,6 +109,10 @@ void GlasslabSDK::registerInstructor( const char* name, const char* email, const
 
 void GlasslabSDK::getUserInfo() {
     if( m_core != NULL ) m_core->getUserInfo();
+}
+
+void GlasslabSDK::getPlayerInfo() {
+    if( m_core != NULL ) m_core->getPlayerInfo();
 }
 
 void GlasslabSDK::login( const char* username, const char* password, const char* type ) {

@@ -51,7 +51,7 @@ void* sdkResponses( void* threadId )
             case nsGlasslabSDK::Const::Message_Connect:
             {
                 printf( "RESPONSE: Message_Connect\n" );
-                printf( "We're connected to %s!\n", host );
+                printf( "We're connected to %s!\n", glsdk->getConnectUri() );
                 
                 
                 glsdk->login( username, password, NULL );
