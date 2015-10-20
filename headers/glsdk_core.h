@@ -48,7 +48,9 @@ either expressed or implied, of the FreeBSD Project.
 
 
 // The classes below are not exported
+#if !WIN32
 #pragma GCC visibility push(hidden)
+#endif
 
 using namespace std;
 
@@ -327,15 +329,19 @@ namespace nsGlasslabSDK {
             map<int, const char*> m_matchesMap;
         
             // Async http GET request queue
-            pthread_mutex_t m_jobQueueMutex = PTHREAD_MUTEX_INITIALIZER;
+#if MULTITHREADED
+			pthread_mutex_t m_jobQueueMutex = PTHREAD_MUTEX_INITIALIZER;
             pthread_cond_t m_jobTriggerCondition = PTHREAD_COND_INITIALIZER;
+#endif
             std::queue<HTTPThreadData*> m_httpGetJobs;
             static void* proc_asyncHTTPGetRequests(void*);
             int mf_startAsyncHTTPRequestThread(); // Starts the async http GET request processor thread. Returns 0 on success.
             bool threadStarted = false;
     };
 };
+#if !WIN32
 #pragma GCC visibility pop
+#endif
 
 extern map<string, string> GetLaunchParameters();
 

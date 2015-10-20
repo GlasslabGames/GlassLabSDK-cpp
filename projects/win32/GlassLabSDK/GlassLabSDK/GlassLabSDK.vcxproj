@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -25,18 +25,18 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v90</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_lib|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v90</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v90</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <PlatformToolset>v90</PlatformToolset>
@@ -95,14 +95,14 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <PostBuildEvent>
-      <Command>"C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/bin/lib.exe" /OUT:$(SolutionDir)/../../../lib/win32/GlassLabSDK.lib $(SolutionDir)$(Configuration)\GlassLabSDKLib.lib $(SolutionDir)/../../../deps/lib/jansson.lib $(SolutionDir)/../../../deps/lib/libevent.lib $(SolutionDir)/../../../deps/lib/libevent_core.lib $(SolutionDir)/../../../deps/lib/libevent_extras.lib $(SolutionDir)/../../../deps/lib/SQLite_Static_Library.lib</Command>
+      <Command>"C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/lib.exe" /OUT:$(SolutionDir)/../../../lib/win32/GlassLabSDK.lib $(SolutionDir)$(Configuration)\GlassLabSDK.lib $(SolutionDir)/../../../deps/lib/win32/jansson.lib $(SolutionDir)/../../../deps/lib/win32/libevent.lib $(SolutionDir)/../../../deps/lib/win32/libevent_core.lib $(SolutionDir)/../../../deps/lib/win32/libevent_extras.lib $(SolutionDir)/../../../deps/lib/win32/SQLite_Static_Library.lib</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_dll|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -115,8 +115,8 @@
       <Command>xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.dll" "$(SolutionDir)\..\..\..\lib\win32\dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.exp" "$(SolutionDir)\..\..\..\lib\win32\dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)\..\..\..\lib\win32\dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.dll" "$(SolutionDir)\..\..\..\examples\win32\GlassLabSDK Example\Release_dll" &amp; xcopy /Y "$(SolutionDir)$(Configuration)\GlassLabSDK.dll" "$(SolutionDir)\..\..\..\examples\unity\Assets\Plugins"</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>SQLite_Static_Library.lib;jansson.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Ben\Desktop\Dashboard Projects\bendapkiewicz\SDK\GLSDK-cpp\deps\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SQLite_Static_Library.lib;jansson.lib;libevent.lib;Ws2_32.lib;Shell32.lib;Advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\..\..\deps\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_lib|Win32'">
@@ -133,7 +133,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)/../../../headers;$(SolutionDir)/../../../deps/include/libevent/win32;$(SolutionDir)/../../../deps/include/libjansson;$(SolutionDir)/../../../deps/include/libsqlite;$(SolutionDir)/../../../deps/src/CppSQLite-master/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
-      <Command>"C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/bin/lib.exe" /OUT:"$(SolutionDir)\..\..\..\lib\win32\lib\GlassLabSDK.lib" "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\jansson.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent_core.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent_extras.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\SQLite_Static_Library.lib"</Command>
+      <Command>"C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/lib.exe" /OUT:"$(SolutionDir)\..\..\..\lib\win32\lib\GlassLabSDK.lib" "$(SolutionDir)$(Configuration)\GlassLabSDK.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\jansson.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent_core.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\libevent_extras.lib" "$(SolutionDir)\..\..\..\deps\lib\win32\SQLite_Static_Library.lib"</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>SQLite_Static_Library.lib;jansson.lib;libevent.lib;libevent_core.lib;libevent_extras.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>

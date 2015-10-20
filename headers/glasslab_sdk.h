@@ -47,7 +47,11 @@ either expressed or implied, of the FreeBSD Project.
 /* ---------------------------- */
 
 #if WIN32
+#if _DLL
+#define APIIMPORT __declspec(dllexport) 
+#else
 #define APIIMPORT __declspec(dllimport) 
+#endif
 #else
 #define APIIMPORT 
 #endif
@@ -71,18 +75,7 @@ either expressed or implied, of the FreeBSD Project.
 #include <cstdio>
 #include <time.h>
 
-#if WIN32
-typedef __int8 int8_t;
-typedef unsigned __int8 uint8_t;
-typedef __int16 int16_t;
-typedef unsigned __int16 uint16_t;
-typedef __int32 int32_t;
-typedef unsigned __int32 uint32_t;
-typedef __int64 int64_t;
-typedef unsigned __int64 uint64_t;
-#else
 #include <stdint.h>
-#endif
 
 #include <signal.h>
 #include <evhttp.h>
@@ -97,7 +90,9 @@ typedef unsigned __int64 uint64_t;
 #include <CppSQLite3.h>
 
 // The classes below are exported
+#if !WIN32
 #pragma GCC visibility push(default)
+#endif
 
 using namespace std;
 
@@ -120,13 +115,13 @@ class GlasslabSDK {
 		/* TODO: figure out how to resolve this behavior... */
 		/* APIIMPORT required when compiling the DLL and running in DLL example */
 		/* APIIMPORT should be removed when running the lib example */
-        GlasslabSDK( const char* clientId, const char* deviceId, const char* dataPath = NULL, const char* uri = NULL );
+		APIIMPORT GlasslabSDK( const char* clientId, const char* deviceId, const char* dataPath = NULL, const char* uri = NULL );
         GlasslabSDK(nsGlasslabSDK::Core* core);
     
         // Some platforms require this to be called, usually very early in program execution.
         // For Mac and iOS, needs ot be called in the NSApplicationDelegate's
         // applicationWillFinishLaunching: method.
-        static void initSDK();
+        static void APIIMPORT initSDK();
     
         // Message stack functions
         nsGlasslabSDK::Const::Status APIIMPORT getLastStatus();
@@ -223,7 +218,9 @@ class GlasslabSDK {
         // Core SDK
         nsGlasslabSDK::Core* m_core;
 };
+#if !WIN32
 #pragma GCC visibility pop
+#endif
 
 /* ---------------------------- */
 #endif

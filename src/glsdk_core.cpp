@@ -48,6 +48,11 @@ either expressed or implied, of the FreeBSD Project.
 #include <pthread.h>
 #endif
 
+#if WIN32
+#include <string>
+#include <sstream>
+#include <vector>
+#endif
 
 namespace nsGlasslabSDK {
 
@@ -128,7 +133,7 @@ static const size_t MAX_LOG_QUEUE = 50;
         m_playSessionEventOrder = 1;
 
         // process possible parameters from calling we page
-        map<string, string> params = GetLaunchParameters();
+		map<string, string> params = GetLaunchParameters();
         map<string, string>::iterator iter = params.find("sdkURI");
         if (iter != params.end()) {
             m_connectUri = iter->second;
@@ -2084,7 +2089,8 @@ static const size_t MAX_LOG_QUEUE = 50;
 #endif
     }
     
-    /**
+#ifdef MULTITHREADED
+	/**
      * mf_startAsyncHTTPRequestThread - starts a thread to process jobs in Core's m_httpGetJobs queue
      * Returns:
      *  0 on success
@@ -2177,7 +2183,8 @@ static const size_t MAX_LOG_QUEUE = 50;
         pCore->threadStarted = false;
         pthread_exit(NULL);
     }
-    
+#endif
+
     /**
      * HttpGetRequest function performs a GET/POST request to the server for
      * a single event extracted from the SQLite database.
@@ -3142,13 +3149,56 @@ static const size_t MAX_LOG_QUEUE = 50;
 // Windows version of utility function
 
 #if WIN32
+
+vector<string> &split(const string &s, char delim, vector<string> &elems) {
+	stringstream ss(s);
+	string item;
+	while (getline(ss, item, delim)) {
+		elems.push_back(item);
+	}
+	return elems;
+}
+
+
+vector<string> split(const string &s, char delim) {
+	vector<string> elems;
+	split(s, delim, elems);
+	return elems;
+}
+
 map<string, string> GetLaunchParameters()
 {
     map<string, string> params;
-    
-    // TODO - return empty map for now
-    // LPCSTR *line = GetCommandLine();
-    
+	LPWSTR *szArglist;
+	int nArgs = 0;
+
+	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
+	if (NULL != szArglist && nArgs > 1)
+	{
+		char buf[512];
+
+		int length = WideCharToMultiByte(CP_UTF8, 0, szArglist[1], -1, buf, 512, NULL, NULL);
+		if (length != 0) {
+			buf[length] = 0;
+
+			char *c = strchr(buf, '?');
+			if (c != NULL) {
+				string uri(c + 1);
+				vector<string> parts = split(uri, '&');
+				for (int i = 0; i < parts.size(); i++) {
+					string part(parts[i]);
+					size_t index = part.find('=');
+					if (index != string::npos) {
+						params[part.substr(0, index)] = part.substr(index + 1);
+					}
+				}
+			}
+		}
+	}
+
+	// Free memory allocated for CommandLineToArgvW arguments.
+	LocalFree(szArglist);
+
     return params;
 }
 #endif
