@@ -121,7 +121,11 @@ class GlasslabSDK {
         // Some platforms require this to be called, usually very early in program execution.
         // For Mac and iOS, needs ot be called in the NSApplicationDelegate's
         // applicationWillFinishLaunching: method.
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+        static void APIIMPORT initSDK(void *launchOptions);
+#else
         static void APIIMPORT initSDK();
+#endif
     
         // Message stack functions
         nsGlasslabSDK::Const::Status APIIMPORT getLastStatus();

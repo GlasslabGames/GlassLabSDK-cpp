@@ -18,13 +18,6 @@ map<string, string> GetLaunchParameters()
 {
     map<string, string> params;
     
-    // get command line argument array
-    /*
-    NSArray *args = [NSProcessInfo processInfo].arguments;
-    if (args.count > 1) {
-        // only one real argument is expected, so no parameter value can include a space
-        NSURL *url = [NSURL URLWithString:args[1]];
-    */
     if (launchURL != nil) {
         NSURL *url = [NSURL URLWithString:launchURL];
      

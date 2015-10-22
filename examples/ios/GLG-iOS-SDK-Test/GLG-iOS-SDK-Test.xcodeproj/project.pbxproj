@@ -1,0 +1,564 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC321A161BD8010F00A4B9AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC321A151BD8010F00A4B9AE /* main.m */; };
+		EC321A191BD8010F00A4B9AE /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC321A181BD8010F00A4B9AE /* AppDelegate.mm */; };
+		EC321A1C1BD8010F00A4B9AE /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC321A1B1BD8010F00A4B9AE /* ViewController.mm */; };
+		EC321A211BD8010F00A4B9AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC321A201BD8010F00A4B9AE /* Assets.xcassets */; };
+		EC321A2F1BD8010F00A4B9AE /* GLG_iOS_SDK_TestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC321A2E1BD8010F00A4B9AE /* GLG_iOS_SDK_TestTests.m */; };
+		EC321A3A1BD8010F00A4B9AE /* GLG_iOS_SDK_TestUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC321A391BD8010F00A4B9AE /* GLG_iOS_SDK_TestUITests.m */; };
+		EC747C441BD8538C00BB0EBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC747C401BD8538C00BB0EBA /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
+		EC747C451BD8538C00BB0EBA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC747C421BD8538C00BB0EBA /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		EC747C471BD854AA00BB0EBA /* libGlasslabSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC747C461BD854AA00BB0EBA /* libGlasslabSDK.a */; settings = {ASSET_TAGS = (); }; };
+		EC747C491BD8565900BB0EBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC747C481BD8565900BB0EBA /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EC321A2B1BD8010F00A4B9AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC321A091BD8010F00A4B9AE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC321A101BD8010F00A4B9AE;
+			remoteInfo = "GLG-iOS-SDK-Test";
+		};
+		EC321A361BD8010F00A4B9AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC321A091BD8010F00A4B9AE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC321A101BD8010F00A4B9AE;
+			remoteInfo = "GLG-iOS-SDK-Test";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EC321A111BD8010F00A4B9AE /* GLG-iOS-SDK-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GLG-iOS-SDK-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC321A151BD8010F00A4B9AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EC321A171BD8010F00A4B9AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EC321A181BD8010F00A4B9AE /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		EC321A1A1BD8010F00A4B9AE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EC321A1B1BD8010F00A4B9AE /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		EC321A201BD8010F00A4B9AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC321A251BD8010F00A4B9AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC321A2A1BD8010F00A4B9AE /* GLG-iOS-SDK-TestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GLG-iOS-SDK-TestTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC321A2E1BD8010F00A4B9AE /* GLG_iOS_SDK_TestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLG_iOS_SDK_TestTests.m; sourceTree = "<group>"; };
+		EC321A301BD8010F00A4B9AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC321A351BD8010F00A4B9AE /* GLG-iOS-SDK-TestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GLG-iOS-SDK-TestUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC321A391BD8010F00A4B9AE /* GLG_iOS_SDK_TestUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLG_iOS_SDK_TestUITests.m; sourceTree = "<group>"; };
+		EC321A3B1BD8010F00A4B9AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC747C411BD8538C00BB0EBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EC747C431BD8538C00BB0EBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EC747C461BD854AA00BB0EBA /* libGlasslabSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGlasslabSDK.a; path = ../../../lib/ios/libGlasslabSDK.a; sourceTree = "<group>"; };
+		EC747C481BD8565900BB0EBA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC321A0E1BD8010F00A4B9AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC747C491BD8565900BB0EBA /* Foundation.framework in Frameworks */,
+				EC747C471BD854AA00BB0EBA /* libGlasslabSDK.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC321A271BD8010F00A4B9AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC321A321BD8010F00A4B9AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC321A081BD8010F00A4B9AE = {
+			isa = PBXGroup;
+			children = (
+				EC321A131BD8010F00A4B9AE /* GLG-iOS-SDK-Test */,
+				EC321A471BD809CC00A4B9AE /* Frameworks */,
+				EC321A2D1BD8010F00A4B9AE /* GLG-iOS-SDK-TestTests */,
+				EC321A381BD8010F00A4B9AE /* GLG-iOS-SDK-TestUITests */,
+				EC321A121BD8010F00A4B9AE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EC321A121BD8010F00A4B9AE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC321A111BD8010F00A4B9AE /* GLG-iOS-SDK-Test.app */,
+				EC321A2A1BD8010F00A4B9AE /* GLG-iOS-SDK-TestTests.xctest */,
+				EC321A351BD8010F00A4B9AE /* GLG-iOS-SDK-TestUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC321A131BD8010F00A4B9AE /* GLG-iOS-SDK-Test */ = {
+			isa = PBXGroup;
+			children = (
+				EC321A171BD8010F00A4B9AE /* AppDelegate.h */,
+				EC321A181BD8010F00A4B9AE /* AppDelegate.mm */,
+				EC321A1A1BD8010F00A4B9AE /* ViewController.h */,
+				EC321A1B1BD8010F00A4B9AE /* ViewController.mm */,
+				EC747C401BD8538C00BB0EBA /* LaunchScreen.storyboard */,
+				EC747C421BD8538C00BB0EBA /* Main.storyboard */,
+				EC321A201BD8010F00A4B9AE /* Assets.xcassets */,
+				EC321A251BD8010F00A4B9AE /* Info.plist */,
+				EC321A141BD8010F00A4B9AE /* Supporting Files */,
+			);
+			path = "GLG-iOS-SDK-Test";
+			sourceTree = "<group>";
+		};
+		EC321A141BD8010F00A4B9AE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC321A151BD8010F00A4B9AE /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EC321A2D1BD8010F00A4B9AE /* GLG-iOS-SDK-TestTests */ = {
+			isa = PBXGroup;
+			children = (
+				EC321A2E1BD8010F00A4B9AE /* GLG_iOS_SDK_TestTests.m */,
+				EC321A301BD8010F00A4B9AE /* Info.plist */,
+			);
+			path = "GLG-iOS-SDK-TestTests";
+			sourceTree = "<group>";
+		};
+		EC321A381BD8010F00A4B9AE /* GLG-iOS-SDK-TestUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EC321A391BD8010F00A4B9AE /* GLG_iOS_SDK_TestUITests.m */,
+				EC321A3B1BD8010F00A4B9AE /* Info.plist */,
+			);
+			path = "GLG-iOS-SDK-TestUITests";
+			sourceTree = "<group>";
+		};
+		EC321A471BD809CC00A4B9AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC747C481BD8565900BB0EBA /* Foundation.framework */,
+				EC747C461BD854AA00BB0EBA /* libGlasslabSDK.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC321A101BD8010F00A4B9AE /* GLG-iOS-SDK-Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC321A3E1BD8010F00A4B9AE /* Build configuration list for PBXNativeTarget "GLG-iOS-SDK-Test" */;
+			buildPhases = (
+				EC321A0D1BD8010F00A4B9AE /* Sources */,
+				EC321A0E1BD8010F00A4B9AE /* Frameworks */,
+				EC321A0F1BD8010F00A4B9AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GLG-iOS-SDK-Test";
+			productName = "GLG-iOS-SDK-Test";
+			productReference = EC321A111BD8010F00A4B9AE /* GLG-iOS-SDK-Test.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EC321A291BD8010F00A4B9AE /* GLG-iOS-SDK-TestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC321A411BD8010F00A4B9AE /* Build configuration list for PBXNativeTarget "GLG-iOS-SDK-TestTests" */;
+			buildPhases = (
+				EC321A261BD8010F00A4B9AE /* Sources */,
+				EC321A271BD8010F00A4B9AE /* Frameworks */,
+				EC321A281BD8010F00A4B9AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC321A2C1BD8010F00A4B9AE /* PBXTargetDependency */,
+			);
+			name = "GLG-iOS-SDK-TestTests";
+			productName = "GLG-iOS-SDK-TestTests";
+			productReference = EC321A2A1BD8010F00A4B9AE /* GLG-iOS-SDK-TestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EC321A341BD8010F00A4B9AE /* GLG-iOS-SDK-TestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC321A441BD8010F00A4B9AE /* Build configuration list for PBXNativeTarget "GLG-iOS-SDK-TestUITests" */;
+			buildPhases = (
+				EC321A311BD8010F00A4B9AE /* Sources */,
+				EC321A321BD8010F00A4B9AE /* Frameworks */,
+				EC321A331BD8010F00A4B9AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC321A371BD8010F00A4B9AE /* PBXTargetDependency */,
+			);
+			name = "GLG-iOS-SDK-TestUITests";
+			productName = "GLG-iOS-SDK-TestUITests";
+			productReference = EC321A351BD8010F00A4B9AE /* GLG-iOS-SDK-TestUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC321A091BD8010F00A4B9AE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Glasslab Games";
+				TargetAttributes = {
+					EC321A101BD8010F00A4B9AE = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					EC321A291BD8010F00A4B9AE = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = EC321A101BD8010F00A4B9AE;
+					};
+					EC321A341BD8010F00A4B9AE = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = EC321A101BD8010F00A4B9AE;
+					};
+				};
+			};
+			buildConfigurationList = EC321A0C1BD8010F00A4B9AE /* Build configuration list for PBXProject "GLG-iOS-SDK-Test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EC321A081BD8010F00A4B9AE;
+			productRefGroup = EC321A121BD8010F00A4B9AE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC321A101BD8010F00A4B9AE /* GLG-iOS-SDK-Test */,
+				EC321A291BD8010F00A4B9AE /* GLG-iOS-SDK-TestTests */,
+				EC321A341BD8010F00A4B9AE /* GLG-iOS-SDK-TestUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC321A0F1BD8010F00A4B9AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC747C451BD8538C00BB0EBA /* Main.storyboard in Resources */,
+				EC321A211BD8010F00A4B9AE /* Assets.xcassets in Resources */,
+				EC747C441BD8538C00BB0EBA /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC321A281BD8010F00A4B9AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC321A331BD8010F00A4B9AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC321A0D1BD8010F00A4B9AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC321A1C1BD8010F00A4B9AE /* ViewController.mm in Sources */,
+				EC321A191BD8010F00A4B9AE /* AppDelegate.mm in Sources */,
+				EC321A161BD8010F00A4B9AE /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC321A261BD8010F00A4B9AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC321A2F1BD8010F00A4B9AE /* GLG_iOS_SDK_TestTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC321A311BD8010F00A4B9AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC321A3A1BD8010F00A4B9AE /* GLG_iOS_SDK_TestUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EC321A2C1BD8010F00A4B9AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC321A101BD8010F00A4B9AE /* GLG-iOS-SDK-Test */;
+			targetProxy = EC321A2B1BD8010F00A4B9AE /* PBXContainerItemProxy */;
+		};
+		EC321A371BD8010F00A4B9AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC321A101BD8010F00A4B9AE /* GLG-iOS-SDK-Test */;
+			targetProxy = EC321A361BD8010F00A4B9AE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EC747C401BD8538C00BB0EBA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC747C411BD8538C00BB0EBA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		EC747C421BD8538C00BB0EBA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC747C431BD8538C00BB0EBA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC321A3C1BD8010F00A4B9AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EC321A3D1BD8010F00A4B9AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC321A3F1BD8010F00A4B9AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				ENABLE_BITCODE = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				HEADER_SEARCH_PATHS = (
+					"../../../deps/include/**",
+					../../../headers,
+					/usr/include,
+					"../../../deps/src/**",
+				);
+				INFOPLIST_FILE = "GLG-iOS-SDK-Test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = ../../../lib/ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.glasslabgames.GLG-iOS-SDK-Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EC321A401BD8010F00A4B9AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				ENABLE_BITCODE = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				HEADER_SEARCH_PATHS = (
+					"../../../deps/include/**",
+					../../../headers,
+					/usr/include,
+					"../../../deps/src/**",
+				);
+				INFOPLIST_FILE = "GLG-iOS-SDK-Test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = ../../../lib/ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.glasslabgames.GLG-iOS-SDK-Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		EC321A421BD8010F00A4B9AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "GLG-iOS-SDK-TestTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.glasslabgames.GLG-iOS-SDK-TestTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GLG-iOS-SDK-Test.app/GLG-iOS-SDK-Test";
+			};
+			name = Debug;
+		};
+		EC321A431BD8010F00A4B9AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "GLG-iOS-SDK-TestTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.glasslabgames.GLG-iOS-SDK-TestTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GLG-iOS-SDK-Test.app/GLG-iOS-SDK-Test";
+			};
+			name = Release;
+		};
+		EC321A451BD8010F00A4B9AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "GLG-iOS-SDK-TestUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.glasslabgames.GLG-iOS-SDK-TestUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "GLG-iOS-SDK-Test";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		EC321A461BD8010F00A4B9AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "GLG-iOS-SDK-TestUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.glasslabgames.GLG-iOS-SDK-TestUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "GLG-iOS-SDK-Test";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC321A0C1BD8010F00A4B9AE /* Build configuration list for PBXProject "GLG-iOS-SDK-Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC321A3C1BD8010F00A4B9AE /* Debug */,
+				EC321A3D1BD8010F00A4B9AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC321A3E1BD8010F00A4B9AE /* Build configuration list for PBXNativeTarget "GLG-iOS-SDK-Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC321A3F1BD8010F00A4B9AE /* Debug */,
+				EC321A401BD8010F00A4B9AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC321A411BD8010F00A4B9AE /* Build configuration list for PBXNativeTarget "GLG-iOS-SDK-TestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC321A421BD8010F00A4B9AE /* Debug */,
+				EC321A431BD8010F00A4B9AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC321A441BD8010F00A4B9AE /* Build configuration list for PBXNativeTarget "GLG-iOS-SDK-TestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC321A451BD8010F00A4B9AE /* Debug */,
+				EC321A461BD8010F00A4B9AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC321A091BD8010F00A4B9AE /* Project object */;
+}

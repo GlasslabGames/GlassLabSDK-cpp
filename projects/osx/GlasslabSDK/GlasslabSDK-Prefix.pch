@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#import "TargetConditionals.h"
 
 #ifdef __cplusplus
 extern "C" {

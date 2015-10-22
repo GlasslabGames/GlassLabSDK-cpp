@@ -43,8 +43,12 @@ either expressed or implied, of the FreeBSD Project.
 
 #include "glasslab_sdk.h"
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+extern "C" void Init_iOS_GLSDK(void *launchOptions);
+#else
 #if !WIN32
 extern "C" void Init_Mac_GLSDK();
+#endif
 #endif
 
 GlasslabSDK::GlasslabSDK( const char* clientId, const char* deviceId, const char* dataPath, const char* uri ) {
@@ -57,11 +61,17 @@ GlasslabSDK::GlasslabSDK(nsGlasslabSDK::Core* core)
 	m_core = core;
 }
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+void GlasslabSDK::initSDK(void *launchOptions) {
+    Init_iOS_GLSDK(launchOptions);
+}
+#else
 void GlasslabSDK::initSDK() {
 #if !WIN32
     Init_Mac_GLSDK();
 #endif
 }
+#endif
 
 nsGlasslabSDK::Const::Status GlasslabSDK::getLastStatus() {
     if( m_core != NULL ) return m_core->getLastStatus();
